@@ -17,6 +17,7 @@ export default class Plans
             this.resources.items.picture2Texture,
             this.resources.items.picture3Texture,
             this.resources.items.picture1Texture,
+            this.resources.items.picture4Texture,
         ]
         this.meshes = []
         this.materials = []
@@ -58,7 +59,7 @@ export default class Plans
             fragmentShader: screenFragmentShader,
             transparent: true,
             side: THREE.DoubleSide,
-            opacity: 0.8,
+            // opacity: 0.8,
             uniforms: {
                 uTime: {value: 0},
                 uTexture: { type: "t", value: this.textures[i]},

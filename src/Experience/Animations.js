@@ -32,7 +32,8 @@ export default class Animations
         this.allTimingAnimation = [
             7.6,
             17.5,
-            45
+            28,
+            45,
         ]
         this.animationsCamera = [
             {
@@ -47,6 +48,16 @@ export default class Animations
             },
             {
                 // 17.5
+                x: 0.5568795805606047,
+                y: -7.476699297650231,
+                z: -8.24078460917381,
+                xRotation: -0.0256513528116189,
+                yRotation: -0.03554797026364589,
+                zRotation: -0.0009118612491070096,
+                duration: 2.5
+            },
+            {
+                // 29
                 x: 0.7094238771395334,
                 y: -9.524769536311132,
                 z: -10.498159347421927,
@@ -56,7 +67,7 @@ export default class Animations
                 duration: 2.5
             },
             {
-                // 
+                // 45
                 x: -1.5188378497841581,
                 y: 1.0954093163298464,
                 z: 42.694385332373145,
@@ -65,6 +76,7 @@ export default class Animations
                 zRotation: -0.0009118605773534697,
                 duration: 8
             },
+
         ]
         this.currentTimingAnimation = this.allTimingAnimation[this.animationIndex]
     }

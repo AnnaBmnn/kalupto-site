@@ -28,6 +28,11 @@ export default [
         path: 'textures/pictures/picture3.jpg'
     },
     {
+        name: 'picture4Texture',
+        type: 'texture',
+        path: 'textures/pictures/picture4.jpg'
+    },
+    {
         name: 'grassColorTexture',
         type: 'texture',
         path: 'textures/dirt/color.jpg'
