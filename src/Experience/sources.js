@@ -37,17 +37,6 @@ export default [
         type: 'texture',
         path: 'textures/dirt/normal.jpg'
     },
-
-    {
-        name: 'maskModel',
-        type: 'gltfModel',
-        path: 'models/thaimask.glb'
-    },
-    {
-        name: 'foxModel',
-        type: 'gltfModel',
-        path: 'models/Fox/glTF/Fox.gltf'
-    },
     {
         name: 'snowModel',
         type: 'gltfModel',
