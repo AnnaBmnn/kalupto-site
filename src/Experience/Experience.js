@@ -6,6 +6,7 @@ import Time from './Utils/Time.js'
 import Camera from './Camera.js'
 import Renderer from './Renderer.js'
 import World from './World/World.js'
+import Animations from './Animations.js'
 import Resources from './Utils/Resources.js'
 
 import sources from './sources.js'
@@ -38,6 +39,7 @@ export default class Experience
         this.camera = new Camera()
         this.renderer = new Renderer()
         this.world = new World()
+        this.animations = new Animations()
 
 
         // Resize event
@@ -64,6 +66,7 @@ export default class Experience
         this.camera.update()
         this.world.update()
         this.renderer.update()
+        this.animations.update()
     }
 
     destroy()

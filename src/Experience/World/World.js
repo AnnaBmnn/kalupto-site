@@ -3,7 +3,12 @@ import Environment from './Environment.js'
 // import Floor from './Floor.js'
 // import Fox from './Fox.js'
 import Mask from './Mask.js'
+import Mountain from './Mountain.js'
+import Snow from './Snow.js'
+
 import Plans from './Plans.js'
+import Plan from './Plan.js'
+import Videos from './Videos.js'
 import Audio from './Audio.js'
 
 
@@ -22,11 +27,19 @@ export default class World
             // Setup
             // this.floor = new Floor()
             // this.fox = new Fox()
-            this.mask = new Mask()
+            // this.mask = new Mask()
+            this.mountain = new Mountain()
+            // this.snow = new Snow()
+
+
             this.plans = new Plans()
-            this.audio = new Audio()
+            this.plan = new Plan()
+            this.videos = new Videos()
+
 
             this.environment = new Environment()
+            this.audio = new Audio()
+
         })
     }
 
@@ -34,8 +47,16 @@ export default class World
     {
         if(this.mask)
             this.mask.update()
+        if(this.mountain)
+            this.mountain.update()
+        if(this.snow)
+            this.snow.update()
         if(this.plans)
             this.plans.update()
+        if(this.plan)
+            this.plan.update()
+        if(this.videos)
+            this.videos.update()
         if(this.audio)
             this.audio.update()
     }

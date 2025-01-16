@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import Experience from '../Experience.js'
+import { Sky } from 'three/addons/objects/Sky.js';
 
 export default class Environment
 {
@@ -9,6 +10,7 @@ export default class Environment
         this.scene = this.experience.scene
         this.resources = this.experience.resources
         this.debug = this.experience.debug
+        this.debugObject = {color: '#a778d8'}
         
         // Debug
         if(this.debug.active)
@@ -18,16 +20,17 @@ export default class Environment
 
         this.setSunLight()
         this.setEnvironmentMap()
+        // this.setSky()
     }
 
     setSunLight()
     {
-        this.sunLight = new THREE.DirectionalLight('#ffffff', 4)
+        this.sunLight = new THREE.DirectionalLight('#6772AB', 4)
         this.sunLight.castShadow = true
         this.sunLight.shadow.camera.far = 15
         this.sunLight.shadow.mapSize.set(1024, 1024)
         this.sunLight.shadow.normalBias = 0.05
-        this.sunLight.position.set(-3.728, -3.236, - 1.0)
+        this.sunLight.position.set(-3.728, 3, - 1.0)
         this.scene.add(this.sunLight)
 
         // Debug
@@ -60,13 +63,15 @@ export default class Environment
                 .min(- 5)
                 .max(5)
                 .step(0.001)
+
+
         }
     }
 
     setEnvironmentMap()
     {
         this.environmentMap = {}
-        this.environmentMap.intensity = 0.4
+        this.environmentMap.intensity = 2
         this.environmentMap.texture = this.resources.items.environmentMapTexture
         this.environmentMap.texture.colorSpace = THREE.SRGBColorSpace
         
@@ -84,6 +89,10 @@ export default class Environment
                 }
             })
         }
+        this.scene.backgroundBlurriness = 0.9
+        this.scene.fog = new THREE.Fog( 0xcccccc, 10, 300);
+
+        this.scene.background = this.debugObject.color 
         this.environmentMap.updateMaterials()
 
         // Debug
@@ -96,6 +105,32 @@ export default class Environment
                 .max(4)
                 .step(0.001)
                 .onChange(this.environmentMap.updateMaterials)
+
+            this.debugFolder
+                .addColor(this.debugObject , 'color')
+                .name('background color')
+                .onChange((value) =>
+                {
+                    console.log(value)
+                    this.debugObject.color = value
+                    this.scene.background =  new THREE.Color(this.debugObject.color)
+                })
         }
+    }
+
+    setSky()
+    {
+        // Skybox
+
+        this.sky = new Sky()
+        this.sky.scale.setScalar( 45000000 )
+        this.scene.add( this.sky )
+
+        const skyUniforms = this.sky.material.uniforms
+
+        skyUniforms[ 'turbidity' ].value = 10
+        skyUniforms[ 'rayleigh' ].value = 2
+        skyUniforms[ 'mieCoefficient' ].value = 0.005
+        skyUniforms[ 'mieDirectionalG' ].value = 0.8
     }
 }

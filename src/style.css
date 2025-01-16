@@ -24,3 +24,13 @@ button {
     right: 16px;
     z-index: 2;
 }
+
+.button-camera {
+    bottom: 50px;
+}
+
+video {
+    position: fixed;
+    top: 0;
+    /* display: none; */
+}

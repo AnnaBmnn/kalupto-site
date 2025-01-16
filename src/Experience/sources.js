@@ -4,12 +4,12 @@ export default [
         type: 'cubeTexture',
         path:
         [
-            'textures/environmentMap/px.jpg',
-            'textures/environmentMap/nx.jpg',
-            'textures/environmentMap/py.jpg',
-            'textures/environmentMap/ny.jpg',
-            'textures/environmentMap/pz.jpg',
-            'textures/environmentMap/nz.jpg'
+            'textures/environmentMap/test.png',
+            'textures/environmentMap/test.png',
+            'textures/environmentMap/test.png',
+            'textures/environmentMap/test.png',
+            'textures/environmentMap/test.png',
+            'textures/environmentMap/test.png',
         ]
     },
     {
@@ -47,5 +47,35 @@ export default [
         name: 'foxModel',
         type: 'gltfModel',
         path: 'models/Fox/glTF/Fox.gltf'
-    }
+    },
+    {
+        name: 'snowModel',
+        type: 'gltfModel',
+        path: 'models/frozen_lake_photoscan.glb'
+    },
+    {
+        name: 'snowFlakeTexture1',
+        type: 'texture',
+        path: 'textures/snow/snowflake1.png'
+    },
+    {
+        name: 'snowFlakeTexture2',
+        type: 'texture',
+        path: 'textures/snow/snowflake3.png'
+    },
+    {
+        name: 'snowFlakeTexture3',
+        type: 'texture',
+        path: 'textures/snow/snowflake4.png'
+    },
+    {
+        name: 'snowFlakeTexture4',
+        type: 'texture',
+        path: 'textures/snow/snowflake5.png'
+    },
+    {
+        name: 'lakeIceTexture',
+        type: 'texture',
+        path: 'textures/iceTexture.jpg'
+    },
 ]
