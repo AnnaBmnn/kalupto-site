@@ -129,7 +129,7 @@ export default class Videos
                             opacity: 0.85,
                         }
                     )
-                }, 11000)
+                }, 10000)
 
             }
 
