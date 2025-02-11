@@ -2,11 +2,15 @@ import * as THREE from 'three'
 import Experience from './Experience.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import gsap from 'gsap'
+import EventEmitter from './Utils/EventEmitter.js'
 
-export default class Animations
+
+export default class Animations  extends EventEmitter
 {
     constructor()
     {
+        super()
+
         this.experience = new Experience()
         this.camera = this.experience.camera
         this.scene = this.experience.scene
@@ -17,23 +21,27 @@ export default class Animations
         this.resources.on('ready', () =>
         {
             console.log('ready')
-
             this.audio = this.world.audio.domAudio
-            console.log(this.world.audio.domAudio)
             this.world.audio.domAudio.addEventListener('ended', () =>{
-                console.log('ici')
                 this.resetAnim()
             })
         })
 
 
+        this.animationCameraIndex = 0
         this.animationIndex = 0
         // s
-        this.allTimingAnimation = [
+        this.allTimingCameraAnimation = [
             7.6,
             17.5,
             28,
             45,
+        ]
+        this.allTimingAnimation = [
+            {
+                timing: 45,
+                eventName: 'animation-second-step'
+            },
         ]
         this.animationsCamera = [
             {
@@ -78,39 +86,40 @@ export default class Animations
             },
 
         ]
-        this.currentTimingAnimation = this.allTimingAnimation[this.animationIndex]
+        this.currentTimingAnimation = this.allTimingCameraAnimation[this.animationCameraIndex]
     }
 
     animateCamera()
     {
+        console.log('animate camera')
         gsap.to(
             this.camera.instance.position,
             {
-                duration: this.animationsCamera[this.animationIndex].duration,
+                duration: this.animationsCamera[this.animationCameraIndex].duration,
                 ease: 'power4.inOut',
-                x: this.animationsCamera[this.animationIndex].x,
-                y: this.animationsCamera[this.animationIndex].y,
-                z: this.animationsCamera[this.animationIndex].z,
+                x: this.animationsCamera[this.animationCameraIndex].x,
+                y: this.animationsCamera[this.animationCameraIndex].y,
+                z: this.animationsCamera[this.animationCameraIndex].z,
             }
         )
         gsap.to(
             this.camera.instance.rotation,
             {
-                duration: this.animationsCamera[this.animationIndex].duration,
+                duration: this.animationsCamera[this.animationCameraIndex].duration,
                 ease: 'power4.inOut',
-                x: this.animationsCamera[this.animationIndex].xRotation,
-                y: this.animationsCamera[this.animationIndex].yRotation,
-                z: this.animationsCamera[this.animationIndex].zRotation,
+                x: this.animationsCamera[this.animationCameraIndex].xRotation,
+                y: this.animationsCamera[this.animationCameraIndex].yRotation,
+                z: this.animationsCamera[this.animationCameraIndex].zRotation,
             }
         )
     }
 
     setNextAnimation()
     {
-        this.animationIndex += 1
-        if(this.allTimingAnimation[this.animationIndex])
+        this.animationCameraIndex += 1
+        if(this.allTimingCameraAnimation[this.animationCameraIndex])
         {
-            this.currentTimingAnimation = this.allTimingAnimation[this.animationIndex]
+            this.currentTimingAnimation = this.allTimingCameraAnimation[this.animationCameraIndex]
         } else 
         {
             this.currentTimingAnimation = null 
@@ -119,8 +128,9 @@ export default class Animations
     resetAnim()
     {
 
+        this.animationCameraIndex = 0
         this.animationIndex = 0
-        this.currentTimingAnimation = this.allTimingAnimation[this.animationIndex]
+        this.currentTimingAnimation = this.allTimingCameraAnimation[this.animationCameraIndex]
         this.camera.instance.position.set(
             -0.03488971620850754,
             -3.3098271974449474,
@@ -140,6 +150,16 @@ export default class Animations
             this.animateCamera()
             this.setNextAnimation()
         }
+
+        if(this.animationIndex < this.allTimingAnimation.length){
+            if(this.audio.currentTime >= this.allTimingAnimation[this.animationIndex].timing)
+            {
+                this.trigger(this.allTimingAnimation[this.animationIndex].eventName)
+                this.animationIndex += 1
+                console.log('ICI')
+            }
+        }
+
     }
 
     update()

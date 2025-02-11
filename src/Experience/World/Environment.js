@@ -1,6 +1,8 @@
 import * as THREE from 'three'
 import Experience from '../Experience.js'
 import { Sky } from 'three/addons/objects/Sky.js';
+import gsap from 'gsap'
+
 
 export default class Environment
 {
@@ -20,6 +22,10 @@ export default class Environment
 
         this.setSunLight()
         this.setEnvironmentMap()
+        window.setTimeout(()=>{
+            this.setAnimations()
+        }, 200)    
+
         // this.setSky()
     }
 
@@ -90,9 +96,10 @@ export default class Environment
             })
         }
         this.scene.backgroundBlurriness = 0.9
-        this.scene.fog = new THREE.Fog( 0xcccccc, 10, 300);
+        // this.scene.fog = new THREE.Fog( 0xcccccc, 10, 300);
 
-        this.scene.background = this.debugObject.color 
+        this.scene.background =  new THREE.Color('#FFFFFF')
+        // this.scene.background = this.debugObject.color 
         this.environmentMap.updateMaterials()
 
         // Debug
@@ -117,7 +124,24 @@ export default class Environment
                 })
         }
     }
+    setAnimations()
+    {
+        this.experience.animations.on('animation-second-step', ()=>{
+            console.log('LA')
+            gsap.to(
+                this.scene.background,
+                {
+                    duration: 3,
+                    ease: 'power2.inOut',
+                    r: 0.85,
+                    g: 0.85,
+                    b: 0.85,
+                }
+            )
+        })
 
+
+    }
     setSky()
     {
         // Skybox

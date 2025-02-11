@@ -2,6 +2,7 @@ import * as THREE from 'three'
 import Experience from '../Experience.js'
 import screenVertexShader from '../../shaders/sorting/vertex.glsl'
 import screenFragmentShader from '../../shaders/sorting/fragment.glsl'
+import gsap from 'gsap'
 
 export default class Plans
 {
@@ -30,7 +31,9 @@ export default class Plans
             this.setMaterial(i)
             this.setMesh(i)
         }
-
+        window.setTimeout(()=>{
+            this.setAnimations()
+        }, 200)  
     }
 
     setGeometry()
@@ -144,6 +147,20 @@ export default class Plans
                .step(0.01)
        }
     }
+    setAnimations()
+    {
+        this.experience.animations.on('animation-second-step', ()=>{
+            window.setTimeout(()=>{
+                this.isAnim = true
+                for(let i = 0; i < this.materials.length; i++)
+                {
+                    this.materials[i].transparent = false
+                }
+            }, 3000)
+
+
+        })
+    }
     update()
     {
         
@@ -174,6 +191,11 @@ export default class Plans
                     // this.meshes[i].position.y = Math.cos(this.time.elapsed * 0.0001 + i + 0) * 10
                     // this.meshes[i].position.x = Math.cos(this.time.elapsed * 0.0001 + i + 0) * 10
 
+                }
+                if(this.isAnim){
+                    this.meshes[i].position.x += Math.cos(this.time.elapsed * 0.0001 + i + 1) * 0.05
+                    this.meshes[i].position.z += Math.sin(this.time.elapsed * 0.0002 + i + 2) * 0.005
+                    this.meshes[i].position.y -= Math.sin(this.time.elapsed * 0.0001 + i + 3) * 0.01
                 }
             }
             

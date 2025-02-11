@@ -74,7 +74,7 @@ export default class Snow
 
     setVertices()
     {
-        for ( let i = 0; i < 10000; i ++ ) {
+        for ( let i = 0; i < 5000; i ++ ) {
 
             const x = Math.random() * 200 - 100
             const y = Math.random() * 200 - 100

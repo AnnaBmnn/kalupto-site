@@ -3,7 +3,7 @@ import Environment from './Environment.js'
 // import Floor from './Floor.js'
 // import Fox from './Fox.js'
 import Mask from './Mask.js'
-import Mountain from './Mountain.js'
+import Rocks from './Rocks.js'
 import Snow from './Snow.js'
 
 import Plans from './Plans.js'
@@ -33,8 +33,10 @@ export default class World
 
 
             this.plans = new Plans()
-            this.plan = new Plan()
+            // this.plan = new Plan()
             this.videos = new Videos()
+
+            // this.rocks = new Rocks()
 
 
             this.environment = new Environment()
@@ -57,6 +59,8 @@ export default class World
             this.plan.update()
         if(this.videos)
             this.videos.update()
+        if(this.rocks)
+            this.rocks.update()
         if(this.audio)
             this.audio.update()
     }
