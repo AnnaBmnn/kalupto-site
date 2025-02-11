@@ -48,6 +48,7 @@ export default class Videos
         {
             //console.log('ici')
             //this.videos[i].play()
+            this.videos[i].load()
             this.videos[i].addEventListener('canplaythrough', ()=> {
                 console.log('load')
                 this.textures[i] = new THREE.VideoTexture( this.videos[i]);
