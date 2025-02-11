@@ -156,7 +156,7 @@ export default class Plans
                 {
                     this.materials[i].transparent = false
                 }
-            }, 3000)
+            }, 6000)
 
 
         })

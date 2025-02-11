@@ -14,7 +14,7 @@ export default class Videos
         this.time = this.experience.time
         this.audio = this.experience.world.audio
         this.videos = document.querySelectorAll('.js-video-texture')
-        this.numberSlide = 50
+        this.numberSlide = 75
         this.frame = 0
 
         this.texturesFixed = [
@@ -108,7 +108,7 @@ export default class Videos
         for(let j = 0; j < this.numberSlide; j++)
         {
             const _clone = this.mesh = new THREE.Mesh(this.geometry, this.materials[i])
-            _clone.position.x = j * 0.2
+            // _clone.position.x = j * 0.2
             this.cloneMeshes[i][j] = _clone
             this.scene.add(_clone)
         }
@@ -124,12 +124,12 @@ export default class Videos
                     gsap.to(
                         this.materials[i],
                         {
-                            duration: 6,
+                            duration: 12,
                             ease: 'power2.out',
                             opacity: 0.85,
                         }
                     )
-                }, 2000)
+                }, 11000)
 
             }
 
