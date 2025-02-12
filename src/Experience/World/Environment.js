@@ -95,7 +95,7 @@ export default class Environment
                 }
             })
         }
-        this.scene.backgroundBlurriness = 0.9
+        // this.scene.backgroundBlurriness = 0.9
         // this.scene.fog = new THREE.Fog( 0xcccccc, 10, 300);
 
         this.scene.background =  new THREE.Color('#FFFFFF')

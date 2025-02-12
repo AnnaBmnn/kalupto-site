@@ -38,7 +38,7 @@ export default class Plans
 
     setGeometry()
     {
-        this.geometry = new THREE.PlaneGeometry( 5, 5, 2048, 2048);
+        this.geometry = new THREE.PlaneGeometry( 5, 5, 512, 512);
     }
 
     setMaterial(i)

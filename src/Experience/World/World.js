@@ -30,6 +30,7 @@ export default class World
             // this.mask = new Mask()
             // this.mountain = new Mountain()
             // this.snow = new Snow()
+            this.environment = new Environment()
 
 
             this.plans = new Plans()
@@ -39,7 +40,6 @@ export default class World
             // this.rocks = new Rocks()
 
 
-            this.environment = new Environment()
             this.audio = new Audio()
 
         })
@@ -47,20 +47,12 @@ export default class World
 
     update()
     {
-        if(this.mask)
-            this.mask.update()
-        if(this.mountain)
-            this.mountain.update()
-        if(this.snow)
-            this.snow.update()
         if(this.plans)
             this.plans.update()
         if(this.plan)
             this.plan.update()
         if(this.videos)
             this.videos.update()
-        if(this.rocks)
-            this.rocks.update()
         if(this.audio)
             this.audio.update()
     }

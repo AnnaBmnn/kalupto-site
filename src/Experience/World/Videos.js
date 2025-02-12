@@ -14,7 +14,7 @@ export default class Videos
         this.time = this.experience.time
         this.audio = this.experience.world.audio
         this.videos = document.querySelectorAll('.js-video-texture')
-        this.numberSlide = 20
+        this.numberSlide = 60
         this.frame = 0
         this.frameAnim = 0
 
@@ -52,7 +52,8 @@ export default class Videos
             this.videos[i].load()
             this.videos[i].addEventListener('canplaythrough', ()=> {
                 console.log('load')
-                this.textures[i] = new THREE.VideoTexture( this.videos[i]);
+                this.textures[i] = this.texturesFixed[0]
+                // this.textures[i] = new THREE.VideoTexture( this.videos[i]);
                 this.setMaterial(i)
                 this.setMesh(i)
 
@@ -71,7 +72,7 @@ export default class Videos
         this.materials[i] = new THREE.MeshStandardMaterial({
             map: this.textures[i],
             normalMap: this.texturesFixed[0],
-            transparent: true,
+            transparent: false,
             opacity: 0.0,
             side: THREE.DoubleSide,
             // blending: THREE.MultiplyBlending  
@@ -102,13 +103,15 @@ export default class Videos
         this.mesh.visible = false
         // this.mesh.rotation.x = - Math.PI * 0.5
 
-        this.mesh.receiveShadow = true
+        this.mesh.receiveShadow = false
+        this.mesh.castShadow = false
         this.scene.add(this.mesh)
         this.meshes.push(this.mesh)
 
         for(let j = 0; j < this.numberSlide; j++)
         {
-            const _clone = this.mesh = new THREE.Mesh(this.geometry, this.materials[i])
+            const _clone = new THREE.Mesh(this.geometry, this.materials[i])
+            _clone.visible = false
             // _clone.position.x = j * 0.2
             this.cloneMeshes[i][j] = _clone
             this.scene.add(_clone)
@@ -122,6 +125,13 @@ export default class Videos
                 window.setTimeout(()=>{
                     this.isAnim = true
                     this.meshes[i].visible = true
+                    this.meshes[i].material.transparent = true
+
+                    for(let j = 0; j < this.numberSlide; j++)
+                    {
+                        this.cloneMeshes[i][j].visible = true
+                        this.cloneMeshes[i][j].material.transparent = true
+                    }
                     gsap.to(
                         this.materials[i],
                         {
@@ -152,6 +162,7 @@ export default class Videos
             }
 
         }
+        
         if(this.isAnim && this.meshes[0] && this.meshes[1] && this.meshes[2] && this.cloneMeshes && this.frame % 3 == 0){
             this.cloneMeshes[0][this.frameAnim].position.x = this.meshes[0].position.x
             this.cloneMeshes[0][this.frameAnim].position.y = this.meshes[0].position.y
@@ -175,6 +186,7 @@ export default class Videos
             // this.scene.add(_clone2)
             this.frameAnim = (this.frameAnim + 1) % this.numberSlide
         }
+        
         this.frame += 1
     }
 }
