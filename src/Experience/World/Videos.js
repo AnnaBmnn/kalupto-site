@@ -14,7 +14,7 @@ export default class Videos
         this.time = this.experience.time
         this.audio = this.experience.world.audio
         this.videos = document.querySelectorAll('.js-video-texture')
-        this.numberSlide = 40
+        this.numberSlide = 20
         this.frame = 0
         this.frameAnim = 0
 
