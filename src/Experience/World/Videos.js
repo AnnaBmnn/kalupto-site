@@ -61,7 +61,7 @@ export default class Videos
     }
     setGeometry()
     {
-        this.geometry = new THREE.PlaneGeometry( 10, 10, 124, 124);
+        this.geometry = new THREE.PlaneGeometry( 10, 10, 1, 1);
     }
 
     setMaterial(i)
