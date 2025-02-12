@@ -199,7 +199,7 @@ export default class Plans
                 }
                 if(this.isAnim){
                     this.meshes[i].position.x += Math.cos(this.time.elapsed * 0.0001 + i + 1) * 0.05
-                    this.meshes[i].position.z += Math.sin(this.time.elapsed * 0.0002 + i + 2) * 0.005
+                    // this.meshes[i].position.z += Math.sin(this.time.elapsed * 0.0002 + i + 2) * 0.005
                     this.meshes[i].position.y -= Math.sin(this.time.elapsed * 0.0001 + i + 3) * 0.01
                 }
             }

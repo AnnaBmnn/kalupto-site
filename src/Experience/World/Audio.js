@@ -30,7 +30,7 @@ export default class Audio
                 this.setAnalyzer()
             } 
             if(this.domAudio.paused){
-                this.domAudio.currentTime = 40
+                // this.domAudio.currentTime = 40
                 this.domAudio.play()
                 this.domButton.innerHTML = 'pause'
             }else {
