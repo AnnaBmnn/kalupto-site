@@ -14,7 +14,7 @@ export default class Videos
         this.time = this.experience.time
         this.audio = this.experience.world.audio
         this.videos = document.querySelectorAll('.js-video-texture')
-        this.numberSlide = 60
+        this.numberSlide = 50
         this.frame = 0
         this.frameAnim = 0
 
@@ -163,7 +163,7 @@ export default class Videos
 
         }
         
-        if(this.isAnim && this.meshes[0] && this.meshes[1] && this.meshes[2] && this.cloneMeshes && this.frame % 3 == 0){
+        if(this.isAnim && this.meshes[0] && this.meshes[1] && this.meshes[2] && this.cloneMeshes && this.frame % 2 == 0){
             this.cloneMeshes[0][this.frameAnim].position.x = this.meshes[0].position.x
             this.cloneMeshes[0][this.frameAnim].position.y = this.meshes[0].position.y
             this.cloneMeshes[0][this.frameAnim].position.z = this.meshes[0].position.z
