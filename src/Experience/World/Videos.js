@@ -14,8 +14,9 @@ export default class Videos
         this.time = this.experience.time
         this.audio = this.experience.world.audio
         this.videos = document.querySelectorAll('.js-video-texture')
-        this.numberSlide = 30
+        this.numberSlide = 40
         this.frame = 0
+        this.frameAnim = 0
 
         this.texturesFixed = [
             this.resources.items.picture1Texture,
@@ -151,16 +152,16 @@ export default class Videos
             }
 
         }
-        if(this.isAnim && this.meshes[0] && this.meshes[1] && this.meshes[2] && this.cloneMeshes){
-            this.cloneMeshes[0][this.frame].position.x = this.meshes[0].position.x
-            this.cloneMeshes[0][this.frame].position.y = this.meshes[0].position.y
-            this.cloneMeshes[0][this.frame].position.z = this.meshes[0].position.z
-            this.cloneMeshes[1][this.frame].position.x = this.meshes[1].position.x
-            this.cloneMeshes[1][this.frame].position.y = this.meshes[1].position.y
-            this.cloneMeshes[1][this.frame].position.z = this.meshes[1].position.z
-            this.cloneMeshes[2][this.frame].position.x = this.meshes[2].position.x
-            this.cloneMeshes[2][this.frame].position.y = this.meshes[2].position.y
-            this.cloneMeshes[2][this.frame].position.z = this.meshes[2].position.z
+        if(this.isAnim && this.meshes[0] && this.meshes[1] && this.meshes[2] && this.cloneMeshes && this.frame % 3 == 0){
+            this.cloneMeshes[0][this.frameAnim].position.x = this.meshes[0].position.x
+            this.cloneMeshes[0][this.frameAnim].position.y = this.meshes[0].position.y
+            this.cloneMeshes[0][this.frameAnim].position.z = this.meshes[0].position.z
+            this.cloneMeshes[1][this.frameAnim].position.x = this.meshes[1].position.x
+            this.cloneMeshes[1][this.frameAnim].position.y = this.meshes[1].position.y
+            this.cloneMeshes[1][this.frameAnim].position.z = this.meshes[1].position.z
+            this.cloneMeshes[2][this.frameAnim].position.x = this.meshes[2].position.x
+            this.cloneMeshes[2][this.frameAnim].position.y = this.meshes[2].position.y
+            this.cloneMeshes[2][this.frameAnim].position.z = this.meshes[2].position.z
 
 
             // const _clone = this.meshes[0].clone()
@@ -172,7 +173,8 @@ export default class Videos
             // this.scene.add(_clone)
             // this.scene.add(_clone1)
             // this.scene.add(_clone2)
-            this.frame = (this.frame + 1) % this.numberSlide
+            this.frameAnim = (this.frameAnim + 1) % this.numberSlide
         }
+        this.frame += 1
     }
 }
