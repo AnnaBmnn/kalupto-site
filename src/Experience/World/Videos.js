@@ -52,8 +52,8 @@ export default class Videos
             this.videos[i].load()
             this.videos[i].addEventListener('canplaythrough', ()=> {
                 console.log('load')
-                this.textures[i] = this.texturesFixed[0]
-                // this.textures[i] = new THREE.VideoTexture( this.videos[i]);
+                // this.textures[i] = this.texturesFixed[0]
+                this.textures[i] = new THREE.VideoTexture( this.videos[i]);
                 this.setMaterial(i)
                 this.setMesh(i)
 
@@ -63,7 +63,7 @@ export default class Videos
     }
     setGeometry()
     {
-        this.geometry = new THREE.PlaneGeometry( 10, 10, 1, 1);
+        this.geometry = new THREE.PlaneGeometry( 12, 12, 1, 1);
     }
 
     setMaterial(i)
@@ -127,11 +127,7 @@ export default class Videos
                     this.meshes[i].visible = true
                     this.meshes[i].material.transparent = true
 
-                    for(let j = 0; j < this.numberSlide; j++)
-                    {
-                        this.cloneMeshes[i][j].visible = true
-                        this.cloneMeshes[i][j].material.transparent = true
-                    }
+
                     gsap.to(
                         this.materials[i],
                         {
@@ -140,6 +136,17 @@ export default class Videos
                             opacity: 0.85,
                         }
                     )
+                    window.setTimeout(()=>{
+                        for(let j = 0; j < this.numberSlide; j++)
+                        {
+                            this.cloneMeshes[i][j].visible = true
+                            this.cloneMeshes[i][j].material.transparent = true
+                            this.cloneMeshes[i][j].position.x = this.meshes[i].position.x
+                            this.cloneMeshes[i][j].position.y = this.meshes[i].position.y
+                            this.cloneMeshes[i][j].position.z = this.meshes[i].position.z
+                        }
+                    }, 300)
+
                 }, 8000)
 
             }
@@ -153,8 +160,8 @@ export default class Videos
             //this.material.uniforms.uTime.value = this.time.elapsed
             
             for(let i = 0; i < this.meshes.length; i++ ){
-                this.meshes[i].position.x = Math.cos(this.time.elapsed * 0.0001 + i + 3) * 10
-                this.meshes[i].position.z = -3 + i * 0.1 + Math.sin(this.time.elapsed * 0.0001 + i + 2) * 10
+                this.meshes[i].position.x = Math.cos(this.time.elapsed * 0.0001 + i + 3) * 10 *  Math.sin(this.time.elapsed * 0.0001 + i + 3) * 5
+                this.meshes[i].position.z = -4 + i * 0.1 + Math.sin(this.time.elapsed * 0.0001 + i + 2) * 10
                 this.meshes[i].position.y = Math.sin(this.time.elapsed * 0.0001 + i + 3) * 10
                 // let _scale = 1 + this.experience.world.audio.frequenceAverage * 0.001
                 // this.meshes[i].scale.set(_scale, _scale, _scale)

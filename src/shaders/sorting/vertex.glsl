@@ -1,4 +1,5 @@
 uniform float uTime;
+uniform float uStep;
 uniform sampler2D uTexture;
 uniform sampler2D uTextureAlpha;
 uniform float uFrequenceAverage;
@@ -21,7 +22,7 @@ void main()
     vec4 modelPosition = modelMatrix * vec4(position, 1.0);
 
     // elevation
-    modelPosition.z += uFrequenceAverage * 0.004 * vTexture.g ;
+    modelPosition.z += uFrequenceAverage * (0.004 * pow((uStep + 1.0), 3.0) )* vTexture.g ;
     
 
     // gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);

@@ -38,7 +38,7 @@ export default class Plans
 
     setGeometry()
     {
-        this.geometry = new THREE.PlaneGeometry( 5, 5, 1024, 768);
+        this.geometry = new THREE.PlaneGeometry( 5, 5, 768, 768);
     }
 
     setMaterial(i)
@@ -67,7 +67,8 @@ export default class Plans
                 uTime: {value: 0},
                 uTexture: { type: "t", value: this.textures[i]},
                 uTextureAlpha: { type: "t", value: this.textures[(i + 1) % 3]},
-                uFrequenceAverage: {value: 0}
+                uFrequenceAverage: {value: 0},
+                uStep: {value: 0},
             }
         })
         
@@ -152,9 +153,13 @@ export default class Plans
         this.experience.animations.on('animation-second-step', ()=>{
             window.setTimeout(()=>{
                 this.isAnim = true
+
                 for(let i = 0; i < this.materials.length; i++)
                 {
                     this.materials[i].transparent = false
+                    this.materials[i].uniforms.uStep.value = 1
+
+                    // this.meshes[i].rotation.x = Math.Pi * 0.5
                 }
             }, 6000)
 
