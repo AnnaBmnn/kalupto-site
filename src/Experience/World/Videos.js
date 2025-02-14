@@ -14,7 +14,7 @@ export default class Videos
         this.time = this.experience.time
         this.audio = this.experience.world.audio
         this.videos = document.querySelectorAll('.js-video-texture')
-        this.numberSlide = 30
+        this.numberSlide = 45
         this.frame = 0
         this.frameAnim = 0
 
@@ -169,7 +169,7 @@ export default class Videos
             for(let i = 0; i < this.meshes.length; i++ ){
                 
                 this.meshes[i].position.x = Math.cos(this.time.elapsed * 0.0001 + i + 3) * 10 *  Math.sin(this.time.elapsed * 0.0001 + i + 3) * 5
-                this.meshes[i].position.z = -0.5 + (i + 1) * 0.1 + Math.sin(this.time.elapsed * 0.0001 + i + 2) * 6
+                this.meshes[i].position.z = -0.0 + (i + 1) * 0.1 + Math.sin(this.time.elapsed * 0.0001 + i + 2) * 6
                 this.meshes[i].position.y = Math.sin(this.time.elapsed * 0.0001 + i + 3) * 10
                 // let _scale = 1 + this.experience.world.audio.frequenceAverage * 0.001
                 // this.meshes[i].scale.set(_scale, _scale, _scale)

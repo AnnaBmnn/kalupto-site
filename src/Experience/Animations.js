@@ -37,6 +37,7 @@ export default class Animations  extends EventEmitter
             28,
             36,
             47,
+            108.5
         ]
         this.allTimingAnimation = [
             {
@@ -89,13 +90,22 @@ export default class Animations  extends EventEmitter
                 // 45
                 x: -1.5188378497841581,
                 y: 1.0954093163298464,
-                z: 42.694385332373145,
+                z: 40.694385332373145,
                 xRotation: -0.025651340118769773,
                 yRotation: -0.035547961670017905,
                 zRotation: -0.0009118605773534697,
                 duration: 7
             },
-
+            {
+                // 108
+                x: -0.8475996027827574,
+                y: 3.8449413740002845,
+                z: -70.8831670680309,
+                xRotation: 3.0909667227169484,
+                yRotation: -0.011155023740283846,
+                zRotation: -0.1410274489483117,
+                duration: 12
+            }
         ]
         this.currentTimingAnimation = this.allTimingCameraAnimation[this.animationCameraIndex]
     }

@@ -29,7 +29,7 @@ export default class World
             // this.fox = new Fox()
             // this.mask = new Mask()
             // this.mountain = new Mountain()
-            this.snow = new Snow()
+            // this.snow = new Snow()
             this.environment = new Environment()
 
 
