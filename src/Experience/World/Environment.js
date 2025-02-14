@@ -127,15 +127,14 @@ export default class Environment
     setAnimations()
     {
         this.experience.animations.on('animation-second-step', ()=>{
-            console.log('LA')
             gsap.to(
                 this.scene.background,
                 {
                     duration: 3,
                     ease: 'power2.inOut',
-                    r: 0.85,
-                    g: 0.85,
-                    b: 0.85,
+                    r: 0.90,
+                    g: 0.90,
+                    b: 0.92,
                 }
             )
         })

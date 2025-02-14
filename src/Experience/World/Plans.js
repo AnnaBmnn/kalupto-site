@@ -50,7 +50,7 @@ export default class Plans
             transparent: true,
             opacity: 0.8,
             side: THREE.DoubleSide,
-            //blending: THREE.SubtractiveBlending  
+            blending: THREE.SubtractiveBlending  
         })
         */
         
@@ -160,8 +160,18 @@ export default class Plans
                     this.materials[i].uniforms.uStep.value = 1
 
                     // this.meshes[i].rotation.x = Math.Pi * 0.5
+                    gsap.to(
+                        this.meshes[i].scale,
+                        {
+                            duration: 40,
+                            ease: 'power4.out',
+                            x: 4,
+                            y: 4,
+                            z: 3
+                        }
+                    )
                 }
-            }, 6000)
+            }, 10000)
 
 
         })
@@ -198,9 +208,12 @@ export default class Plans
 
                 }
                 if(this.isAnim){
-                    this.meshes[i].position.x += Math.cos(this.time.elapsed * 0.0001 + i + 1) * 0.05
-                    // this.meshes[i].position.z += Math.sin(this.time.elapsed * 0.0002 + i + 2) * 0.005
-                    this.meshes[i].position.y -= Math.sin(this.time.elapsed * 0.0001 + i + 3) * 0.01
+                    // this.meshes[i].scale.x = 2.5
+                    // this.meshes[i].scale.y = 2.5
+                    // this.meshes[i].scale.z = 2.5
+                    this.meshes[i].position.x += Math.cos(this.time.elapsed * 0.0004 + i * 2 ) * 0.05
+                    this.meshes[i].position.z = -3 + i * 0.5 + this.experience.world.audio.frequenceAverage * 0.001
+                    this.meshes[i].position.y += Math.sin(this.time.elapsed * 0.0001 + i + 3) * 0.03 * Math.sin(this.time.elapsed * 0.0001 + i + 3) * 0.03
                 }
             }
             

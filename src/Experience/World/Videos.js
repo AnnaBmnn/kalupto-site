@@ -14,7 +14,7 @@ export default class Videos
         this.time = this.experience.time
         this.audio = this.experience.world.audio
         this.videos = document.querySelectorAll('.js-video-texture')
-        this.numberSlide = 50
+        this.numberSlide = 30
         this.frame = 0
         this.frameAnim = 0
 
@@ -63,7 +63,7 @@ export default class Videos
     }
     setGeometry()
     {
-        this.geometry = new THREE.PlaneGeometry( 12, 12, 1, 1);
+        this.geometry = new THREE.PlaneGeometry( 13, 13, 1, 1);
     }
 
     setMaterial(i)
@@ -120,11 +120,12 @@ export default class Videos
     setAnimations()
     {
         this.experience.animations.on('animation-second-step', ()=>{
-            for(let i = 0; i < this.materials.length; i++)
-            {
-                window.setTimeout(()=>{
+
+            window.setTimeout(()=>{
+                for(let i = 0; i < this.materials.length; i++)
+                {
                     this.isAnim = true
-                    this.meshes[i].visible = true
+                    // this.meshes[i].visible = true
                     this.meshes[i].material.transparent = true
 
 
@@ -141,15 +142,17 @@ export default class Videos
                         {
                             this.cloneMeshes[i][j].visible = true
                             this.cloneMeshes[i][j].material.transparent = true
+                            this.cloneMeshes[i][j].material.opacity = 1
                             this.cloneMeshes[i][j].position.x = this.meshes[i].position.x
                             this.cloneMeshes[i][j].position.y = this.meshes[i].position.y
-                            this.cloneMeshes[i][j].position.z = this.meshes[i].position.z
+                            this.cloneMeshes[i][j].position.z = this.meshes[i].position.z - j * 0.001
                         }
-                    }, 300)
+                    }, 450 * i )
+                }
 
-                }, 8000)
 
-            }
+            }, 7000)
+
 
         })
     }
@@ -158,14 +161,20 @@ export default class Videos
         if(this.meshes && this.meshes.length > 0 && this.isAnim)
         {
             //this.material.uniforms.uTime.value = this.time.elapsed
-            
+            const _frequencies = [
+                this.experience.world.audio.frequenceBassAverage,
+                this.experience.world.audio.frequenceMidAverage,
+                this.experience.world.audio.frequenceAverage
+            ]
             for(let i = 0; i < this.meshes.length; i++ ){
+                
                 this.meshes[i].position.x = Math.cos(this.time.elapsed * 0.0001 + i + 3) * 10 *  Math.sin(this.time.elapsed * 0.0001 + i + 3) * 5
-                this.meshes[i].position.z = -4 + i * 0.1 + Math.sin(this.time.elapsed * 0.0001 + i + 2) * 10
+                this.meshes[i].position.z = -0.5 + (i + 1) * 0.1 + Math.sin(this.time.elapsed * 0.0001 + i + 2) * 6
                 this.meshes[i].position.y = Math.sin(this.time.elapsed * 0.0001 + i + 3) * 10
                 // let _scale = 1 + this.experience.world.audio.frequenceAverage * 0.001
                 // this.meshes[i].scale.set(_scale, _scale, _scale)
-                this.meshes[i].material.opacity = 0.0 + this.experience.world.audio.frequenceAverage * 0.01
+                this.meshes[i].material.opacity = 0.01 + _frequencies[i] * 0.005
+                // this.meshes[i].material.opacity = 0.0 + this.experience.world.audio.frequenceAverage * 0.01
             }
 
         }

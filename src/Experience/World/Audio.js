@@ -30,7 +30,7 @@ export default class Audio
                 this.setAnalyzer()
             } 
             if(this.domAudio.paused){
-                // this.domAudio.currentTime = 40
+                // this.domAudio.currentTime = 50
                 this.domAudio.play()
                 this.domButton.innerHTML = 'pause'
             }else {
@@ -70,28 +70,28 @@ export default class Audio
     {
         if(this.domAudio)
         {
-            // console.log(this.domAudio.currentTime)
+            console.log(this.domAudio.currentTime)
         }
         // const _index = Math.floor(Math.random() * this.audiosSrc.length);
         // this.setAudio(_index)
     }
-    getAverage(array) 
+    getAverage(array, indexStart, indexEnd) 
     {
-        let i = 0;
-        const longueur = array.length;
+        // const longueur = array.length;
         let value = 0;
-        while (i < longueur) {
+        for ( let i = indexStart; i < indexEnd; i ++) {
             value += array[i];
-            i++
         }
-        return value / longueur
+        return value / (indexEnd - indexStart)
     }
     update()
     {
         if(this.analyser){
             this.analyser.getByteFrequencyData(this.dataArray)
-            // console.log(this.dataArray[100])
-            this.frequenceAverage = this.getAverage(this.dataArray)
+            this.frequenceAverage = this.getAverage(this.dataArray, 0, this.dataArray.length)
+            this.frequenceBassAverage = this.getAverage(this.dataArray, 0, 70)
+            this.frequenceMidAverage = this.getAverage(this.dataArray, 70, 80)
+            this.frequenceHightAverage = this.getAverage(this.dataArray, 80, 128)
             // this.frequenceAverage = this.dataArray[100]
         }
 

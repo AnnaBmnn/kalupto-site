@@ -35,11 +35,12 @@ export default class Animations  extends EventEmitter
             7.6,
             17.5,
             28,
-            45,
+            36,
+            47,
         ]
         this.allTimingAnimation = [
             {
-                timing: 45,
+                timing: 47,
                 eventName: 'animation-second-step'
             },
         ]
@@ -75,6 +76,16 @@ export default class Animations  extends EventEmitter
                 duration: 2.5
             },
             {
+                // 40
+                x: -0.25176999999999816,
+                y: -26.168514,
+                z: -22.49030599999999,
+                xRotation: 2.2807461744793236,
+                yRotation: -0.007296463658920518,
+                zRotation: 3.133103159041517,
+                duration: 8
+            },
+            {
                 // 45
                 x: -1.5188378497841581,
                 y: 1.0954093163298464,
@@ -82,7 +93,7 @@ export default class Animations  extends EventEmitter
                 xRotation: -0.025651340118769773,
                 yRotation: -0.035547961670017905,
                 zRotation: -0.0009118605773534697,
-                duration: 8
+                duration: 7
             },
 
         ]
