@@ -212,7 +212,7 @@ export default class Plans
                     // this.meshes[i].scale.y = 2.5
                     // this.meshes[i].scale.z = 2.5
                     this.meshes[i].position.x += Math.cos(this.time.elapsed * 0.0004 + i * 2 ) * 0.05
-                    this.meshes[i].position.z = -3 + i * 0.5 + this.experience.world.audio.frequenceAverage * 0.001
+                    this.meshes[i].position.z = -3.5 + i * 0.5 + this.experience.world.audio.frequenceAverage * 0.001
                     this.meshes[i].position.y += Math.sin(this.time.elapsed * 0.0001 + i + 3) * 0.03 * Math.sin(this.time.elapsed * 0.0001 + i + 3) * 0.03
                 }
             }
