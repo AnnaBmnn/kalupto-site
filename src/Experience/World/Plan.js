@@ -103,16 +103,16 @@ export default class Plan
     setMaterial(i)
     {
         
-        this.material = new THREE.MeshStandardMaterial({
-            map: this.resources.items.lakeIceTexture,
-            //normalMap: new THREE.VideoTexture( this.videos[i]),
-            transparent: true,
-            opacity: 0.9,
-            side: THREE.DoubleSide,
-            blending: THREE.MultiplyBlending  
-        })
+        // this.material = new THREE.MeshStandardMaterial({
+        //     map: this.resources.items.lakeIceTexture,
+        //     //normalMap: new THREE.VideoTexture( this.videos[i]),
+        //     transparent: true,
+        //     opacity: 0.9,
+        //     side: THREE.DoubleSide,
+        //     blending: THREE.MultiplyBlending  
+        // })
         
-        /*
+        
         this.material = new THREE.ShaderMaterial({
             depthWrite: true,
             // blending: THREE.AdditiveBlending,
@@ -124,10 +124,11 @@ export default class Plan
             opacity: 0.8,
             uniforms: {
                 uTime: {value: 0},
+                uFrequenceAverage: {value: 0},
                 uTexture: { type: "t", value: this.textures[i]}
             }
         })
-        */
+        
     }
 
     setMesh(i)
@@ -135,7 +136,7 @@ export default class Plan
         this.mesh = new THREE.Mesh(this.geometry, this.material)
         this.mesh.position.x = 0
         this.mesh.position.y = -0
-        this.mesh.position.z = -50
+        this.mesh.position.z = 30
 
         this.mesh.scale.x = 30
         this.mesh.scale.y = 30
@@ -152,8 +153,12 @@ export default class Plan
     }
     update()
     {
-        //this.mesh.rotation.z += 0.00001
+        // Uniforms
+        this.material.uniforms.uTime.value = this.time.elapsed
+        this.material.uniforms.uFrequenceAverage.value = this.experience.world.audio.frequenceAverage 
         
+
+        // ANimation
         this.mesh.lookAt(this.camera.controls.object.position)
 
 

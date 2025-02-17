@@ -12,7 +12,7 @@ void main()
     vec4 modelPosition = modelMatrix * vec4(position, 1.0);
 
     // elevation
-    modelPosition.z += ((vTexture.r + vTexture.g + vTexture.b) / 3.0) * 5.0 + sin(vTexture.r + uTime) ;
+    //modelPosition.z += ((vTexture.r + vTexture.g + vTexture.b) / 3.0) * 5.0 + sin(vTexture.r + uTime) ;
 
     // gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 

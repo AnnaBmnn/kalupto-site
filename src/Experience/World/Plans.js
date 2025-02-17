@@ -183,7 +183,7 @@ export default class Plans
                             x: 17,
                             y: 17,
                             z: 17,
-                            duration: 18,
+                            duration: 16,
                             ease: 'power2.inOut',
                             delay: 0,
                             onComplete: ()=>{

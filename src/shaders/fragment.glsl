@@ -1,27 +1,88 @@
+/*
+* Shaderto
+* https://www.shadertoy.com/view/MtKXRh
+*/
+
 #define PI 3.1415926535897932384626433832795
 
+uniform float uTime;
+uniform float uFrequenceAverage;
 
 varying vec2 vUv;
 varying vec4 vTexture;
+// "Vortex Street" by dr2 - 2015
+// License: Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
 
-float random(vec2 st)
+// Motivated by implementation of van Wijk's IBFV by eiffie (lllGDl) and andregc (4llGWl) 
+
+const vec4 cHashA4 = vec4 (0., 1., 57., 58.);
+const vec3 cHashA3 = vec3 (1., 57., 113.);
+const float cHashM = 43758.54;
+
+vec4 Hashv4f (float p)
 {
-
-    return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+  return fract (sin (p + cHashA4) * cHashM);
 }
 
-vec2 rotate(vec2 uv, float rotation, vec2 mid)
+float Noisefv2 (vec2 p)
 {
-    return vec2(
-      cos(rotation) * (uv.x - mid.x) + sin(rotation) * (uv.y - mid.y) + mid.x,
-      cos(rotation) * (uv.y - mid.y) - sin(rotation) * (uv.x - mid.x) + mid.y
-    );
+  vec2 i = floor (p);
+  vec2 f = fract (p);
+  f = f * f * (3. - 2. * f);
+  vec4 t = Hashv4f (dot (i, cHashA3.xy));
+  return mix (mix (t.x, t.y, f.x), mix (t.z, t.w, f.x), f.y);
+}
+
+float Fbm2 (vec2 p)
+{
+  float s = 0.;
+  float a = 1.;
+  for (int i = 0; i < 6; i ++) {
+    s += a * Noisefv2 (p);
+    a *= 0.5;
+    p *= 2.;
+  }
+  return s;
+}
+
+float tCur;
+
+vec2 VortF (vec2 q, vec2 c)
+{
+  vec2 d = q - c;
+  return 0.25 * vec2 (d.y, - d.x) / (dot (d, d) + 0.05);
+}
+
+vec2 FlowField (vec2 q)
+{
+  vec2 vr, c;
+  float dir = 1.;
+  c = vec2 (mod (tCur, 10.) - 20., 0.6 * dir);
+  vr = vec2 (0.);
+  for (int k = 0; k < 30; k ++) {
+    vr += dir * VortF (4. * q, c);
+    c = vec2 (c.x + 1., - c.y);
+    dir = - dir;
+  }
+  return vr;
+}
+
+void mainImage (out vec4 fragColor, in vec2 fragCoord)
+{
+
 }
 
 void main()
 {
 
-    // gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);
-    gl_FragColor = vec4(vTexture.rgb, 0.8);
+    float tCur = uTime * 0.01;
+    vec2 p = vUv;
+    vec3 color = vec3 (0.5, 0.5, 1.) + (1.0 - uFrequenceAverage * 0.01);
+
+    p -= FlowField (p) * 0.03;
+    vec3 col = Fbm2 (5. * p + vec2 (-0.1 * tCur, 0.)) * color;
+    gl_FragColor = vec4 (col, 1.);
+
+    //gl_FragColor = vec4(vTexture.rgb, 0.8);
 
 }
