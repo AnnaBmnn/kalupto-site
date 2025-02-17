@@ -69,6 +69,7 @@ export default class Plans
                 uTextureAlpha: { type: "t", value: this.textures[(i + 1) % 3]},
                 uFrequenceAverage: {value: 0},
                 uStep: {value: 0},
+                uOpacity: {value: 0},
             }
         })
         
@@ -150,28 +151,54 @@ export default class Plans
     }
     setAnimations()
     {
+        
+        this.experience.animations.on('animation-step-one-end-one', ()=>{
+            // this.materials[i].uniforms.uStep.value = 1
+            // this.materials[i].uniforms.uOpacity.value = 1
+            for(let i = 0; i < this.materials.length; i++ ){
+
+                // this.materials[i].uniforms.uFrequenceAverage.value = this.experience.world.audio.frequenceAverage 
+
+            }
+        })
         this.experience.animations.on('animation-second-step', ()=>{
             window.setTimeout(()=>{
                 this.isAnim = true
 
                 for(let i = 0; i < this.materials.length; i++)
                 {
-                    this.materials[i].transparent = false
                     this.materials[i].uniforms.uStep.value = 1
+                    // this.materials[i].uniforms.uOpacity.value = 1
+                    this.materials[i].uniforms.uStep.value = 1
+                    // this.meshes[i].scale.x = 16
+                    // this.meshes[i].scale.y = 16
+                    // this.meshes[i].scale.z = 16
+                    gsap.to(
+                        this.materials[i].uniforms.uOpacity,
+                        {
+                            duration: 12,
+                            ease: 'power2.inOut',
+                            value: 1,
+                            onComplete: ()=>{
+                                this.materials[i].transparent = false
 
-                    // this.meshes[i].rotation.x = Math.Pi * 0.5
+                            }
+                        }
+                    )
                     gsap.to(
                         this.meshes[i].scale,
                         {
-                            duration: 40,
-                            ease: 'power4.out',
-                            x: 4,
-                            y: 4,
-                            z: 3
+                            x: 16,
+                            y: 16,
+                            z: 16,
+                            duration: 12,
+                            ease: 'power2.inOut',
+                            onComplete: ()=>{
+                            }
                         }
                     )
                 }
-            }, 10000)
+            }, 6000)
 
 
         })
@@ -212,8 +239,8 @@ export default class Plans
                     // this.meshes[i].scale.y = 2.5
                     // this.meshes[i].scale.z = 2.5
                     this.meshes[i].position.x += Math.cos(this.time.elapsed * 0.0004 + i * 2 ) * 0.05
-                    this.meshes[i].position.z = -3.5 + i * 0.5 + this.experience.world.audio.frequenceAverage * 0.001
-                    this.meshes[i].position.y += Math.sin(this.time.elapsed * 0.0001 + i + 3) * 0.03 * Math.sin(this.time.elapsed * 0.0001 + i + 3) * 0.03
+                    this.meshes[i].position.z = -1.5 + i * 0.5 + this.experience.world.audio.frequenceAverage * 0.002
+                    // this.meshes[i].position.y += Math.sin(this.time.elapsed * 0.0001 + i + 3) * 0.03 * Math.sin(this.time.elapsed * 0.0001 + i + 3) * 0.03
                 }
             }
             

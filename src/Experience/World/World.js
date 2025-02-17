@@ -2,7 +2,7 @@ import Experience from '../Experience.js'
 import Environment from './Environment.js'
 // import Floor from './Floor.js'
 // import Fox from './Fox.js'
-import Mask from './Mask.js'
+import Mountain from './Mountain.js'
 import Rocks from './Rocks.js'
 import Snow from './Snow.js'
 
