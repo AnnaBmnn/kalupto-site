@@ -173,33 +173,40 @@ export default class Plans
                     // this.meshes[i].scale.x = 16
                     // this.meshes[i].scale.y = 16
                     // this.meshes[i].scale.z = 16
-                    gsap.to(
-                        this.materials[i].uniforms.uOpacity,
-                        {
-                            duration: 12,
-                            ease: 'power2.inOut',
-                            value: 1,
-                            onComplete: ()=>{
-                                this.materials[i].transparent = false
+                    if(i === 3){
+                        this.meshes[i].rotation.y = Math.Pi * 0.5
+                    }
 
-                            }
-                        }
-                    )
                     gsap.to(
                         this.meshes[i].scale,
                         {
-                            x: 16,
-                            y: 16,
-                            z: 16,
-                            duration: 12,
+                            x: 17,
+                            y: 17,
+                            z: 17,
+                            duration: 18,
                             ease: 'power2.inOut',
+                            delay: 0,
                             onComplete: ()=>{
                             }
                         }
                     )
                 }
             }, 6000)
+            for(let i = 0; i < this.materials.length; i++)
+            {
+                gsap.to(
+                    this.materials[i].uniforms.uOpacity,
+                    {
+                        duration: 12,
+                        ease: 'power2.inOut',
+                        value: 1,
+                        onComplete: ()=>{
+                            this.materials[i].transparent = false
 
+                        }
+                    }
+                )
+            }
 
         })
     }
@@ -239,7 +246,7 @@ export default class Plans
                     // this.meshes[i].scale.y = 2.5
                     // this.meshes[i].scale.z = 2.5
                     this.meshes[i].position.x += Math.cos(this.time.elapsed * 0.0004 + i * 2 ) * 0.05
-                    this.meshes[i].position.z = -1.5 + i * 0.5 + this.experience.world.audio.frequenceAverage * 0.002
+                    this.meshes[i].position.z =  i * 0.5 + this.experience.world.audio.frequenceAverage * 0.002
                     // this.meshes[i].position.y += Math.sin(this.time.elapsed * 0.0001 + i + 3) * 0.03 * Math.sin(this.time.elapsed * 0.0001 + i + 3) * 0.03
                 }
             }

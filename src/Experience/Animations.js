@@ -109,7 +109,7 @@ export default class Animations  extends EventEmitter
                 xRotation: 2.4085087900846265,
                 yRotation: 0.0062373307374652956,
                 zRotation: -3.1359761164660243,
-                duration: 12
+                duration: 15
             },
             // {
             //     // 108
