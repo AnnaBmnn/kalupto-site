@@ -3,6 +3,7 @@ import * as THREE from 'three'
 import Debug from './Utils/Debug.js'
 import Sizes from './Utils/Sizes.js'
 import Time from './Utils/Time.js'
+import Splash from './Interface/Splash.js'
 import Camera from './Camera.js'
 import Renderer from './Renderer.js'
 import World from './World/World.js'
@@ -34,6 +35,7 @@ export default class Experience
         this.debug = new Debug()
         this.sizes = new Sizes()
         this.time = new Time()
+        this.splash = new Splash()
         this.scene = new THREE.Scene()
         this.resources = new Resources(sources)
         this.camera = new Camera()

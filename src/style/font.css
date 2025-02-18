@@ -1,0 +1,16 @@
+@font-face {
+	font-family: 'SuisseInt';
+	src: local('SuisseInt'), local('SuisseInt'),
+		url('../font/Suisseintregular.woff2') format('woff2');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Honeymoon';
+	src: local('ABCHoneymoon'), local('ABCHoneymoon'),
+		url('../font/ABCHoneymoon-Regular.woff2') format('woff2');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}

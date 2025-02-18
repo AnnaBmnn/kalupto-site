@@ -13,7 +13,7 @@ export default class Audio
         this.resources = this.experience.resources
         this.debug = this.experience.debug
         this.domAudio = document.querySelector('.js-audio')
-        this.domButton = document.querySelector('.js-play-audio')
+        this.domButtons = document.querySelectorAll('.js-play-audio')
 
         this.onTimeUpdate = this.onTimeUpdate.bind(this)
 
@@ -24,24 +24,32 @@ export default class Audio
         }
 
         // Resource
-        this.domButton.addEventListener('click', ()=>{
+        for(let i = 0; i < this.domButtons.length; i++ )
+        {
+            this.domButtons[i].addEventListener('click', ()=>{
 
-            if(!this.audioCtx){
-                this.setAnalyzer()
-            } 
-            if(this.domAudio.paused){
-                // this.domAudio.currentTime = 40
-                this.domAudio.play()
-                this.domButton.innerHTML = 'pause'
-            }else {
-                this.domAudio.pause()
-                this.domButton.innerHTML = 'play'
+                if(!this.audioCtx){
+                    this.setAnalyzer()
+                } 
+                if(this.domAudio.paused){
+                    // this.domAudio.currentTime = 40
+                    this.domAudio.play()
+                    // this.domButton.innerHTML = 'pause'
+                    for(let i = 0; i < this.domButtons.length; i++ )
+                    {
+                        this.domButton[i].innerHTML = 'pause'
+                    }
+                }else {
+                    this.domAudio.pause()
+                    // this.domButton.innerHTML = 'play'
+                    for(let i = 0; i < this.domButtons.length; i++ )
+                    {
+                        this.domButton[i].innerHTML = 'play'
+                    }    
+                }
+            })
+        }
 
-            }
-            
-
-
-        })
         this.domAudio.addEventListener('timeupdate', this.onTimeUpdate)
         this.domAudio.addEventListener('ended', ()=>{
             console.log('ended')

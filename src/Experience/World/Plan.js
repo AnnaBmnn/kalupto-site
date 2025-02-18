@@ -138,9 +138,9 @@ export default class Plan
         this.mesh.position.y = -0
         this.mesh.position.z = 30
 
-        this.mesh.scale.x = 30
-        this.mesh.scale.y = 30
-        this.mesh.scale.z = 30
+        this.mesh.scale.x = 10
+        this.mesh.scale.y = 10
+        this.mesh.scale.z = 10
 
         this.mesh.rotation.x = Math.PI
 
