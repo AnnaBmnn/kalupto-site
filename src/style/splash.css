@@ -41,6 +41,7 @@
     transform: translateY(-3.3vw) scale(0.8, 1.4);
     transform-origin: left bottom;
     letter-spacing: -0.2vw;
+    text-decoration: none;
 }
 
 .splash__name, .splash__name:visited, .splash__name:focus {
@@ -71,8 +72,10 @@
     position: absolute;
     right: 16px;
     top: 50%;
+    bottom: unset;
     background-color: transparent;
     border: none;
+    height: 2.7vw;
 	font-family: 'SuisseInt', Arial, Helvetica, sans-serif;
     font-size: clamp(10px, 1.4vw, 20px);
     letter-spacing: -5%;
@@ -85,6 +88,7 @@
     cursor: pointer;
     display: flex;
     align-self: start;
+
 }
 
 .splash__play:hover {
