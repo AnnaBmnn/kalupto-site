@@ -37,7 +37,7 @@ export default class Audio
                     // this.domButton.innerHTML = 'pause'
                     for(let i = 0; i < this.domButtons.length; i++ )
                     {
-                        this.domButton[i].innerHTML = 'pause'
+                        this.domButtons[i].innerHTML = 'pause'
                     }
                 }else {
                     this.domAudio.pause()

@@ -136,11 +136,11 @@ export default class Plan
         this.mesh = new THREE.Mesh(this.geometry, this.material)
         this.mesh.position.x = 0
         this.mesh.position.y = -0
-        this.mesh.position.z = 30
+        this.mesh.position.z = 50
 
-        this.mesh.scale.x = 10
-        this.mesh.scale.y = 10
-        this.mesh.scale.z = 10
+        this.mesh.scale.x = 20
+        this.mesh.scale.y = 20
+        this.mesh.scale.z = 20
 
         this.mesh.rotation.x = Math.PI
 

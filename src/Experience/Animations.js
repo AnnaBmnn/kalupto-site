@@ -31,18 +31,18 @@ export default class Animations  extends EventEmitter
         this.animationCameraIndex = 0
         this.animationIndex = 0
         // s
-        this.allTimingCameraAnimation = [
-            7.6,
-            17.5,
-            28,
-            36,
-            47,
-            65,
-            // 108.5
-        ]
+        // this.allTimingCameraAnimation = [
+        //     7.6,
+        //     17.5,
+        //     28,
+        //     36,
+        //     47,
+        //     65,
+        //     108.5
+        // ]
         this.allTimingAnimation = [
             {
-                timing: 17.5,
+                timing: 8.6,
                 eventName: 'animation-step-one-end-one'
             },
             {
@@ -122,7 +122,7 @@ export default class Animations  extends EventEmitter
             //     duration: 12
             // }
         ]
-        this.currentTimingAnimation = this.allTimingCameraAnimation[this.animationCameraIndex]
+        // this.currentTimingAnimation = this.allTimingCameraAnimation[this.animationCameraIndex]
     }
 
     animateCamera()
@@ -181,18 +181,18 @@ export default class Animations  extends EventEmitter
     checkIfCurrentAnimation()
     {
 
-        if(this.audio.currentTime >= this.currentTimingAnimation )
-        {
-            this.animateCamera()
-            this.setNextAnimation()
-        }
+        // if(this.audio.currentTime >= this.currentTimingAnimation )
+        // {
+        //     this.animateCamera()
+        //     this.setNextAnimation()
+        // }
 
         if(this.animationIndex < this.allTimingAnimation.length){
+
             if(this.audio.currentTime >= this.allTimingAnimation[this.animationIndex].timing)
             {
                 this.trigger(this.allTimingAnimation[this.animationIndex].eventName)
                 this.animationIndex += 1
-                console.log('ICI')
             }
         }
 
@@ -203,11 +203,11 @@ export default class Animations  extends EventEmitter
         if(this.audio)
         {
 
-            if(this.currentTimingAnimation)
-            {
+            // if(this.currentTimingAnimation)
+            // {
 
                 this.checkIfCurrentAnimation()
-            }
+            // }
         }
 
     }

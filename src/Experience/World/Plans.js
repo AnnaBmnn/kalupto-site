@@ -22,7 +22,7 @@ export default class Plans
         ]
         this.meshes = []
         this.materials = []
-
+        this.isAnim = 0
 
         this.setGeometry()
 
@@ -79,7 +79,7 @@ export default class Plans
     {
         this.mesh = new THREE.Mesh(this.geometry, this.materials[i])
         this.mesh.position.z = -2 - i * 2.5
-        this.mesh.position.y = 0 - i * 3.0
+        this.mesh.position.y = 0 - i * 0.0
 
         // this.mesh.rotation.x = - Math.PI * 0.5
 
@@ -155,15 +155,27 @@ export default class Plans
         this.experience.animations.on('animation-step-one-end-one', ()=>{
             // this.materials[i].uniforms.uStep.value = 1
             // this.materials[i].uniforms.uOpacity.value = 1
-            for(let i = 0; i < this.materials.length; i++ ){
-
+            this.isAnim += 1
+            for(let i = 0; i < this.meshes.length; i++ ){
+                // this.meshes[i].position.z = 0
                 // this.materials[i].uniforms.uFrequenceAverage.value = this.experience.world.audio.frequenceAverage 
-
+                gsap.to(
+                    this.meshes[i].position,
+                    {
+                        z: 0,
+                        duration: 3,
+                        ease: 'power2.inOut',
+                        delay: 0,
+                        onComplete: ()=>{
+                        }
+                    }
+                )
             }
         })
         this.experience.animations.on('animation-second-step', ()=>{
             window.setTimeout(()=>{
-                this.isAnim = true
+                this.isAnim += 1
+
 
                 for(let i = 0; i < this.materials.length; i++)
                 {
@@ -241,7 +253,11 @@ export default class Plans
                     // this.meshes[i].position.x = Math.cos(this.time.elapsed * 0.0001 + i + 0) * 10
 
                 }
-                if(this.isAnim){
+                if(this.isAnim  == 1){
+                    const sens = i % 2 == 0 ? 1 : -1
+                    this.meshes[i].rotation.z += 0.001 * sens
+                }
+                if(this.isAnim  >= 2){
                     // this.meshes[i].scale.x = 2.5
                     // this.meshes[i].scale.y = 2.5
                     // this.meshes[i].scale.z = 2.5
