@@ -38,7 +38,7 @@ export default class Plans
 
     setGeometry()
     {
-        this.geometry = new THREE.PlaneGeometry( 5, 5, 768, 768);
+        this.geometry = new THREE.PlaneGeometry( 5.5, 5.5, 768, 768);
     }
 
     setMaterial(i)
@@ -86,71 +86,9 @@ export default class Plans
         this.mesh.receiveShadow = true
         this.scene.add(this.mesh)
         this.meshes.push(this.mesh)
-       // Debug
-       if(this.debug.active)
-       {
-           this.debugFolder = this.debug.ui.addFolder('Plan')
 
-           this.debugFolder
-               .add(this.meshes[0].position, 'x')
-               .name('position x')
-               .min(-100)
-               .max(100)
-               .step(0.01)
-           this.debugFolder
-               .add(this.meshes[0].position, 'y')
-               .name('position y')
-               .min(-100)
-               .max(100)
-               .step(0.01)
-           this.debugFolder
-               .add(this.meshes[0].position, 'z')
-               .name('position z')
-               .min(-100)
-               .max(100)
-               .step(0.01)
-
-           this.debugFolder
-               .add(this.meshes[0].scale, 'x')
-               .name('scale x')
-               .min(0)
-               .max(100)
-               .step(0.01)
-           this.debugFolder
-               .add(this.meshes[0].scale, 'y')
-               .name('scale y')
-               .min(0)
-               .max(100)
-               .step(0.01)
-           this.debugFolder
-               .add(this.meshes[0].scale, 'z')
-               .name('scale z')
-               .min(0)
-               .max(100)
-               .step(0.01)
-
-           this.debugFolder
-               .add(this.meshes[0].rotation, 'x')
-               .name('rotation x')
-               .min(0)
-               .max(7)
-               .step(0.01)
-           this.debugFolder
-               .add(this.meshes[0].rotation, 'y')
-               .name('rotation y')
-               .min(0)
-               .max(7)
-               .step(0.01)
-           this.debugFolder
-               .add(this.meshes[0].rotation, 'z')
-               .name('rotation z')
-               .min(0)
-               .max(7)
-               .step(0.01)
-       }
     }
-    setAnimations()
-    {
+    setAnimations(){
         
         this.experience.animations.on('animation-step-one-end-one', ()=>{
             // this.materials[i].uniforms.uStep.value = 1
@@ -162,9 +100,9 @@ export default class Plans
                 gsap.to(
                     this.meshes[i].position,
                     {
-                        z: 0,
-                        duration: 3,
-                        ease: 'power2.inOut',
+                        z: -0.010,
+                        duration: 2.3,
+                        ease: 'power2.out',
                         delay: 0,
                         onComplete: ()=>{
                         }
@@ -172,38 +110,7 @@ export default class Plans
                 )
             }
         })
-        this.experience.animations.on('animation-second-step', ()=>{
-            window.setTimeout(()=>{
-                this.isAnim += 1
-
-
-                for(let i = 0; i < this.materials.length; i++)
-                {
-                    this.materials[i].uniforms.uStep.value = 1
-                    // this.materials[i].uniforms.uOpacity.value = 1
-                    this.materials[i].uniforms.uStep.value = 1
-                    // this.meshes[i].scale.x = 16
-                    // this.meshes[i].scale.y = 16
-                    // this.meshes[i].scale.z = 16
-                    if(i === 3){
-                        this.meshes[i].rotation.y = Math.Pi * 0.5
-                    }
-
-                    gsap.to(
-                        this.meshes[i].scale,
-                        {
-                            x: 17,
-                            y: 17,
-                            z: 17,
-                            duration: 16,
-                            ease: 'power2.inOut',
-                            delay: 0,
-                            onComplete: ()=>{
-                            }
-                        }
-                    )
-                }
-            }, 6000)
+        this.experience.animations.on('animation-step-one-end-two', ()=>{
             for(let i = 0; i < this.materials.length; i++)
             {
                 gsap.to(
@@ -219,6 +126,84 @@ export default class Plans
                     }
                 )
             }
+        })
+        this.experience.animations.on('animation-step-one-respi', ()=>{
+            for(let i = 0; i < this.materials.length; i++)
+            {
+                this.materials[i].transparent = true
+
+                gsap.to(
+                    this.materials[i].uniforms.uOpacity,
+                    {
+                        duration: 2,
+                        ease: 'power2.inOut',
+                        value: 0,
+                        onComplete: ()=>{
+
+                        }
+                    }
+                )
+                // gsap.to(
+                //     this.meshes[i].position,
+                //     {
+                //         z: -2 - i * 2.5,
+                //         duration: 2.3,
+                //         ease: 'power2.out',
+                //         delay: 0,
+                //         onComplete: ()=>{
+                //         }
+                //     }
+                // )
+            }
+        })
+        this.experience.animations.on('animation-second-step', ()=>{
+            window.setTimeout(()=>{
+                this.isAnim += 1
+
+
+                for(let i = 0; i < this.materials.length; i++)
+                {
+                    // this.materials[i].uniforms.uStep.value = 1
+                    // this.materials[i].uniforms.uOpacity.value = 1
+                    // this.materials[i].uniforms.uStep.value = 1
+                    // this.meshes[i].scale.x = 16
+                    // this.meshes[i].scale.y = 16
+                    // this.meshes[i].scale.z = 16
+                    if(i === 3){
+                        this.meshes[i].rotation.y = Math.Pi * 0.5
+                    }
+                    /*
+                    gsap.to(
+                        this.meshes[i].scale,
+                        {
+                            x: 17,
+                            y: 17,
+                            z: 17,
+                            duration: 16,
+                            ease: 'power2.inOut',
+                            delay: 0,
+                            onComplete: ()=>{
+                            }
+                        }
+                    )
+                    */
+                }
+            }, 6000)
+            // for(let i = 0; i < this.materials.length; i++)
+            // {
+            //     gsap.to(
+            //         this.materials[i].uniforms.uOpacity,
+            //         {
+            //             duration: 12,
+            //             ease: 'power2.inOut',
+            //             value: 1,
+            //             onComplete: ()=>{
+            //                 this.materials[i].transparent = false
+
+            //             }
+            //         }
+            //     )
+            // }
 
         })
     }
@@ -252,17 +237,17 @@ export default class Plans
                     // this.meshes[i].position.y = Math.cos(this.time.elapsed * 0.0001 + i + 0) * 10
                     // this.meshes[i].position.x = Math.cos(this.time.elapsed * 0.0001 + i + 0) * 10
 
-                }
+                } 
                 if(this.isAnim  == 1){
-                    const sens = i % 2 == 0 ? 1 : -1
-                    this.meshes[i].rotation.z += 0.001 * sens
+                    const sens = i % 2 == 0 ? -1 : 1
+                    this.meshes[i].rotation.z += 0.0001 * sens * i
                 }
                 if(this.isAnim  >= 2){
                     // this.meshes[i].scale.x = 2.5
                     // this.meshes[i].scale.y = 2.5
                     // this.meshes[i].scale.z = 2.5
-                    this.meshes[i].position.x += Math.cos(this.time.elapsed * 0.0004 + i * 2 ) * 0.05
-                    this.meshes[i].position.z =  i * 0.5 + this.experience.world.audio.frequenceAverage * 0.002
+                    // this.meshes[i].position.x += Math.cos(this.time.elapsed * 0.0004 + i * 2 ) * 0.05
+                    // this.meshes[i].position.z =  i * 0.5 + this.experience.world.audio.frequenceAverage * 0.002
                     // this.meshes[i].position.y += Math.sin(this.time.elapsed * 0.0001 + i + 3) * 0.03 * Math.sin(this.time.elapsed * 0.0001 + i + 3) * 0.03
                 }
             }

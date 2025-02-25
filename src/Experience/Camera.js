@@ -13,7 +13,7 @@ export default class Camera
 
         this.setInstance()
         this.setControls()
-        //this.setButtonDebug()
+        this.setButtonDebug()
 
         // on end audio 
     }

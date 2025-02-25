@@ -22,7 +22,7 @@ void main()
     vec4 modelPosition = modelMatrix * vec4(position, 1.0);
 
     // elevation
-    modelPosition.z += uFrequenceAverage * (0.005 * pow((uStep + 1.0), 3.0) )* vTexture.g ;
+    modelPosition.z += uFrequenceAverage * (0.007 * pow((uStep + 1.0), 2.0) )* vTexture.g ;
     
 
     // gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);

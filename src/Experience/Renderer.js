@@ -29,6 +29,12 @@ export default class Renderer
         // Add Passes
         this.setPostProcessing()
         this.setBloomPass()
+
+        // Add Animations
+        window.setTimeout(() => {
+            this.setAnimations()
+          
+        }, 1000);
     }
 
     setInstance()
@@ -65,20 +71,29 @@ export default class Renderer
     }
     setBloomPass()
     {
-        const unrealBloomPass = new UnrealBloomPass()
-        unrealBloomPass.strength = 1.0
-        unrealBloomPass.radius = 1.0
-        unrealBloomPass.threshold = 0.9 
-        unrealBloomPass.enabled = true
-        this.effectComposer.addPass(unrealBloomPass)
+        this.unrealBloomPass = new UnrealBloomPass()
+        this.unrealBloomPass.strength = 1.0
+        this.unrealBloomPass.radius = 1.0
+        this.unrealBloomPass.threshold = 0.9 
+        this.unrealBloomPass.enabled = true
+        this.effectComposer.addPass(this.unrealBloomPass)
 
         if(this.debug.active)
         {
-            this.debugFolder.add(unrealBloomPass, 'enabled')
-            this.debugFolder.add(unrealBloomPass, 'strength').min(0).max(2).step(0.001)
-            this.debugFolder.add(unrealBloomPass, 'radius').min(0).max(2).step(0.001)
-            this.debugFolder.add(unrealBloomPass, 'threshold').min(0).max(1).step(0.001)
+            this.debugFolder.add(this.unrealBloomPass, 'enabled')
+            this.debugFolder.add(this.unrealBloomPass, 'strength').min(0).max(2).step(0.001)
+            this.debugFolder.add(this.unrealBloomPass, 'radius').min(0).max(2).step(0.001)
+            this.debugFolder.add(this.unrealBloomPass, 'threshold').min(0).max(1).step(0.001)
         }
+    }
+    setAnimations()
+    {
+        this.experience.animations.on('animation-second-step', ()=>{
+            window.setTimeout(() => {
+                this.unrealBloomPass.strength = 0.6
+                this.unrealBloomPass.radius = 0.1
+            }, 6000);
+        })
     }
     resize()
     {

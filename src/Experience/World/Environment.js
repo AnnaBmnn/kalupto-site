@@ -135,6 +135,7 @@ export default class Environment
                     r: 0.90,
                     g: 0.90,
                     b: 0.92,
+                    delay: 4
                 }
             )
         })

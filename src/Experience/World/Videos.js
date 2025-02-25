@@ -63,7 +63,7 @@ export default class Videos
     }
     setGeometry()
     {
-        this.geometry = new THREE.PlaneGeometry( 15, 15, 1, 1);
+        this.geometry = new THREE.PlaneGeometry( 10, 10, 1, 1);
     }
 
     setMaterial(i)
@@ -169,7 +169,7 @@ export default class Videos
             for(let i = 0; i < this.meshes.length; i++ ){
                 
                 this.meshes[i].position.x = Math.cos(this.time.elapsed * 0.0001 + i + 3) * 10 *  Math.sin(this.time.elapsed * 0.0001 + i + 3) * 5
-                this.meshes[i].position.z = -0.5 + (i + 1) * 0.1 + Math.sin(this.time.elapsed * 0.0001 + i + 2) * 3
+                this.meshes[i].position.z =  (i + 1) * 0.1 + Math.sin(this.time.elapsed * 0.0001 + i + 2) * 3
                 this.meshes[i].position.y = Math.sin(this.time.elapsed * 0.0001 + i + 3) * 10
 
                 // let _scale = 1 + this.experience.world.audio.frequenceAverage * 0.001

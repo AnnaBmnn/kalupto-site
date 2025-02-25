@@ -31,19 +31,27 @@ export default class Animations  extends EventEmitter
         this.animationCameraIndex = 0
         this.animationIndex = 0
         // s
-        // this.allTimingCameraAnimation = [
+        this.allTimingCameraAnimation = [
         //     7.6,
-        //     17.5,
-        //     28,
-        //     36,
-        //     47,
+            17.5,
+            // 28,
+            36,
+            47,
         //     65,
-        //     108.5
-        // ]
+            108.5
+        ]
         this.allTimingAnimation = [
             {
                 timing: 8.6,
                 eventName: 'animation-step-one-end-one'
+            },
+            {
+                timing: 8.6,
+                eventName: 'animation-step-one-end-two'
+            },
+            {
+                timing: 36,
+                eventName: 'animation-step-one-respi'
             },
             {
                 timing: 47,
@@ -51,38 +59,38 @@ export default class Animations  extends EventEmitter
             },
         ]
         this.animationsCamera = [
-            {
-                // 7.8
-                x: 0.3808333260338206,
-                y: -4.116371661838657,
-                z: -5.635623280722066,
-                xRotation: 2.51074099480408,
-                yRotation: 0.05451533552399793,
-                zRotation: -3.10181427932108,
-                duration: 3
-            },
+            // {
+            //     // 7.8
+            //     x: 0.3808333260338206,
+            //     y: -4.116371661838657,
+            //     z: -5.635623280722066,
+            //     xRotation: 2.51074099480408,
+            //     yRotation: 0.05451533552399793,
+            //     zRotation: -3.10181427932108,
+            //     duration: 3
+            // },
             {
                 // 17.5
-                x: 0.5568795805606047,
-                y: -7.476699297650231,
-                z: -8.24078460917381,
-                xRotation: -0.0256513528116189,
-                yRotation: -0.03554797026364589,
-                zRotation: -0.0009118612491070096,
-                duration: 2.5
+                x: -0.23106710191415267,
+                y: -4.568926426545236,
+                z: -2.37870515178001,
+                xRotation: 2.050808812413357,
+                yRotation: -0.04482819088302481,
+                zRotation: 3.055728841713903,
+                duration: 3.5
             },
+            // {
+            //     // 29
+            //     x: -0.0016189926816755022,
+            //     y: -6.298464155607868,
+            //     z: -0.19042595527136175,
+            //     xRotation: 1.6010208110599313,
+            //     yRotation: -0.0002569277740684537,
+            //     zRotation: 3.133094796509806,
+            //     duration: 2.5
+            // },
             {
-                // 29
-                x: -0.157865549100623,
-                y: -16.408313895182953,
-                z: -14.101989538962583,
-                xRotation: 2.4047700057437735,
-                yRotation: 0.05000557347834436,
-                zRotation: -3.0962735560522296,
-                duration: 2.5
-            },
-            {
-                // 40
+                // 36
                 x: -0.25176999999999816,
                 y: -26.168514,
                 z: -16.49030599999999,
@@ -92,37 +100,37 @@ export default class Animations  extends EventEmitter
                 duration: 8
             },
             {
-                // 45
+                // 47
+                x: 0.5885196280063759,
+                y: -7.459538307170829,
+                z: 4.840980315830795,
+                xRotation: 0.9951489446651853,
+                yRotation: 0.06608384757973242,
+                zRotation: -0.10140644768587119,
+                duration: 7
+            },
+            // {
+            //     // 70
+            //     x: 0.4037481071254601,
+            //     y: -43.31506512193883,
+            //     z: -48.101844332011645,
+            //     xRotation: 2.4085087900846265,
+            //     yRotation: 0.0062373307374652956,
+            //     zRotation: -3.1359761164660243,
+            //     duration: 15
+            // },
+            {
+                // 108
                 x: -0.8475996027827574,
                 y: 3.8449413740002845,
                 z: -70.8831670680309,
                 xRotation: 3.0909667227169484,
                 yRotation: -0.011155023740283846,
                 zRotation: -0.1410274489483117,
-                duration: 7
-            },
-            {
-                // 70
-                x: 0.4037481071254601,
-                y: -43.31506512193883,
-                z: -48.101844332011645,
-                xRotation: 2.4085087900846265,
-                yRotation: 0.0062373307374652956,
-                zRotation: -3.1359761164660243,
-                duration: 15
-            },
-            // {
-            //     // 108
-            //     x: -0.8475996027827574,
-            //     y: 3.8449413740002845,
-            //     z: -70.8831670680309,
-            //     xRotation: 3.0909667227169484,
-            //     yRotation: -0.011155023740283846,
-            //     zRotation: -0.1410274489483117,
-            //     duration: 12
-            // }
+                duration: 12
+            }
         ]
-        // this.currentTimingAnimation = this.allTimingCameraAnimation[this.animationCameraIndex]
+        this.currentTimingAnimation = this.allTimingCameraAnimation[this.animationCameraIndex]
     }
 
     animateCamera()
@@ -180,12 +188,13 @@ export default class Animations  extends EventEmitter
     }
     checkIfCurrentAnimation()
     {
+        if(this.animationCameraIndex < this.animationsCamera.length && this.audio.currentTime >= this.currentTimingAnimation )
+        {
+            console.log(this.animationCameraIndex)
 
-        // if(this.audio.currentTime >= this.currentTimingAnimation )
-        // {
-        //     this.animateCamera()
-        //     this.setNextAnimation()
-        // }
+            this.animateCamera()
+            this.setNextAnimation()
+        }
 
         if(this.animationIndex < this.allTimingAnimation.length){
 

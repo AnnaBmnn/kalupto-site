@@ -25,12 +25,10 @@ export default class Plan
 
 
         this.setGeometry()
+        this.setMaterial(0)
+        this.setMesh(0)
+        this.setAnimations()
 
-
-        for(let i = 0; i < 1; i++){
-            this.setMaterial(i)
-            this.setMesh(i)
-        }
         // Debug
         if(this.debug.active)
         {
@@ -130,7 +128,7 @@ export default class Plan
         })
         
     }
-
+    
     setMesh(i)
     {
         this.mesh = new THREE.Mesh(this.geometry, this.material)
@@ -147,9 +145,21 @@ export default class Plan
 
         // this.mesh.rotation.x = - Math.PI * 0.5
 
-        this.mesh.receiveShadow = true
+        this.mesh.receiveShadow = false
         this.scene.add(this.mesh)
         this.meshes.push(this.mesh)
+    }
+    setAnimations()
+    {
+        this.experience.animations.on('animation-step-one-respi', ()=>{
+            this.mesh.visible = false
+        })
+        this.experience.animations.on('animation-second-step', ()=>{
+            window.setTimeout(() => {
+                this.mesh.visible = true
+                this.mesh.position.z = - 5.71
+            }, 6000);
+        })
     }
     update()
     {
