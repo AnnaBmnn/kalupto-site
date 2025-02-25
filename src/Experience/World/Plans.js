@@ -163,7 +163,7 @@ export default class Plans
 
                 for(let i = 0; i < this.materials.length; i++)
                 {
-                    // this.materials[i].uniforms.uStep.value = 1
+                    this.materials[i].uniforms.uStep.value = 0 + i * 0.1
                     // this.materials[i].uniforms.uOpacity.value = 1
                     // this.materials[i].uniforms.uStep.value = 1
                     // this.meshes[i].scale.x = 16
@@ -205,6 +205,18 @@ export default class Plans
             //     )
             // }
 
+        })
+        this.experience.animations.on('animation-third-step', ()=>{
+            for(let i = 0; i < this.meshes.length; i++ ){
+                this.meshes[i].rotation.z = 0
+
+            }
+        })
+        this.experience.animations.on('animation-four-step', ()=>{
+            for(let i = 0; i < this.meshes.length; i++ ){
+                this.materials[i].uniforms.uStep.value = 5
+
+            }
         })
     }
     update()

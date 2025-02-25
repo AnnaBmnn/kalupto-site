@@ -134,7 +134,7 @@ export default class Plan
         this.mesh = new THREE.Mesh(this.geometry, this.material)
         this.mesh.position.x = 0
         this.mesh.position.y = -0
-        this.mesh.position.z = 50
+        this.mesh.position.z = 5
 
         this.mesh.scale.x = 20
         this.mesh.scale.y = 20
@@ -159,6 +159,9 @@ export default class Plan
                 this.mesh.visible = true
                 this.mesh.position.z = - 5.71
             }, 6000);
+        })
+        this.experience.animations.on('animation-fourth-step', ()=>{
+            // this.mesh.visible = false
         })
     }
     update()

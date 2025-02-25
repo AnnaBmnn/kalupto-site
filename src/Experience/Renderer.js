@@ -91,7 +91,7 @@ export default class Renderer
         this.experience.animations.on('animation-second-step', ()=>{
             window.setTimeout(() => {
                 this.unrealBloomPass.strength = 0.6
-                this.unrealBloomPass.radius = 0.1
+                this.unrealBloomPass.radius = 1
             }, 6000);
         })
     }

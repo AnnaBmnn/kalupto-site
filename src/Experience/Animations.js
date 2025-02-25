@@ -32,13 +32,14 @@ export default class Animations  extends EventEmitter
         this.animationIndex = 0
         // s
         this.allTimingCameraAnimation = [
-        //     7.6,
-            17.5,
+            7.6,
+            // 17.5,
             // 28,
             36,
             47,
         //     65,
-            108.5
+            92
+            // 112
         ]
         this.allTimingAnimation = [
             {
@@ -46,7 +47,7 @@ export default class Animations  extends EventEmitter
                 eventName: 'animation-step-one-end-one'
             },
             {
-                timing: 8.6,
+                timing: 17.5,
                 eventName: 'animation-step-one-end-two'
             },
             {
@@ -56,6 +57,14 @@ export default class Animations  extends EventEmitter
             {
                 timing: 47,
                 eventName: 'animation-second-step'
+            },
+            {
+                timing: 92,
+                eventName: 'animation-third-step'
+            },
+            {
+                timing: 98,
+                eventName: 'animation-fourth-step'
             },
         ]
         this.animationsCamera = [
@@ -70,13 +79,14 @@ export default class Animations  extends EventEmitter
             //     duration: 3
             // },
             {
-                // 17.5
-                x: -0.23106710191415267,
-                y: -4.568926426545236,
-                z: -2.37870515178001,
-                xRotation: 2.050808812413357,
-                yRotation: -0.04482819088302481,
-                zRotation: 3.055728841713903,
+                // 7.8
+
+                x: -0.018751447384539443,
+                y:  -4.5,
+                z: -0.5,
+                xRotation: 1.672099238000587,
+                yRotation: -0.002223679511046401,
+                zRotation: 3.119720504189871,
                 duration: 3.5
             },
             // {
@@ -120,14 +130,14 @@ export default class Animations  extends EventEmitter
             //     duration: 15
             // },
             {
-                // 108
-                x: -0.8475996027827574,
-                y: 3.8449413740002845,
-                z: -70.8831670680309,
-                xRotation: 3.0909667227169484,
-                yRotation: -0.011155023740283846,
-                zRotation: -0.1410274489483117,
-                duration: 12
+                // 92
+                x: 2.9493436304834812,
+                y: -100.2798654676241,
+                z: 33.797661201595208,
+                xRotation: 1.2427260269878113,
+                yRotation: 0.028045322575490406,
+                zRotation: -0.0822000892839695,
+                duration: 15
             }
         ]
         this.currentTimingAnimation = this.allTimingCameraAnimation[this.animationCameraIndex]
