@@ -3,6 +3,7 @@ import Experience from './Experience.js'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js'
+import gsap from 'gsap'
 
 
 export default class Renderer
@@ -88,9 +89,34 @@ export default class Renderer
     }
     setAnimations()
     {
+        
+        this.experience.animations.on('animation-step-one-begin', ()=>{
+            this.unrealBloomPass.enabled = false
+            this.unrealBloomPass.strength = 0.0
+            this.unrealBloomPass.radius = 0.0
+
+        })
+        
+        this.experience.animations.on('animation-step-one-respi', ()=>{
+            this.unrealBloomPass.enabled = true
+            
+            
+            window.setTimeout(() => {
+                gsap.to(
+                    this.unrealBloomPass,
+                    {
+                        duration: 1,
+                        ease: 'power4.inOut',
+                        strength: 1,
+                        radius: 1.0,
+                    }
+                )
+            }, 2000);
+
+        })
         this.experience.animations.on('animation-second-step', ()=>{
             window.setTimeout(() => {
-                this.unrealBloomPass.strength = 0.6
+                this.unrealBloomPass.strength = 1
                 this.unrealBloomPass.radius = 1
             }, 6000);
         })

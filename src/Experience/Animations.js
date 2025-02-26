@@ -33,7 +33,7 @@ export default class Animations  extends EventEmitter
         // s
         this.allTimingCameraAnimation = [
             7.6,
-            // 17.5,
+            17.5,
             // 28,
             36,
             47,
@@ -42,6 +42,10 @@ export default class Animations  extends EventEmitter
             // 112
         ]
         this.allTimingAnimation = [
+            {
+                timing: 1.5,
+                eventName: 'animation-step-one-begin'
+            },
             {
                 timing: 8.6,
                 eventName: 'animation-step-one-end-one'
@@ -68,26 +72,26 @@ export default class Animations  extends EventEmitter
             },
         ]
         this.animationsCamera = [
-            // {
-            //     // 7.8
-            //     x: 0.3808333260338206,
-            //     y: -4.116371661838657,
-            //     z: -5.635623280722066,
-            //     xRotation: 2.51074099480408,
-            //     yRotation: 0.05451533552399793,
-            //     zRotation: -3.10181427932108,
-            //     duration: 3
-            // },
             {
                 // 7.8
+                x: 0.3808333260338206,
+                y: -4.116371661838657,
+                z: -5.635623280722066,
+                xRotation: 2.51074099480408,
+                yRotation: 0.05451533552399793,
+                zRotation: -3.10181427932108,
+                duration: 3
+            },
+            {
+                // 17.8
 
-                x: -0.018751447384539443,
-                y:  -4.5,
-                z: -0.5,
-                xRotation: 1.672099238000587,
-                yRotation: -0.002223679511046401,
-                zRotation: 3.119720504189871,
-                duration: 3.5
+                x: 0.267180455821947,
+                y:  -2.887917137676363,
+                z: -3.9537758597092445,
+                xRotation: 2.510740931961457,
+                yRotation: 0.05451528915825064,
+                zRotation: -3.101814307841023,
+                duration: 6
             },
             // {
             //     // 29

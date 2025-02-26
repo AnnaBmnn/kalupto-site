@@ -90,11 +90,11 @@ export default class Plans
     }
     setAnimations(){
         
-        this.experience.animations.on('animation-step-one-end-one', ()=>{
+        this.experience.animations.on('animation-step-one-end-two', ()=>{
             // this.materials[i].uniforms.uStep.value = 1
             // this.materials[i].uniforms.uOpacity.value = 1
             this.isAnim += 1
-            for(let i = 0; i < this.meshes.length; i++ ){
+            for(let i = 0; i < this.meshes.length - 1 ; i++ ){
                 // this.meshes[i].position.z = 0
                 // this.materials[i].uniforms.uFrequenceAverage.value = this.experience.world.audio.frequenceAverage 
                 gsap.to(
@@ -157,6 +157,21 @@ export default class Plans
             }
         })
         this.experience.animations.on('animation-second-step', ()=>{
+            for(let i = 0; i < this.meshes.length - 1 ; i++ ){
+                // this.meshes[i].position.z = 0
+                // this.materials[i].uniforms.uFrequenceAverage.value = this.experience.world.audio.frequenceAverage 
+                gsap.to(
+                    this.meshes[i].position,
+                    {
+                        z: -2 - i * 2.5,
+                        duration: 2.3,
+                        ease: 'power2.out',
+                        delay: 0,
+                        onComplete: ()=>{
+                        }
+                    }
+                )
+            }
             window.setTimeout(()=>{
                 this.isAnim += 1
 
@@ -171,6 +186,21 @@ export default class Plans
                     // this.meshes[i].scale.z = 16
                     if(i === 3){
                         this.meshes[i].rotation.y = Math.Pi * 0.5
+                    }
+                    for(let i = 0; i < this.meshes.length ; i++ ){
+                        // this.meshes[i].position.z = 0
+                        // this.materials[i].uniforms.uFrequenceAverage.value = this.experience.world.audio.frequenceAverage 
+                        gsap.to(
+                            this.meshes[i].position,
+                            {
+                                z: 0,
+                                duration: 2.3,
+                                ease: 'power2.out',
+                                delay: 0,
+                                onComplete: ()=>{
+                                }
+                            }
+                        )
                     }
                     /*
                     gsap.to(
@@ -189,21 +219,21 @@ export default class Plans
                     */
                 }
             }, 6000)
-            // for(let i = 0; i < this.materials.length; i++)
-            // {
-            //     gsap.to(
-            //         this.materials[i].uniforms.uOpacity,
-            //         {
-            //             duration: 12,
-            //             ease: 'power2.inOut',
-            //             value: 1,
-            //             onComplete: ()=>{
-            //                 this.materials[i].transparent = false
+            for(let i = 0; i < this.materials.length; i++)
+            {
+                gsap.to(
+                    this.materials[i].uniforms.uOpacity,
+                    {
+                        duration: 12,
+                        ease: 'power2.inOut',
+                        value: 1,
+                        onComplete: ()=>{
+                            this.materials[i].transparent = false
 
-            //             }
-            //         }
-            //     )
-            // }
+                        }
+                    }
+                )
+            }
 
         })
         this.experience.animations.on('animation-third-step', ()=>{
@@ -241,7 +271,7 @@ export default class Plans
 
                 if(!this.experience.world.audio.domAudio.paused)
                 {
-                    this.meshes[i].scale.x += 0.001
+                    this.meshes[i].scale.x += 0.0012
                     this.meshes[i].scale.y += 0.0005
 
                     // this.meshes[i].position.z -= 0.5 
@@ -252,7 +282,7 @@ export default class Plans
                 } 
                 if(this.isAnim  == 1){
                     const sens = i % 2 == 0 ? -1 : 1
-                    this.meshes[i].rotation.z += 0.0001 * sens * i
+                    this.meshes[i].rotation.z += 0.00013 * sens * i
                 }
                 if(this.isAnim  >= 2){
                     // this.meshes[i].scale.x = 2.5
