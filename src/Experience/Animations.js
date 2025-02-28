@@ -84,16 +84,6 @@ export default class Animations  extends EventEmitter
                 duration: 4.5
             },
             {
-                // 17.5
-                x: -0.1688190001454601,
-                y: -4.376023982912357,
-                z: -7.702506009704813,
-                xRotation: 2.6249367621353117,
-                yRotation: -0.01905435645126834,
-                zRotation: 3.1307683817368614,
-                duration: 4.5
-            },
-            {
                 // 29
                 x: -0.06305390318082914,
                 y: -8.068487017624127,
@@ -103,6 +93,17 @@ export default class Animations  extends EventEmitter
                 zRotation: 3.127336031002351,
                 duration: 4.5
             },
+            {
+                // 17.5
+                x: -0.1688190001454601,
+                y: -4.376023982912357,
+                z: -7.702506009704813,
+                xRotation: 2.6249367621353117,
+                yRotation: -0.01905435645126834,
+                zRotation: 3.1307683817368614,
+                duration: 4.5
+            },
+
             {
                 // 36
                 x: -0.25176999999999816,
