@@ -82,18 +82,31 @@
     text-transform: uppercase;
     color: #3E1031;
     border-bottom: 2px dotted #3E1031;
-    border-top: 2px dotted transparent;
     transform: translateY(-100%);
-    transition: border 0.3s ease-in-out;
+    /* transition: border 0.3s ease-in-out; */
     cursor: pointer;
-    display: flex;
+    display: inline-block;
+    text-align: right;
     /* align-self: start; */
+}
 
+.splash__play::first-letter {
+	font-family: 'Honeymoon', serif;
+    line-height: clamp(10px, 1vw, 20px);
+    transform: translateY(5px);
+    font-size: clamp(20px, 2vw, 40px);
+    margin-top: clamp(-20px, -2vw, -40px);
 }
 
 .splash__play:hover {
-    border-top: 2px dotted #3E1031;
-
+	font-family: 'Honeymoon', serif;
+    line-height: clamp(10px, 1vw, 20px);
+    /* transform: translate(-10px, 12px); */
+    transform: translateY(3px) scale(0.8, 1.4);
+    font-size: clamp(20px, 2vw, 40px);
+    margin-top: clamp(-20px, -2vw, -40px);
+    letter-spacing: -0.7vw;
+    border-color: transparent;
 }
 
 @media screen and (max-width: 750px) {
