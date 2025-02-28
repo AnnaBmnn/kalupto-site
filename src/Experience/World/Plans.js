@@ -104,12 +104,12 @@ export default class Plans
                     this.meshes[i].position,
                     {
                         z: -2.2,
-                        x: -i * 0,
+                        x: -i * 0.2,
                         duration: 6,
                         ease: 'power2.inOut',
                         delay: 2,
                         onComplete: ()=>{
-                            this.isAnim += 1
+                            this.isAnim = 1
 
                         }
                     }
@@ -122,7 +122,7 @@ export default class Plans
                 gsap.to(
                     this.materials[i].uniforms.uOpacity,
                     {
-                        duration: 6,
+                        duration: 12,
                         ease: 'power2.inOut',
                         value: 1,
                         onComplete: ()=>{
@@ -134,8 +134,10 @@ export default class Plans
             }
         })
         this.experience.animations.on('animation-step-one-respi', ()=>{
+            this.isAnim = 2
             for(let i = 0; i < this.materials.length; i++)
             {
+                this.meshes[i].rotation.z = 0
                 this.materials[i].transparent = true
 
                 gsap.to(
@@ -169,7 +171,18 @@ export default class Plans
                 gsap.to(
                     this.meshes[i].position,
                     {
-                        z: -2 - i * 2.5,
+                        z: -2 - i * 3,
+                        duration: 2.3,
+                        ease: 'power2.out',
+                        delay: 0,
+                        onComplete: ()=>{
+                        }
+                    }
+                )
+                gsap.to(
+                    this.meshes[i].rotation,
+                    {
+                        z: 0,
                         duration: 2.3,
                         ease: 'power2.out',
                         delay: 0,
@@ -178,20 +191,21 @@ export default class Plans
                     }
                 )
             }
+            this.isAnim = 3
+
             window.setTimeout(()=>{
-                this.isAnim += 1
 
 
                 for(let i = 0; i < this.materials.length; i++)
                 {
-                    this.materials[i].uniforms.uStep.value = 0 + i * 0.1
+                    this.materials[i].uniforms.uStep.value = 1 + i * 0.4
                     // this.materials[i].uniforms.uOpacity.value = 1
                     // this.materials[i].uniforms.uStep.value = 1
                     // this.meshes[i].scale.x = 16
                     // this.meshes[i].scale.y = 16
                     // this.meshes[i].scale.z = 16
                     if(i === 3){
-                        this.meshes[i].rotation.y = Math.Pi * 0.5
+                        // this.meshes[i].rotation.y = Math.Pi * 0.5
                     }
                     for(let i = 0; i < this.meshes.length ; i++ ){
                         // this.meshes[i].position.z = 0
@@ -199,7 +213,8 @@ export default class Plans
                         gsap.to(
                             this.meshes[i].position,
                             {
-                                z: 0,
+                                x: i > 1 ? 5 : -5,
+                                y: i % 2 == 0 ? 5 : -5,
                                 duration: 2.3,
                                 ease: 'power2.out',
                                 delay: 0,
@@ -224,35 +239,67 @@ export default class Plans
                     )
                     */
                 }
-            }, 6000)
-            for(let i = 0; i < this.materials.length; i++)
-            {
+            }, 6800)
+            // for(let i = 0; i < this.materials.length; i++)
+            // {
+            //     gsap.to(
+            //         this.materials[i].uniforms.uOpacity,
+            //         {
+            //             duration: 12,
+            //             ease: 'power2.inOut',
+            //             value: 1,
+            //             onComplete: ()=>{
+            //                 this.materials[i].transparent = false
+
+            //             }
+            //         }
+            //     )
+            // }
+
+        })
+        this.experience.animations.on('animation-fourth-step', ()=>{
+            console.log('FOUR STEPS')
+            for(let i = 0; i < this.meshes.length; i++ ){
+                // this.materials[i].uniforms.uStep.value = 2.5
+                this.meshes[i].rotation.z = 0
+                // this.meshes[i].position.x = -2
+                // this.meshes[i].position.y = 0
+                // this.meshes[i].position.z = 0
                 gsap.to(
-                    this.materials[i].uniforms.uOpacity,
+                    this.materials[i].uniforms.uStep,
                     {
                         duration: 12,
                         ease: 'power2.inOut',
-                        value: 1,
-                        onComplete: ()=>{
-                            this.materials[i].transparent = false
-
-                        }
+                        value: 1.5,
+                    }
+                )
+                gsap.to(
+                    this.meshes[i].position,
+                    {
+                        duration: 6,
+                        ease: 'power2.inOut',
+                        x: -2,
+                        y: 0,
+                        z: 0,
                     }
                 )
             }
-
+            // this.isAnim = 4
         })
-        this.experience.animations.on('animation-third-step', ()=>{
-            for(let i = 0; i < this.meshes.length; i++ ){
-                this.meshes[i].rotation.z = 0
+        this.experience.animations.on('animation-fourth-step', ()=>{
 
-            }
-        })
-        this.experience.animations.on('animation-four-step', ()=>{
+            console.log('FOUR STEPS')
             for(let i = 0; i < this.meshes.length; i++ ){
-                this.materials[i].uniforms.uStep.value = 5
-
-            }
+                gsap.to(
+                    this.materials[i].uniforms.uStep,
+                    {
+                        duration: 12,
+                        ease: 'power2.inOut',
+                        value: 1.5,
+                    }
+                )
+                }
+            this.isAnim = 4
         })
     }
     update()
@@ -287,16 +334,28 @@ export default class Plans
 
                 } 
                 if(this.isAnim  == 1){
-                    const sens = i % 2 == 0 ? 1 : -1
-                    this.meshes[i].rotation.z += 0.00013 * sens * i
+                    // const sens = i % 2 == 0 ? 1 : -1
+                    // this.meshes[i].rotation.z += 0.0008 * sens * i
+                    this.meshes[i].rotation.z += 0.001 * i
+
                 }
-                if(this.isAnim  >= 2){
+                if(this.isAnim === 3){
+                    // this.meshes[i].position.x += Math.cos(this.time.elapsed * 0.0004 + i * 2 ) * 0.05
+                    // this.meshes[i].position.z =  i * 0.5 + this.experience.world.audio.frequenceAverage * 0.002
+                    // this.meshes[i].position.y += Math.sin(this.time.elapsed * 0.0001 + i + 3) * 0.03 * Math.sin(this.time.elapsed * 0.0001 + i + 3) * 0.03
+                }
+                if(this.isAnim === 4){
+
                     // this.meshes[i].scale.x = 2.5
                     // this.meshes[i].scale.y = 2.5
                     // this.meshes[i].scale.z = 2.5
                     // this.meshes[i].position.x += Math.cos(this.time.elapsed * 0.0004 + i * 2 ) * 0.05
                     // this.meshes[i].position.z =  i * 0.5 + this.experience.world.audio.frequenceAverage * 0.002
                     // this.meshes[i].position.y += Math.sin(this.time.elapsed * 0.0001 + i + 3) * 0.03 * Math.sin(this.time.elapsed * 0.0001 + i + 3) * 0.03
+                }
+                if(this.isAnim === 4 ){
+                    this.meshes[i].rotation.z += 0.01 
+                    // this.meshes[i].rotation.x += Math.cos(this.time.elapsed * 0.0001) * 0.0005
                 }
             }
             
