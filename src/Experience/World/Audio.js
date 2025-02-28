@@ -16,7 +16,7 @@ export default class Audio
         this.domButtons = document.querySelectorAll('.js-play-audio')
 
         this.onTimeUpdate = this.onTimeUpdate.bind(this)
-
+        this.frequenceAverage = 50
         // Debug
         if(this.debug.active)
         {

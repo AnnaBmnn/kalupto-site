@@ -67,7 +67,7 @@ export default class Plans
                 uTime: {value: 0},
                 uTexture: { type: "t", value: this.textures[i]},
                 uTextureAlpha: { type: "t", value: this.textures[(i + 1) % 3]},
-                uFrequenceAverage: {value: 0},
+                uFrequenceAverage: {value: 50},
                 uStep: {value: 0},
                 uOpacity: {value: 0},
             }
@@ -78,8 +78,8 @@ export default class Plans
     setMesh(i)
     {
         this.mesh = new THREE.Mesh(this.geometry, this.materials[i])
-        this.mesh.position.z = -2 - i * 2.5
-        this.mesh.position.y = 0 - i * 0.0
+        this.mesh.position.z = -2 - i * 2.7
+        this.mesh.position.y = 0 - i * 3.0
 
         // this.mesh.rotation.x = - Math.PI * 0.5
 
@@ -94,20 +94,20 @@ export default class Plans
             // this.materials[i].uniforms.uStep.value = 1
             // this.materials[i].uniforms.uOpacity.value = 1
             this.isAnim += 1
-            for(let i = 0; i < this.meshes.length - 1 ; i++ ){
+            for(let i = 0; i < this.meshes.length  ; i++ ){
                 // this.meshes[i].position.z = 0
                 // this.materials[i].uniforms.uFrequenceAverage.value = this.experience.world.audio.frequenceAverage 
-                gsap.to(
-                    this.meshes[i].position,
-                    {
-                        z: -0.010,
-                        duration: 2.3,
-                        ease: 'power2.out',
-                        delay: 0,
-                        onComplete: ()=>{
-                        }
-                    }
-                )
+                // gsap.to(
+                //     this.meshes[i].position,
+                //     {
+                //         z: -0.010,
+                //         duration: 2.3,
+                //         ease: 'power2.out',
+                //         delay: 0,
+                //         onComplete: ()=>{
+                //         }
+                //     }
+                // )
             }
         })
         this.experience.animations.on('animation-step-one-end-two', ()=>{

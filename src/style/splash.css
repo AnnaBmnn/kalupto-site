@@ -5,7 +5,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgb(210 210 210 / 60%);
+    background-color: rgb(210 210 210 / 0%);
     /* backdrop-filter: blur(5px); */
     color: #3E1031;  
     transition: opacity 0.3s ease-in-out;

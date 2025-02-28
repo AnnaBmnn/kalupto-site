@@ -33,8 +33,8 @@ export default class Animations  extends EventEmitter
         // s
         this.allTimingCameraAnimation = [
             7.6,
-            17.5,
-            // 28,
+            15.5,
+            27,
             36,
             47,
         //     65,
@@ -51,11 +51,11 @@ export default class Animations  extends EventEmitter
                 eventName: 'animation-step-one-end-one'
             },
             {
-                timing: 17.5,
+                timing: 16.5,
                 eventName: 'animation-step-one-end-two'
             },
             {
-                timing: 36,
+                timing: 38.7,
                 eventName: 'animation-step-one-respi'
             },
             {
@@ -74,35 +74,34 @@ export default class Animations  extends EventEmitter
         this.animationsCamera = [
             {
                 // 7.8
-                x: 0.3808333260338206,
-                y: -4.116371661838657,
-                z: -5.635623280722066,
-                xRotation: 2.51074099480408,
-                yRotation: 0.05451533552399793,
-                zRotation: -3.10181427932108,
-                duration: 3
+                x: 0.5631214601611035,
+                y: -2.617606050283056,
+                z: -6.456069361541089,
+                xRotation: 2.7563978153521416,
+                yRotation: 0.08065692809882678,
+                zRotation: -3.108937451437602,
+                duration: 3.5
             },
             {
-                // 17.8
-
-                x: 0.267180455821947,
-                y:  -2.887917137676363,
-                z: -3.9537758597092445,
-                xRotation: 2.510740931961457,
-                yRotation: 0.05451528915825064,
-                zRotation: -3.101814307841023,
-                duration: 6
+                // 17.5
+                x: 0.12903942593486345,
+                y: -6.681174205531279,
+                z: -8.816836018887912,
+                xRotation: 2.493134353996446,
+                yRotation: 0.011664252979445778,
+                zRotation: -3.1327542097765217,
+                duration: 3.5
             },
-            // {
-            //     // 29
-            //     x: -0.0016189926816755022,
-            //     y: -6.298464155607868,
-            //     z: -0.19042595527136175,
-            //     xRotation: 1.6010208110599313,
-            //     yRotation: -0.0002569277740684537,
-            //     zRotation: 3.133094796509806,
-            //     duration: 2.5
-            // },
+            {
+                // 29
+                x: 0.09139700000052704,
+                y: -14.07673100000121,
+                z: -13.534689999998736,
+                xRotation: 2.3365659681435043,
+                yRotation: 0.004680274679780486,
+                zRotation: -3.1367249981945,
+                duration: 8
+            },
             {
                 // 36
                 x: -0.25176999999999816,
@@ -113,15 +112,25 @@ export default class Animations  extends EventEmitter
                 zRotation: 3.133103159041517,
                 duration: 8
             },
+            // {
+            //     // 45
+            //     x: -1.5188378497841581,
+            //     y: 1.0954093163298464,
+            //     z: 42.694385332373145,
+            //     xRotation: -0.025651340118769773,
+            //     yRotation: -0.035547961670017905,
+            //     zRotation: -0.0009118605773534697,
+            //     duration: 8
+            // },
             {
                 // 47
-                x: 0.5885196280063759,
-                y: -7.459538307170829,
-                z: 4.840980315830795,
-                xRotation: 0.9951489446651853,
-                yRotation: 0.06608384757973242,
-                zRotation: -0.10140644768587119,
-                duration: 7
+                x: 2.148939808200018,
+                y: -1.039870085182439,
+                z: 25.47331996205237,
+                xRotation: 0.0408037304345009,
+                yRotation: 0.08409138336362511,
+                zRotation: -0.0034290895023416233,
+                duration: 8
             },
             // {
             //     // 70

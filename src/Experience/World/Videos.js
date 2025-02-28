@@ -29,6 +29,7 @@ export default class Videos
         this.materials = []
         this.cloneMeshes = [[],[],[]]
 
+        this.isAnim = true
 
         this.loadTextures()
         this.setGeometry()
@@ -124,7 +125,6 @@ export default class Videos
             window.setTimeout(()=>{
                 for(let i = 0; i < this.materials.length; i++)
                 {
-                    this.isAnim = true
                     // this.meshes[i].visible = true
                     this.meshes[i].material.transparent = true
 
