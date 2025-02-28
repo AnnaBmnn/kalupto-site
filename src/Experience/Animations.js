@@ -32,7 +32,7 @@ export default class Animations  extends EventEmitter
         this.animationIndex = 0
         // s
         this.allTimingCameraAnimation = [
-            7.6,
+            7.0,
             15.5,
             27,
             36,
@@ -42,6 +42,7 @@ export default class Animations  extends EventEmitter
             // 112
         ]
         this.allTimingAnimation = [
+
             {
                 timing: 1.5,
                 eventName: 'animation-step-one-begin'
@@ -74,33 +75,33 @@ export default class Animations  extends EventEmitter
         this.animationsCamera = [
             {
                 // 7.8
-                x: 0.5631214601611035,
-                y: -2.617606050283056,
-                z: -6.456069361541089,
-                xRotation: 2.7563978153521416,
-                yRotation: 0.08065692809882678,
-                zRotation: -3.108937451437602,
-                duration: 3.5
+                x: 0.8039905763962557,
+                y: 0.9723316816118244,
+                z: -7.709605957679526,
+                xRotation: -3.016135530204601,
+                yRotation: 0.10309780774103418,
+                zRotation: 3.1286137602939648,
+                duration: 4.5
             },
             {
                 // 17.5
-                x: 0.12903942593486345,
-                y: -6.681174205531279,
-                z: -8.816836018887912,
-                xRotation: 2.493134353996446,
-                yRotation: 0.011664252979445778,
-                zRotation: -3.1327542097765217,
-                duration: 3.5
+                x: -0.1688190001454601,
+                y: -4.376023982912357,
+                z: -7.702506009704813,
+                xRotation: 2.6249367621353117,
+                yRotation: -0.01905435645126834,
+                zRotation: 3.1307683817368614,
+                duration: 4.5
             },
             {
                 // 29
-                x: 0.09139700000052704,
-                y: -14.07673100000121,
-                z: -13.534689999998736,
-                xRotation: 2.3365659681435043,
-                yRotation: 0.004680274679780486,
-                zRotation: -3.1367249981945,
-                duration: 8
+                x: -0.06305390318082914,
+                y: -8.068487017624127,
+                z: -3.968364918038606,
+                xRotation: 2.027890686644305,
+                yRotation: -0.007012439610756865,
+                zRotation: 3.127336031002351,
+                duration: 4.5
             },
             {
                 // 36

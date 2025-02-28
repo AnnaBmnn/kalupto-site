@@ -17,8 +17,9 @@ export default class Plans
         this.textures = [
             this.resources.items.picture2Texture,
             this.resources.items.picture3Texture,
-            this.resources.items.picture1Texture,
             this.resources.items.picture4Texture,
+            this.resources.items.picture1Texture,
+
         ]
         this.meshes = []
         this.materials = []
@@ -78,7 +79,7 @@ export default class Plans
     setMesh(i)
     {
         this.mesh = new THREE.Mesh(this.geometry, this.materials[i])
-        this.mesh.position.z = -2 - i * 2.7
+        this.mesh.position.z = -2 + i * 2.7
         this.mesh.position.y = 0 - i * 3.0
 
         // this.mesh.rotation.x = - Math.PI * 0.5
@@ -90,33 +91,38 @@ export default class Plans
     }
     setAnimations(){
         
-        this.experience.animations.on('animation-step-one-end-two', ()=>{
+        this.experience.animations.on('animation-step-one-end-one', ()=>{
             // this.materials[i].uniforms.uStep.value = 1
             // this.materials[i].uniforms.uOpacity.value = 1
-            this.isAnim += 1
             for(let i = 0; i < this.meshes.length  ; i++ ){
-                // this.meshes[i].position.z = 0
+                // this.meshes[i].position.z = -2.2
+                // this.meshes[i].position.x = -i * 2
+                // this.mesh.position.z = -2 - i * 2.7
+                // this.mesh.position.y = 0 - i * 3.0
                 // this.materials[i].uniforms.uFrequenceAverage.value = this.experience.world.audio.frequenceAverage 
-                // gsap.to(
-                //     this.meshes[i].position,
-                //     {
-                //         z: -0.010,
-                //         duration: 2.3,
-                //         ease: 'power2.out',
-                //         delay: 0,
-                //         onComplete: ()=>{
-                //         }
-                //     }
-                // )
+                gsap.to(
+                    this.meshes[i].position,
+                    {
+                        z: -2.2,
+                        x: -i * 0,
+                        duration: 6,
+                        ease: 'power2.inOut',
+                        delay: 2,
+                        onComplete: ()=>{
+                            this.isAnim += 1
+
+                        }
+                    }
+                )
             }
         })
-        this.experience.animations.on('animation-step-one-end-two', ()=>{
+        this.experience.animations.on('animation-step-one-end-one', ()=>{
             for(let i = 0; i < this.materials.length; i++)
             {
                 gsap.to(
                     this.materials[i].uniforms.uOpacity,
                     {
-                        duration: 12,
+                        duration: 6,
                         ease: 'power2.inOut',
                         value: 1,
                         onComplete: ()=>{
@@ -281,7 +287,7 @@ export default class Plans
 
                 } 
                 if(this.isAnim  == 1){
-                    const sens = i % 2 == 0 ? -1 : 1
+                    const sens = i % 2 == 0 ? 1 : -1
                     this.meshes[i].rotation.z += 0.00013 * sens * i
                 }
                 if(this.isAnim  >= 2){
