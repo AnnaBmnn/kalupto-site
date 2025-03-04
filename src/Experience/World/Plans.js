@@ -191,14 +191,13 @@ export default class Plans
                     }
                 )
             }
-            this.isAnim = 3
 
             window.setTimeout(()=>{
 
 
                 for(let i = 0; i < this.materials.length; i++)
                 {
-                    this.materials[i].uniforms.uStep.value = 1 + i * 0.4
+                    this.materials[i].uniforms.uStep.value = 1 + i * 0.2
                     // this.materials[i].uniforms.uOpacity.value = 1
                     // this.materials[i].uniforms.uStep.value = 1
                     // this.meshes[i].scale.x = 16
@@ -219,6 +218,8 @@ export default class Plans
                                 ease: 'power2.out',
                                 delay: 0,
                                 onComplete: ()=>{
+                                    this.isAnim = 3
+
                                 }
                             }
                         )
@@ -340,6 +341,10 @@ export default class Plans
 
                 }
                 if(this.isAnim === 3){
+                    this.meshes[i].position.x += Math.cos(this.time.elapsed * 0.0004 + i * 2 ) * 0.05
+                    this.meshes[i].position.y += Math.sin(this.time.elapsed * 0.0001 + i + 3) * 0.03 * Math.sin(this.time.elapsed * 0.0001 + i + 3) * 0.03
+                    this.meshes[i].position.z += Math.sin(this.time.elapsed * 0.00001 + i ) * 0.003
+
                     // this.meshes[i].position.x += Math.cos(this.time.elapsed * 0.0004 + i * 2 ) * 0.05
                     // this.meshes[i].position.z =  i * 0.5 + this.experience.world.audio.frequenceAverage * 0.002
                     // this.meshes[i].position.y += Math.sin(this.time.elapsed * 0.0001 + i + 3) * 0.03 * Math.sin(this.time.elapsed * 0.0001 + i + 3) * 0.03
@@ -349,9 +354,7 @@ export default class Plans
                     // this.meshes[i].scale.x = 2.5
                     // this.meshes[i].scale.y = 2.5
                     // this.meshes[i].scale.z = 2.5
-                    // this.meshes[i].position.x += Math.cos(this.time.elapsed * 0.0004 + i * 2 ) * 0.05
                     // this.meshes[i].position.z =  i * 0.5 + this.experience.world.audio.frequenceAverage * 0.002
-                    // this.meshes[i].position.y += Math.sin(this.time.elapsed * 0.0001 + i + 3) * 0.03 * Math.sin(this.time.elapsed * 0.0001 + i + 3) * 0.03
                 }
                 if(this.isAnim === 4 ){
                     this.meshes[i].rotation.z += 0.01 

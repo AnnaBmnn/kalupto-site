@@ -35,19 +35,19 @@ export default class Audio
                     this.setAnalyzer()
                 } 
                 if(this.domAudio.paused){
-                    // this.domAudio.currentTime = 70
+                    // this.domAudio.currentTime = 50
                     this.domAudio.play()
                     // this.domButton.innerHTML = 'pause'
                     for(let i = 0; i < this.domButtons.length; i++ )
                     {
                         this.domButtons[i].innerHTML = 'pause'
                     }
-                }else {
+                } else {
                     this.domAudio.pause()
                     // this.domButton.innerHTML = 'play'
                     for(let i = 0; i < this.domButtons.length; i++ )
                     {
-                        this.domButton[i].innerHTML = 'play'
+                        this.domButtons[i].innerHTML = 'play'
                     }    
                 }
             })
@@ -82,7 +82,7 @@ export default class Audio
     {
         if(this.domAudio)
         {
-            // console.log(this.domAudio.currentTime)
+            console.log(this.domAudio.currentTime)
         }
         // const _index = Math.floor(Math.random() * this.audiosSrc.length);
         // this.setAudio(_index)
