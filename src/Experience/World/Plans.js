@@ -315,14 +315,14 @@ export default class Plans
 
             }
         }
-        if(this.meshes && this.meshes.length > 0)
+        if(this.meshes && this.meshes.length > 0 &&  this.experience.world.audio.state === 'playing')
         {
             //this.material.uniforms.uTime.value = this.time.elapsed
             
             for(let i = 0; i < this.meshes.length; i++ ){
                 // this.meshes[i].rotation.z += 0.0005 * i * Math.random()
 
-                if(!this.experience.world.audio.domAudio.paused)
+                if(!this.experience.world.audio.domAudio.paused && this.experience.world.audio.state === 'playing')
                 {
                     this.meshes[i].scale.x += 0.0012
                     this.meshes[i].scale.y += 0.0005

@@ -15,8 +15,11 @@ export default class Audio
         this.domAudio = document.querySelector('.js-audio')
         this.domButtons = document.querySelectorAll('.js-play-audio')
 
-        this.onTimeUpdate = this.onTimeUpdate.bind(this)
+        this.state = 'playing'
         this.frequenceAverage = 50
+
+
+        this.onTimeUpdate = this.onTimeUpdate.bind(this)
         // Debug
         if(this.debug.active)
         {
@@ -53,6 +56,8 @@ export default class Audio
         this.domAudio.addEventListener('timeupdate', this.onTimeUpdate)
         this.domAudio.addEventListener('ended', ()=>{
             this.domAudio.play()
+            this.state = 'resting'
+            document.body.classList.add('resting')
         })
 
     }

@@ -16,6 +16,23 @@
     pointer-events: none;
 }
 
+.resting .splash {
+    opacity: 1;
+    pointer-events: none;
+}
+
+.resting .splash__logo {
+    opacity: 0;
+}
+
+.resting .splash__play{
+    pointer-events: all;
+}
+
+.resting .credits__button {
+    pointer-events: all;  
+}
+
 .grid {
     display: grid;
     grid-column: repeat(1fr, 12);

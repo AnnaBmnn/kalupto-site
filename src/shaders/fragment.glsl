@@ -77,7 +77,7 @@ void main()
 
     float tCur = uTime * 0.01;
     vec2 p = vUv;
-    vec3 color = vec3 (0.75, 0.75, 1.) ;
+    vec3 color = vec3 (0.5, 0.5, 1.) ;
 
     p -= FlowField (p) * 0.03;
     vec3 col = Fbm2 (5. * p + vec2 (-0.1 * tCur, 0.)) * color;

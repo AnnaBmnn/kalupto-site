@@ -189,16 +189,16 @@ export default class Animations  extends EventEmitter
         this.animationCameraIndex = 0
         this.animationIndex = 0
         this.currentTimingAnimation = this.allTimingCameraAnimation[this.animationCameraIndex]
-        this.camera.instance.position.set(
-            -0.03488971620850754,
-            -3.3098271974449474,
-            -3.95354847278136
-        )
-        this.camera.instance.rotation.set(
-            2.5305714981683534,
-            -0.006047485185266618,
-            3.1373568046700346
-        )
+        // this.camera.instance.position.set(
+        //     -0.03488971620850754,
+        //     -3.3098271974449474,
+        //     -3.95354847278136
+        // )
+        // this.camera.instance.rotation.set(
+        //     2.5305714981683534,
+        //     -0.006047485185266618,
+        //     3.1373568046700346
+        // )
     }
     checkIfCurrentAnimation()
     {
@@ -214,6 +214,7 @@ export default class Animations  extends EventEmitter
 
             if(this.audio.currentTime >= this.allTimingAnimation[this.animationIndex].timing)
             {
+                console.log('HERE ?')
                 this.trigger(this.allTimingAnimation[this.animationIndex].eventName)
                 this.animationIndex += 1
             }
@@ -225,11 +226,12 @@ export default class Animations  extends EventEmitter
     {
         if(this.audio)
         {
-
             // if(this.currentTimingAnimation)
             // {
+            if(this.world.audio.state === 'playing'){
 
                 this.checkIfCurrentAnimation()
+            }
             // }
         }
 

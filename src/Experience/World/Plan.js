@@ -136,9 +136,9 @@ export default class Plan
         this.mesh.position.y = -0
         this.mesh.position.z = 5
 
-        this.mesh.scale.x = 20
-        this.mesh.scale.y = 20
-        this.mesh.scale.z = 20
+        this.mesh.scale.x = 24
+        this.mesh.scale.y = 24
+        this.mesh.scale.z = 24
 
         this.mesh.rotation.x = Math.PI
 
@@ -157,11 +157,16 @@ export default class Plan
         this.experience.animations.on('animation-second-step', ()=>{
             window.setTimeout(() => {
                 this.mesh.visible = true
-                this.mesh.position.z = - 5.71
+                this.mesh.position.x = 0
+                this.mesh.position.y = 0
+                this.mesh.position.z = -8
             }, 6000);
         })
         this.experience.animations.on('animation-fourth-step', ()=>{
             // this.mesh.visible = false
+            this.mesh.position.y = 38
+            this.mesh.position.z = 0
+            
         })
     }
     update()
