@@ -39,7 +39,7 @@ export default class Animations  extends EventEmitter
             47,
             63,
             76,
-            98,
+            96,
             // 109
         ]
         this.allTimingAnimation = [
@@ -69,7 +69,7 @@ export default class Animations  extends EventEmitter
                 eventName: 'animation-third-step'
             },
             {
-                timing: 98,
+                timing: 92,
                 eventName: 'animation-fourth-step'
             },
         ]
@@ -162,7 +162,7 @@ export default class Animations  extends EventEmitter
                 xRotation: 1.2469533835764062,
                 yRotation:-0.04112168008428243,
                 zRotation: 0.1218685228114564,
-                duration: 18
+                duration: 24
             },
         ]
         this.currentTimingAnimation = this.allTimingCameraAnimation[this.animationCameraIndex]

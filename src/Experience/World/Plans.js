@@ -274,33 +274,33 @@ export default class Plans
                         value: 1.5,
                     }
                 )
+                this.isAnim = 4
+
                 gsap.to(
                     this.meshes[i].position,
                     {
-                        duration: 6,
+                        duration: 5,
                         ease: 'power2.inOut',
                         x: -2,
                         y: 0,
                         z: 0,
-                    }
-                )
-            }
-            // this.isAnim = 4
-        })
-        this.experience.animations.on('animation-fourth-step', ()=>{
+                        onComplete: ()=>{
+                            this.isAnim = 5
 
-            console.log('FOUR STEPS')
-            for(let i = 0; i < this.meshes.length; i++ ){
-                gsap.to(
-                    this.materials[i].uniforms.uStep,
-                    {
-                        duration: 12,
-                        ease: 'power2.inOut',
-                        value: 1.5,
+                        }
                     }
                 )
-                }
-            this.isAnim = 4
+                gsap.to(
+                    this.meshes[i].rotation,
+                    {
+                        duration: 18,
+                        ease: 'power2.inOut',
+                        y: 2 * Math.PI,
+                        delay: 2
+                    }
+                )
+
+            }
         })
     }
     update()
@@ -343,7 +343,7 @@ export default class Plans
                 if(this.isAnim === 3){
                     this.meshes[i].position.x += Math.cos(this.time.elapsed * 0.0004 + i * 2 ) * 0.05
                     this.meshes[i].position.y += Math.sin(this.time.elapsed * 0.0001 + i + 3) * 0.03 * Math.sin(this.time.elapsed * 0.0001 + i + 3) * 0.03
-                    this.meshes[i].position.z += Math.sin(this.time.elapsed * 0.00001 + i ) * 0.003
+                    // this.meshes[i].position.z += Math.sin(this.time.elapsed * 0.00001 + i ) * 0.003
 
                     // this.meshes[i].position.x += Math.cos(this.time.elapsed * 0.0004 + i * 2 ) * 0.05
                     // this.meshes[i].position.z =  i * 0.5 + this.experience.world.audio.frequenceAverage * 0.002
@@ -356,8 +356,9 @@ export default class Plans
                     // this.meshes[i].scale.z = 2.5
                     // this.meshes[i].position.z =  i * 0.5 + this.experience.world.audio.frequenceAverage * 0.002
                 }
-                if(this.isAnim === 4 ){
+                if(this.isAnim === 5 ){
                     this.meshes[i].rotation.z += 0.01 
+                    // this.meshes[i].rotation.y += 0.01 
                     // this.meshes[i].rotation.x += Math.cos(this.time.elapsed * 0.0001) * 0.0005
                 }
             }
