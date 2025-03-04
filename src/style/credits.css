@@ -9,7 +9,7 @@
     transition: opacity 0.3s ease-in-out;
 }
 
-.credits.is-show {
+.credits.show {
     opacity: 1;
 }
 
@@ -51,28 +51,26 @@
 
 .credits__button::first-letter {
 	font-family: 'Honeymoon', serif;
-    line-height: clamp(10px, 1vw, 20px);
+    line-height: clamp(10px, 1vw, 20px);Ò
     transform: translateY(5px);
     font-size: clamp(20px, 2vw, 40px);
     margin-top: clamp(-20px, -2vw, -40px);
 }
 
-.credits__button:hover .credits__button {
-    /* opacity: 0; */
-}
 
+/* 
 .credits__button:hover + .credits {
     opacity: 1;
-}
+} */
 
-
-.credits__button:active + .credits {
+/* 
+.credits__button + .credits {
     opacity: 1;
-}
-
+} */
+/* 
 .credits__button:focus + .credits {
     opacity: 1;
-}
+} */
 
 .credits__item {
     margin: 0 0vw;
