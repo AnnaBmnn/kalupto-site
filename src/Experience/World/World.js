@@ -10,6 +10,7 @@ import Plans from './Plans.js'
 import Plan from './Plan.js'
 import Videos from './Videos.js'
 import Audio from './Audio.js'
+import Lyrics from './Lyrics.js'
 
 
 
@@ -35,6 +36,7 @@ export default class World
 
             this.plans = new Plans()
             this.plan = new Plan()
+            this.lyrics = new Lyrics()
             // this.videos = new Videos()
 
             // this.rocks = new Rocks()

@@ -61,6 +61,10 @@ export default class Animations  extends EventEmitter
                 eventName: 'animation-step-one-respi'
             },
             {
+                timing: 42.5,
+                eventName: 'animation-lyrics-start'
+            },
+            {
                 timing: 47,
                 eventName: 'animation-second-step'
             },
@@ -71,6 +75,14 @@ export default class Animations  extends EventEmitter
             {
                 timing: 92,
                 eventName: 'animation-fourth-step'
+            },
+            {
+                timing: 112.5,
+                eventName: 'animation-lyrics-start-2'
+            },
+            {
+                timing: 118.5,
+                eventName: 'animation-lyrics-end'
             },
         ]
         this.animationsCamera = [
