@@ -374,8 +374,8 @@ export default class Plans
                 //this.meshes[i].position.x += Math.sin(this.time.elapsed * 0.0000002 - i) * 0.01
                 //this.meshes[i].scale.y += Math.cos(this.time.elapsed * 0.00008 + i) * 0.01 + 0.00002 * i
                 //this.meshes[i].scale.x += Math.sin(this.time.elapsed * 0.0001 + i * 0.3) * 0.01 + 0.00002 * i
-                this.meshes[i].scale.y += 0.000001
-                this.meshes[i].scale.x += 0.00001
+                this.meshes[i].scale.y += 0.000001 * i 
+                this.meshes[i].scale.x += 0.000001 * i
 
                 this.materials[i].uniforms.uOpacity.value = Math.abs(Math.sin(this.time.elapsed * 0.0001 + (i * 1.23)))
             }
