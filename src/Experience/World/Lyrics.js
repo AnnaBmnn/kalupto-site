@@ -23,7 +23,7 @@ export default class Lyrics
         })
 
         this.experience.animations.on('animation-lyrics-start-2', ()=>{
-            this.lyric.classList.add('show')
+            this.lyric.classList.add('show2')
         })
         this.experience.animations.on('animation-second-step', this.hideLyrics)
         this.experience.animations.on('animation-lyrics-end', this.hideLyrics2)
@@ -49,7 +49,7 @@ export default class Lyrics
     
     hideLyrics2()
     {
-        this.lyric.classList.remove('show')
+        this.lyric.classList.remove('show2')
             
     }
 }

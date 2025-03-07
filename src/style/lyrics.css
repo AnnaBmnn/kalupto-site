@@ -27,6 +27,13 @@
     transition-delay: 0s;
 
 }
+.lyrics-container.show2 {
+    transform: scale(0.8, 1.6) skew(-25deg, 0deg);
+    /* transform: scale(0.8, 1) skew(15deg, 60deg); */
+
+    transition: none;
+
+}
 
 .lyrics-container.leave {
     transform: scale(0.8, 1.6) skew(-25deg, -90deg);
@@ -40,6 +47,11 @@
 }
 
 .lyrics-container.show .lyrics {
+    opacity: 1;
+    transition-delay: var(--delay);
+}
+
+.lyrics-container.show2 .lyrics {
     opacity: 1;
     transition-delay: var(--delay);
 }

@@ -77,7 +77,7 @@ export default class Animations  extends EventEmitter
                 eventName: 'animation-fourth-step'
             },
             {
-                timing: 112.5,
+                timing: 113.5,
                 eventName: 'animation-lyrics-start-2'
             },
             {

@@ -82,7 +82,7 @@ export default class Audio
     {
         if(this.domAudio)
         {
-            console.log(this.domAudio.currentTime)
+            // console.log(this.domAudio.currentTime)
         }
         // const _index = Math.floor(Math.random() * this.audiosSrc.length);
         // this.setAudio(_index)

@@ -259,10 +259,9 @@ export default class Plans
 
         })
         this.experience.animations.on('animation-fourth-step', ()=>{
-            console.log('FOUR STEPS')
             for(let i = 0; i < this.meshes.length; i++ ){
                 // this.materials[i].uniforms.uStep.value = 2.5
-                this.meshes[i].rotation.z = 0
+                // this.meshes[i].rotation.z = 0
                 // this.meshes[i].position.x = -2
                 // this.meshes[i].position.y = 0
                 // this.meshes[i].position.z = 0
@@ -281,12 +280,11 @@ export default class Plans
                     {
                         duration: 5,
                         ease: 'power2.inOut',
-                        x: -2,
-                        y: 0,
-                        z: 0,
+                        x: -2 - i * 0.2,
+                        y: i * 0.3,
+                        z: i * 0.3,
                         onComplete: ()=>{
                             this.isAnim = 5
-
                         }
                     }
                 )
@@ -296,7 +294,11 @@ export default class Plans
                         duration: 18,
                         ease: 'power2.inOut',
                         y: 2 * Math.PI,
-                        delay: 2
+                        x: 1 * Math.PI,
+                        delay: 2,
+                        onComplete: ()=>{
+                            // this.meshes[i].rotation.y = 3 * Math.PI
+                        }
                     }
                 )
 
@@ -357,12 +359,26 @@ export default class Plans
                     // this.meshes[i].position.z =  i * 0.5 + this.experience.world.audio.frequenceAverage * 0.002
                 }
                 if(this.isAnim === 5 ){
-                    this.meshes[i].rotation.z += 0.01 
+                    this.meshes[i].rotation.z -= 0.01 + 0.001 * i
                     // this.meshes[i].rotation.y += 0.01 
                     // this.meshes[i].rotation.x += Math.cos(this.time.elapsed * 0.0001) * 0.0005
                 }
             }
             
+        } else if(this.experience.world.audio.state === 'resting'){
+
+            for(let i = 0; i < this.meshes.length; i++ ){
+                this.meshes[i].position.x = i > 1 ? 0.03 * i : -0.03 * i
+                this.meshes[i].rotation.z -= 0.0007 * (i + 1.1)
+                this.meshes[i].position.z += Math.cos(this.time.elapsed * 0.0001 + (i + 1)) * 0.002
+                //this.meshes[i].position.x += Math.sin(this.time.elapsed * 0.0000002 - i) * 0.01
+                //this.meshes[i].scale.y += Math.cos(this.time.elapsed * 0.00008 + i) * 0.01 + 0.00002 * i
+                //this.meshes[i].scale.x += Math.sin(this.time.elapsed * 0.0001 + i * 0.3) * 0.01 + 0.00002 * i
+                this.meshes[i].scale.y += 0.000001
+                this.meshes[i].scale.x += 0.00001
+
+                this.materials[i].uniforms.uOpacity.value = Math.abs(Math.sin(this.time.elapsed * 0.0001 + (i * 1.23)))
+            }
         }
     }
 }
