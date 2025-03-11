@@ -111,6 +111,19 @@
     /* text-align: right; */
 }
 
+.credits__name a {
+    color: #3E1031;
+}
+.credits__name a:visited {
+    color: #3E1031;
+}
+.credits__name a:active {
+    color: #3E1031;
+}
+.credits__name a:focus {
+    color: #3E1031;
+}
+
 @media screen and (max-width: 750px) {
     .credits {
         top: 40vw;
