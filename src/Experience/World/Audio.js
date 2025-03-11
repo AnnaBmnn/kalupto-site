@@ -13,6 +13,7 @@ export default class Audio
         this.resources = this.experience.resources
         this.debug = this.experience.debug
         this.domAudio = document.querySelector('.js-audio')
+        this.domAudioNext = document.querySelector('.js-audio-next')
         this.domButtons = document.querySelectorAll('.js-play-audio')
 
         this.state = 'playing'
@@ -34,16 +35,24 @@ export default class Audio
                 if(!this.audioCtx){
                     this.setAnalyzer()
                 } 
-                if(this.domAudio.paused){
+                if(this.domButtons[i].innerHTML !== 'pause'){
                     // this.domAudio.currentTime = 50
-                    this.domAudio.play()
+                    if(this.state !== 'resting'){
+                        this.domAudio.play()
+                    }else {
+                        this.domAudioNext.play()
+                    }
                     // this.domButton.innerHTML = 'pause'
                     for(let i = 0; i < this.domButtons.length; i++ )
                     {
                         this.domButtons[i].innerHTML = 'pause'
                     }
                 } else {
-                    this.domAudio.pause()
+                    if(this.state !== 'resting'){
+                        this.domAudio.pause()
+                    }else {
+                        this.domAudioNext.pause()
+                    }
                     // this.domButton.innerHTML = 'play'
                     for(let i = 0; i < this.domButtons.length; i++ )
                     {
@@ -55,9 +64,13 @@ export default class Audio
 
         this.domAudio.addEventListener('timeupdate', this.onTimeUpdate)
         this.domAudio.addEventListener('ended', ()=>{
-            this.domAudio.play()
+            this.domAudioNext.play()
             this.state = 'resting'
             document.body.classList.add('resting')
+            this.setAnalyzerNext()
+        })
+        this.domAudioNext.addEventListener('ended', ()=>{
+            this.domAudioNext.play()
         })
 
     }
@@ -77,6 +90,19 @@ export default class Audio
             this.source.connect(this.analyser);
             this.analyser.connect(this.audioCtx.destination);
         }
+    }
+    setAnalyzerNext(){
+        this.source = this.audioCtx.createMediaElementSource(this.domAudioNext)
+
+        // Create an analyser
+        this.analyser = this.audioCtx.createAnalyser()
+        this.analyser.fftSize = 256
+        this.bufferLength = this.analyser.frequencyBinCount
+        this.dataArray = new Uint8Array(this.bufferLength)
+    
+        // Connect part
+        this.source.connect(this.analyser);
+        this.analyser.connect(this.audioCtx.destination);
     }
     onTimeUpdate()
     {
