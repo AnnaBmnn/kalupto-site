@@ -126,7 +126,7 @@ export default class Audio
     {
         if(this.analyser){
             this.analyser.getByteFrequencyData(this.dataArray)
-            this.frequenceAverage = this.getAverage(this.dataArray, 0, this.dataArray.length)
+            this.frequenceAverage = this.state === 'resting' ? 20 + 1.8 * this.getAverage(this.dataArray, 0, this.dataArray.length) : this.getAverage(this.dataArray, 0, this.dataArray.length)
             this.frequenceBassAverage = this.getAverage(this.dataArray, 0, 70)
             this.frequenceMidAverage = this.getAverage(this.dataArray, 70, 80)
             this.frequenceHightAverage = this.getAverage(this.dataArray, 80, 128)
