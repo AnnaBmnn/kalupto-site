@@ -19,6 +19,7 @@ export default class Plans
             this.resources.items.picture3Texture,
             this.resources.items.picture4Texture,
             this.resources.items.picture1Texture,
+            
 
         ]
         this.meshes = []
@@ -67,7 +68,7 @@ export default class Plans
             uniforms: {
                 uTime: {value: 0},
                 uTexture: { type: "t", value: this.textures[i]},
-                uTextureAlpha: { type: "t", value: this.textures[(i + 1) % 3]},
+                uTextureAlpha: { type: "t", value: this.resources.items.snowFlakeTexture3},
                 uFrequenceAverage: {value: 50},
                 uStep: {value: 0},
                 uOpacity: {value: 0},

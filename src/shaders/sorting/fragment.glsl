@@ -12,7 +12,7 @@ varying float vTime;
 
 void main()
 {
-    float median = (vTexture.r + vTexture.g + vTexture.b) / 3.0;
+    float median = ((vTexture.r + vTexture.g + vTexture.b) / 3.0) ;
     
     vec4 textureBloom = mix(vTexture, vTextureAlpha, vFrequenceAverage);
     gl_FragColor = vec4(vTexture.r, vTexture.g, vTexture.b, max(uOpacity,median * 1.5));
