@@ -50,6 +50,7 @@
 
 .lyrics-container.show .lyrics.lyrics--the2 {
     animation-delay: 1200ms;
+    animation-duration: 5000ms;
 }
 
 .lyrics-container.show .lyrics.lyrics--eyes {

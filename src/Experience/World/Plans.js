@@ -89,6 +89,7 @@ export default class Plans
     setMesh(i)
     {
         this.mesh = new THREE.Mesh(this.geometry, this.materials[i])
+        this.mesh.renderOrder = 1
         this.mesh.position.z = -2 + i * 2.7
         this.mesh.position.y = 0 - i * 3.0
 

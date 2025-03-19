@@ -139,6 +139,7 @@ export default class Plan
         this.mesh.scale.x = 24
         this.mesh.scale.y = 24
         this.mesh.scale.z = 24
+        this.mesh.renderOrder = 0
 
         this.mesh.rotation.x = Math.PI
 
