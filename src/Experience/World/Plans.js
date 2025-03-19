@@ -312,17 +312,14 @@ export default class Plans
                         }
                     }
                 )
-                for(let i = 0; i < this.materials.length; i++)
-                {
-                    gsap.to(
-                        this.materials[i].uniforms.uShape,
-                        {
-                            duration: 3,
-                            ease: 'power2.inOut',
-                            value: 1,
-                        }
-                    )
-                }
+                gsap.to(
+                    this.materials[i].uniforms.uShape,
+                    {
+                        duration: 2,
+                        ease: 'power2.inOut',
+                        value: 1,
+                    }
+                )
             }
         })
     }
