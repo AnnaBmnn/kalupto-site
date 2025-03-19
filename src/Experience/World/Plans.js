@@ -19,8 +19,12 @@ export default class Plans
             this.resources.items.picture3Texture,
             this.resources.items.picture4Texture,
             this.resources.items.picture1Texture,
-            
-
+        ]
+        this.texturesAlpha = [
+            this.resources.items.snowFlakeTexture1,
+            this.resources.items.snowFlakeTexture2,
+            this.resources.items.snowFlakeTexture3,
+            this.resources.items.snowFlakeTexture4,
         ]
         this.meshes = []
         this.materials = []
@@ -35,6 +39,10 @@ export default class Plans
         }
         window.setTimeout(()=>{
             this.setAnimations()
+            this.experience.world.audio.on('main-audio-end', ()=>{
+
+
+            })
         }, 200)  
     }
 
@@ -68,10 +76,11 @@ export default class Plans
             uniforms: {
                 uTime: {value: 0},
                 uTexture: { type: "t", value: this.textures[i]},
-                uTextureAlpha: { type: "t", value: this.resources.items.snowFlakeTexture3},
+                uTextureAlpha: { type: "t", value: this.texturesAlpha[i]},
                 uFrequenceAverage: {value: 50},
                 uStep: {value: 0},
                 uOpacity: {value: 0},
+                uShape: {value: 0}
             }
         })
         
@@ -302,7 +311,17 @@ export default class Plans
                         }
                     }
                 )
-
+                for(let i = 0; i < this.materials.length; i++)
+                {
+                    gsap.to(
+                        this.materials[i].uniforms.uShape,
+                        {
+                            duration: 3,
+                            ease: 'power2.inOut',
+                            value: 1,
+                        }
+                    )
+                }
             }
         })
     }
@@ -378,7 +397,8 @@ export default class Plans
                 this.meshes[i].scale.y += 0.000001 * i 
                 this.meshes[i].scale.x += 0.000001 * i
 
-                this.materials[i].uniforms.uOpacity.value = Math.abs(Math.sin(this.time.elapsed * 0.0001 + (i * 1.23)))
+                // this.materials[i].uniforms.uOpacity.value = Math.abs(Math.sin(this.time.elapsed * 0.0001 + (i * 1.23)))
+                // this.materials[i].uniforms.uOpacity.value = 0.5
             }
         }
     }

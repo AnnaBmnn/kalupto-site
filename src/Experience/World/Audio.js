@@ -1,11 +1,13 @@
 import * as THREE from 'three'
 import Experience from '../Experience.js'
+import EventEmitter from '../Utils/EventEmitter.js'
 
-export default class Audio 
+
+export default class Audio extends EventEmitter
 {
     constructor()
     {
-        // super()
+        super()
 
         this.experience = new Experience()
 
@@ -68,6 +70,7 @@ export default class Audio
             this.state = 'resting'
             document.body.classList.add('resting')
             this.setAnalyzerNext()
+            this.trigger('main-audio-end')
         })
         this.domAudioNext.addEventListener('ended', ()=>{
             this.domAudioNext.play()

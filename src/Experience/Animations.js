@@ -20,7 +20,6 @@ export default class Animations  extends EventEmitter
         // Wait for resources
         this.resources.on('ready', () =>
         {
-            console.log('ready')
             this.audio = this.world.audio.domAudio
             this.world.audio.domAudio.addEventListener('ended', () =>{
                 this.resetAnim()
@@ -182,7 +181,6 @@ export default class Animations  extends EventEmitter
 
     animateCamera()
     {
-        console.log('animate camera')
         gsap.to(
             this.camera.instance.position,
             {
@@ -237,7 +235,6 @@ export default class Animations  extends EventEmitter
     {
         if(this.animationCameraIndex < this.animationsCamera.length && this.audio.currentTime >= this.currentTimingAnimation )
         {
-            console.log(this.animationCameraIndex)
 
             this.animateCamera()
             this.setNextAnimation()
@@ -247,7 +244,6 @@ export default class Animations  extends EventEmitter
 
             if(this.audio.currentTime >= this.allTimingAnimation[this.animationIndex].timing)
             {
-                console.log('HERE ?')
                 this.trigger(this.allTimingAnimation[this.animationIndex].eventName)
                 this.animationIndex += 1
             }

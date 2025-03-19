@@ -17,13 +17,11 @@ export default class Lyrics
         this.setAnimations()
 
         this.experience.animations.on('animation-lyrics-start', ()=>{
-            this.lyric.classList.remove('move')
             this.lyric.classList.add('show')
-            // this.lyric.classList.add('move')
         })
 
         this.experience.animations.on('animation-lyrics-start-2', ()=>{
-            this.lyric.classList.add('show2')
+            this.lyric.classList.add('show')
         })
         this.experience.animations.on('animation-second-step', this.hideLyrics)
         this.experience.animations.on('animation-lyrics-end', this.hideLyrics2)
@@ -31,17 +29,13 @@ export default class Lyrics
     setAnimations()
     {
         for (let i = 0; i < this.paths.length; i++) {
-            this.paths[i].style.setProperty("--delay",   i* .06 + "s");
+            // this.paths[i].style.setProperty("--delay",   i* .06 + "s");
           }
     }
     hideLyrics()
     {
+
         window.setTimeout(() => {
-            this.lyric.classList.add('leave')
-            
-        }, 600);
-        window.setTimeout(() => {
-            this.lyric.classList.remove('leave')
             this.lyric.classList.remove('show')
             
         }, 10600);
@@ -49,7 +43,7 @@ export default class Lyrics
     
     hideLyrics2()
     {
-        this.lyric.classList.remove('show2')
+        this.lyric.classList.remove('show')
             
     }
 }
