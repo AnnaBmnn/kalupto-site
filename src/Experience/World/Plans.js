@@ -315,7 +315,7 @@ export default class Plans
                 gsap.to(
                     this.materials[i].uniforms.uShape,
                     {
-                        duration: 2,
+                        duration: 12,
                         ease: 'power2.inOut',
                         value: 1,
                     }
