@@ -89,6 +89,8 @@
         left: unset;
         right: 16px;
         bottom: 0vw;
+        transform: translateY(00%);
+
     }
     .about__button {
         grid-column: 4;
