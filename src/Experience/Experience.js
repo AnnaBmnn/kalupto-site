@@ -5,6 +5,7 @@ import Sizes from './Utils/Sizes.js'
 import Time from './Utils/Time.js'
 import Splash from './Interface/Splash.js'
 import Credits from './Interface/Credits.js'
+import About from './Interface/About.js'
 import Camera from './Camera.js'
 import Renderer from './Renderer.js'
 import World from './World/World.js'
@@ -38,6 +39,7 @@ export default class Experience
         this.time = new Time()
         this.splash = new Splash()
         this.credits = new Credits()
+        this.about = new About()
         this.scene = new THREE.Scene()
         this.resources = new Resources(sources)
         this.camera = new Camera()

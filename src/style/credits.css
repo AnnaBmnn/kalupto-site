@@ -17,6 +17,8 @@
     position: relative;
 }
 
+
+
 .credits__button {
     grid-column: 12;
     position: relative;
@@ -137,8 +139,9 @@
         grid-column: 6;
     }
     .credits__title {
+        left: 50%;
+        transform: translateX(-50%) scale(0.8, 1.4);
         right: unset;
-        left: 0;
     }
     .credits__label {
         grid-column: 2 / 4 ;
