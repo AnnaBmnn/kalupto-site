@@ -87,6 +87,7 @@
 }
 
 .splash__play {
+    z-index: 5;
     position: absolute;
     right: 16px;
     top: 50%;
