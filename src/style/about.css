@@ -42,6 +42,7 @@
 }
 
 
+
 .about__title {
     bottom: 90%;
     left: -13%;
@@ -55,13 +56,47 @@
 
 .about__button::first-letter {
 	font-family: 'Honeymoon', serif;
-    line-height: clamp(10px, 1vw, 20px);Ò
+    line-height: clamp(10px, 1vw, 20px);
     transform: translateY(5px);
     font-size: clamp(20px, 2vw, 40px);
     margin-top: clamp(-20px, -2vw, -40px);
 }
 
+.about__listen {
+    grid-column: 10;
+    position: relative;
+    bottom: unset;
+    right: unset; 
+    background-color: transparent;
+    border: 0px solid;
+    text-align: right;
+    grid-row: 1;
+    align-self: self-start;
+	font-family: 'SuisseInt', Arial, Helvetica, sans-serif;
+    font-size: clamp(10px, 1.2vw, 20px);
+    letter-spacing: -5%;
+    text-transform: uppercase;
+    color: #3E1031;
+    cursor: pointer;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+    /* border-top: 2px dotted transparent; */ 
+}
+.about__listen::first-letter {
+	font-family: 'Honeymoon', serif;
+    line-height: clamp(10px, 1vw, 20px);
+    transform: translateY(5px);
+    font-size: clamp(20px, 2vw, 40px);
+    margin-top: clamp(-20px, -2vw, -40px);
+}
 
+.resting .about__button {
+    pointer-events: all;
+}
+
+.resting .about__listen {
+    pointer-events: all;
+}
 /* 
 .credits__button:hover + .credits {
     opacity: 1;
