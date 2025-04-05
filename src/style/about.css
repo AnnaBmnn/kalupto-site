@@ -4,7 +4,7 @@
     text-align: justify;
     right: unset;
     left: 21vw;
-    bottom: 3vw;
+    bottom: 8vw;
     width: 30vw;
     margin: 1.5vw 0 0;
     transform: translateY(-100%);
@@ -44,7 +44,7 @@
 
 
 .about__title {
-    bottom: 90%;
+    bottom: 95%;
     left: -13%;
     pointer-events: none;
     position: absolute;
