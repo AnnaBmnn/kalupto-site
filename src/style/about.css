@@ -149,10 +149,11 @@
 @media screen and (max-width: 750px) {
     .about {
         font-size: 10px;
-        width: 66vw;
-        left: unset;
+        width: 72vw;
+        left: 16px;
         right: 16px;
-        bottom: 17vw;
+        /* top: unset; */
+        bottom: 28vw;
         transform: translateY(00%);
 
     }
