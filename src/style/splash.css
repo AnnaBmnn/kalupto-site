@@ -201,11 +201,17 @@
 @media screen and (max-width: 750px) {
     .splash__play {
         position: absolute;
-        right: 24px; 
+        /* right: 24px;  */
         font-family: 'SuisseInt', Arial, Helvetica, sans-serif;
         font-size: clamp(10px, 1.2vw, 20px);
         letter-spacing: -5%;
         text-transform: uppercase;
+    }
+    .splash__play {
+    }
+    .letter {
+        letter-spacing: 0px;
+
     }
     
     .splash__play::first-letter {
