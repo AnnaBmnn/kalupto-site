@@ -199,6 +199,22 @@
 }
 
 @media screen and (max-width: 750px) {
+    .splash__play {
+        position: absolute;
+        right: 24px; 
+        font-family: 'SuisseInt', Arial, Helvetica, sans-serif;
+        font-size: clamp(10px, 1.2vw, 20px);
+        letter-spacing: -5%;
+        text-transform: uppercase;
+    }
+    
+    .splash__play::first-letter {
+        font-family: 'Honeymoon', serif;
+        line-height: clamp(10px, 1vw, 20px);
+        transform: translateY(5px);
+        font-size: clamp(20px, 2vw, 40px);
+        margin-top: clamp(-20px, -2vw, -40px);
+    }
     .grid {
             grid-template-columns: repeat(6, 1fr);
             margin: 2vw;
