@@ -33,7 +33,7 @@
 .tooltip__img {
     width: 84px;
     margin-top: 8px;
-    margin-left: calc(100% - 80px);
+    margin-left: calc(100% - 78px);
 }
 .tooltip div {
     color: white;
@@ -41,6 +41,6 @@
 @media screen and (max-width: 750px) {
     .tooltip {
         /* transform: translate(-50%, -100%); */
-        width: 40vw;
+        width: 45vw;
     }
 }
