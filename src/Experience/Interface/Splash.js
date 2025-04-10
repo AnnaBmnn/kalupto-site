@@ -20,5 +20,6 @@ export default class Splash
     {
         this.restart.classList.add('show')
         this.screen.classList.add('is-hidden')
+        document.body.classList.add('play')
     }
 }
