@@ -1,8 +1,8 @@
 .tooltip {
     position: fixed;
     z-index: 10;
-    top: 75%;
-    left: 50%; 
+    bottom: 1.5vw;
+    left: 1.5vw;
 	font-family: 'SuisseInt', Arial, Helvetica, sans-serif;
     font-size: clamp(10px, 1.2vw, 20px);
     letter-spacing: -5%;
@@ -10,7 +10,7 @@
     color: #3E1031;
     width: 30vw;
     max-width: 220px;
-    transform: translateY(-100%);
+    /* transform: translateY(-100%); */
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
     filter: hue-rotate(180deg);
@@ -30,7 +30,7 @@
 }
 @media screen and (max-width: 750px) {
     .tooltip {
-        transform: translate(-50%, -100%);
+        /* transform: translate(-50%, -100%); */
 
     }
 }
