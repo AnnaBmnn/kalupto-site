@@ -28,6 +28,6 @@ export default class Tooltip
 
             }, 12000);
             
-        }, 12000);
+        }, 10000);
     }
 }
