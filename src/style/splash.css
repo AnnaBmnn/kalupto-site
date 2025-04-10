@@ -206,18 +206,19 @@
         font-size: clamp(10px, 1.2vw, 20px);
         letter-spacing: -5%;
         text-transform: uppercase;
+        transform: translate(-50%, -50%);
     }
     .splash__play {
         letter-spacing: 0px;
         font-size: 32px;
     }
     .letter {
-        letter-spacing: -3px;
+        letter-spacing: -7px;
         font-size: 17px;
-
     }
     .letter-0 {
-        font-size: 32px;
+        font-size: 33px;
+        letter-spacing: -3px;
     }
     .splash__play::first-letter {
         font-family: 'Honeymoon', serif;
@@ -227,9 +228,9 @@
         margin-top: clamp(-20px, -2vw, -40px);
     }
     .grid {
-            grid-template-columns: repeat(6, 1fr);
-            margin: 2vw;
-            column-gap: 10px;
+        grid-template-columns: repeat(6, 1fr);
+        margin: 2vw;
+        column-gap: 10px;
     }
     .splash__logo {
         bottom: 0%;
