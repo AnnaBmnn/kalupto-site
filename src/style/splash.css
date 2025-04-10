@@ -134,10 +134,12 @@
 }
 
 .splash__play:hover {
-    filter: hue-rotate(180deg);
+    /* filter: hue-rotate(180deg); */
 }
 
 .splash__play:hover .letter {
+    filter: hue-rotate(180deg);
+
 }
 
 

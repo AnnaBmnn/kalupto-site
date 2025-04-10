@@ -1,0 +1,36 @@
+.tooltip {
+    position: fixed;
+    z-index: 10;
+    top: 75%;
+    left: 50%; 
+	font-family: 'SuisseInt', Arial, Helvetica, sans-serif;
+    font-size: clamp(10px, 1.2vw, 20px);
+    letter-spacing: -5%;
+    text-transform: uppercase;
+    color: #3E1031;
+    width: 30vw;
+    max-width: 220px;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    filter: hue-rotate(180deg);
+    pointer-events: none;
+    background-color: rgba(255, 255, 255, 0.2);
+    pointer-events: none;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 6px;
+    border-radius: 3px;
+}
+
+.tooltip.show {
+    opacity: 1;
+    pointer-events: all;
+    cursor: pointer;
+
+}
+@media screen and (max-width: 750px) {
+    .tooltip {
+        transform: translate(-50%, -100%);
+
+    }
+}
