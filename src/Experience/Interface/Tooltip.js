@@ -25,8 +25,7 @@ export default class Tooltip
             this.screen.classList.add('show')
             window.setTimeout(() => {
                 this.screen.classList.remove('show')
-
             }, 12000);
-        }, 10000);
+        }, 9000);
     }
 }

@@ -21,7 +21,7 @@
     border-radius: 3px;
     mix-blend-mode: color-burn;  */
     /* border: 1px solid #3E1031; */
-    transform: translate(-50%, 0);
+    transform: translate(-50%, -50%);
     opacity: 0;
     text-align: center;
 }
@@ -30,7 +30,7 @@
     opacity: 1;
     pointer-events: all;
     cursor: pointer;
-    transform: translate(-50%, 0);
+    transform: translate(-50%, -50%);
     /* transform: translate(0%, 0%); */
 }
 .tooltip__img {
