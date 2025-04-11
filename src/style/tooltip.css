@@ -3,12 +3,11 @@
     z-index: 10;
     top: 45%;
     left: 50%;
-	/* font-family: 'SuisseInt', Arial, Helvetica, sans-serif;
+	font-family: 'SuisseInt', Arial, Helvetica, sans-serif;
     font-size: clamp(14px, 1.2vw, 20px);
-    letter-spacing: -5%;
     text-transform: uppercase;
     color: #3E1031;
-    width: 45vw;
+    /*width: 45vw;
     max-width: 240px;
     transform: translate(0%, 200%);
     opacity: 0;
@@ -24,6 +23,7 @@
     /* border: 1px solid #3E1031; */
     transform: translate(-50%, 0);
     opacity: 0;
+    text-align: center;
 }
 
 .tooltip.show {
@@ -34,8 +34,8 @@
     /* transform: translate(0%, 0%); */
 }
 .tooltip__img {
-    width: 74px;
-    /* margin-top: 8px; */
+    width: 80px;
+    margin-bottom: 8px;
     /* margin-left: calc(100% - 78px); */
 }
 .tooltip div {
