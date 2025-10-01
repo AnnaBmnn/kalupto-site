@@ -7,7 +7,7 @@ varying vec4 vTexture;
 
 void main()
 {
-    vTexture = texture2D(uTexture, uv);    
+    vTexture = texture2D(uTexture, uv);
     
     vec4 modelPosition = modelMatrix * vec4(position, 1.0);
 

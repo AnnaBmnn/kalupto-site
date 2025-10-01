@@ -34,9 +34,9 @@ export default class World
             this.environment = new Environment()
 
 
-            this.plans = new Plans()
+            // this.plans = new Plans()
             this.plan = new Plan()
-            this.lyrics = new Lyrics()
+            // this.lyrics = new Lyrics()
             // this.videos = new Videos()
 
             // this.rocks = new Rocks()

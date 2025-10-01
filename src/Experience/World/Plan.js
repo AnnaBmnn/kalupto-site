@@ -134,11 +134,11 @@ export default class Plan
         this.mesh = new THREE.Mesh(this.geometry, this.material)
         this.mesh.position.x = 0
         this.mesh.position.y = -0
-        this.mesh.position.z = 5
+        this.mesh.position.z = 0
 
-        this.mesh.scale.x = 24
-        this.mesh.scale.y = 24
-        this.mesh.scale.z = 24
+        this.mesh.scale.x = 1.6
+        this.mesh.scale.y = 0.9
+        this.mesh.scale.z = 0.1
         this.mesh.renderOrder = 0
 
         this.mesh.rotation.x = Math.PI
@@ -152,23 +152,9 @@ export default class Plan
     }
     setAnimations()
     {
-        this.experience.animations.on('animation-step-one-respi', ()=>{
-            this.mesh.visible = false
-        })
-        this.experience.animations.on('animation-second-step', ()=>{
-            window.setTimeout(() => {
-                this.mesh.visible = true
-                this.mesh.position.x = 0
-                this.mesh.position.y = 0
-                this.mesh.position.z = -8
-            }, 6000);
-        })
-        this.experience.animations.on('animation-fourth-step', ()=>{
-            // this.mesh.visible = false
-            this.mesh.position.y = 38
-            this.mesh.position.z = 0
-            
-        })
+        // this.experience.animations.on('animation-step-one-respi', ()=>{
+        //     this.mesh.visible = false
+        // })
     }
     update()
     {
@@ -178,7 +164,7 @@ export default class Plan
         
 
         // ANimation
-        this.mesh.lookAt(this.camera.controls.object.position)
+        // this.mesh.lookAt(this.camera.controls.object.position)
 
 
         

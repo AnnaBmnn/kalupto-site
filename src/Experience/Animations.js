@@ -31,150 +31,27 @@ export default class Animations  extends EventEmitter
         this.animationIndex = 0
         // s
         this.allTimingCameraAnimation = [
-            7.0,
-            15.5,
-            27,
-            36,
-            47,
-            63,
-            76,
-            96,
+            0,
             // 109
         ]
         this.allTimingAnimation = [
 
             {
-                timing: 1.5,
+                timing: 0.0,
                 eventName: 'animation-step-one-begin'
-            },
-            {
-                timing: 8.6,
-                eventName: 'animation-step-one-end-one'
-            },
-            {
-                timing: 16.5,
-                eventName: 'animation-step-one-end-two'
-            },
-            {
-                timing: 38.7,
-                eventName: 'animation-step-one-respi'
-            },
-            {
-                timing: 42.5,
-                eventName: 'animation-lyrics-start'
-            },
-            {
-                timing: 47,
-                eventName: 'animation-second-step'
-            },
-            {
-                timing: 92,
-                eventName: 'animation-third-step'
-            },
-            {
-                timing: 92,
-                eventName: 'animation-fourth-step'
-            },
-            {
-                timing: 113.5,
-                eventName: 'animation-lyrics-start-2'
-            },
-            {
-                timing: 118.5,
-                eventName: 'animation-lyrics-end'
-            },
+            }
         ]
         this.animationsCamera = [
             {
-                // 7.8
-                x: 0.8039905763962557,
-                y: 0.9723316816118244,
-                z: -7.709605957679526,
-                xRotation: -3.016135530204601,
-                yRotation: 0.10309780774103418,
-                zRotation: 3.1286137602939648,
-                duration: 4.5
-            },
-            {
-                // 17.5
-                x: -0.1688190001454601,
-                y: -4.376023982912357,
-                z: -7.702506009704813,
-                xRotation: 2.6249367621353117,
-                yRotation: -0.01905435645126834,
-                zRotation: 3.1307683817368614,
-                duration: 4.5
-            },
-            {
-                // 29
-                x: -0.06305390318082914,
-                y: -8.068487017624127,
-                z: -3.968364918038606,
-                xRotation: 2.027890686644305,
-                yRotation: -0.007012439610756865,
-                zRotation: 3.127336031002351,
-                duration: 4.5
-            },
-            {
-                // 36
-                x: -0.25176999999999816,
-                y: -26.168514,
-                z: -16.49030599999999,
-                xRotation: 2.2807461744793236,
-                yRotation: -0.007296463658920518,
-                zRotation: 3.133103159041517,
-                duration: 8
-            },
-            // {
-            //     // 45
-            //     x: -1.5188378497841581,
-            //     y: 1.0954093163298464,
-            //     z: 42.694385332373145,
-            //     xRotation: -0.025651340118769773,
-            //     yRotation: -0.035547961670017905,
-            //     zRotation: -0.0009118605773534697,
-            //     duration: 8
-            // },
-            {
-                // 47
-                x: 2.148939808200018,
-                y: -1.039870085182439,
-                z: 25.47331996205237,
-                xRotation: 0.0408037304345009,
-                yRotation: 0.08409138336362511,
-                zRotation: -0.0034290895023416233,
-                duration: 8
-            },
-            {
-                // 63
-                x: -0.8137422881169089,
-                y: -8.64166483187242,
-                z: 8.321897465339713,
-                xRotation:  0.8042461797805195,
-                yRotation: -0.0677240618273677,
-                zRotation: 0.07015726672096667,
-                duration: 7
-            },
-            {
-                // 75
-                x: 0.6684152643195791,
-                y: -23.125865002474615,
-                z: 10.924142688771918,
-                xRotation: 1.1294897333672764,
-                yRotation: 0.02612831013687288,
-                zRotation: -0.055249749575135926,
-                duration: 8
-            },
-            {
-                // 92
-                x: -5.819030870459607,
-                y: -134.07636028093694,
-                z: 45.00404908280245,
-                xRotation: 1.2469533835764062,
-                yRotation:-0.04112168008428243,
-                zRotation: 0.1218685228114564,
-                duration: 24
-            },
+                // 0
+                x: 0.0,
+                y: 0.0,
+                z: 10,
+                xRotation: 0,
+                yRotation: 0,
+                zRotation: 0,
+                duration: 0.1
+            }
         ]
         this.currentTimingAnimation = this.allTimingCameraAnimation[this.animationCameraIndex]
     }

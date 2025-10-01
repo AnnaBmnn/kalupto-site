@@ -10,79 +10,66 @@ uniform float uFrequenceAverage;
 
 varying vec2 vUv;
 varying vec4 vTexture;
-// "Vortex Street" by dr2 - 2015
-// License: Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
 
-// Motivated by implementation of van Wijk's IBFV by eiffie (lllGDl) and andregc (4llGWl) 
 
-const vec4 cHashA4 = vec4 (0., 1., 57., 58.);
-const vec3 cHashA3 = vec3 (1., 57., 113.);
-const float cHashM = 43758.54;
-
-vec4 Hashv4f (float p)
+//  Classic Perlin 2D Noise 
+//  by Stefan Gustavson
+//
+vec4 permute(vec4 x)
 {
-  return fract (sin (p + cHashA4) * cHashM);
+    return mod(((x*34.0)+1.0)*x, 289.0);
 }
 
-float Noisefv2 (vec2 p)
+
+vec2 fade(vec2 t)
 {
-  vec2 i = floor (p);
-  vec2 f = fract (p);
-  f = f * f * (3. - 2. * f);
-  vec4 t = Hashv4f (dot (i, cHashA3.xy));
-  return mix (mix (t.x, t.y, f.x), mix (t.z, t.w, f.x), f.y);
+    return t*t*t*(t*(t*6.0-15.0)+10.0);
 }
 
-float Fbm2 (vec2 p)
+
+float cnoise(vec2 P)
 {
-  float s = 0.;
-  float a = 1.;
-  for (int i = 0; i < 6; i ++) {
-    s += a * Noisefv2 (p);
-    a *= 0.5;
-    p *= 2.;
-  }
-  return s;
-}
-
-float tCur;
-
-vec2 VortF (vec2 q, vec2 c)
-{
-  vec2 d = q - c;
-  return 0.25 * vec2 (d.y, - d.x) / (dot (d, d) + 0.05);
-}
-
-vec2 FlowField (vec2 q)
-{
-  vec2 vr, c;
-  float dir = 1.;
-  c = vec2 (mod (tCur, 10.) - 20., 0.6 * dir);
-  vr = vec2 (0.);
-  for (int k = 0; k < 30; k ++) {
-    vr += dir * VortF (4. * q, c);
-    c = vec2 (c.x + 1., - c.y);
-    dir = - dir;
-  }
-  return vr;
-}
-
-void mainImage (out vec4 fragColor, in vec2 fragCoord)
-{
-
+    vec4 Pi = floor(P.xyxy) + vec4(0.0, 0.0, 1.0, 1.0);
+    vec4 Pf = fract(P.xyxy) - vec4(0.0, 0.0, 1.0, 1.0);
+    Pi = mod(Pi, 289.0); // To avoid truncation effects in permutation
+    vec4 ix = Pi.xzxz;
+    vec4 iy = Pi.yyww;
+    vec4 fx = Pf.xzxz;
+    vec4 fy = Pf.yyww;
+    vec4 i = permute(permute(ix) + iy);
+    vec4 gx = 2.0 * fract(i * 0.0243902439 ) - 1.0; // 1/41 = 0.024...
+    vec4 gy = abs(gx) - 0.5;
+    vec4 tx = floor(gx + 0.5);
+    gx = gx - tx;
+    vec2 g00 = vec2(gx.x,gy.x);
+    vec2 g10 = vec2(gx.y,gy.y);
+    vec2 g01 = vec2(gx.z,gy.z);
+    vec2 g11 = vec2(gx.w,gy.w);
+    vec4 norm = 1.79284291400159 - 0.85373472095314 * vec4(dot(g00, g00), dot(g01, g01), dot(g10, g10), dot(g11, g11));
+    g00 *= norm.x;
+    g01 *= norm.y;
+    g10 *= norm.z;
+    g11 *= norm.w;
+    float n00 = dot(g00, vec2(fx.x, fy.x));
+    float n10 = dot(g10, vec2(fx.y, fy.y));
+    float n01 = dot(g01, vec2(fx.z, fy.z));
+    float n11 = dot(g11, vec2(fx.w, fy.w));
+    vec2 fade_xy = fade(Pf.xy);
+    vec2 n_x = mix(vec2(n00, n01), vec2(n10, n11), fade_xy.x);
+    float n_xy = mix(n_x.x, n_x.y, fade_xy.y);
+    return 2.3 * n_xy;
 }
 
 void main()
 {
 
     float tCur = uTime * 0.01;
-    vec2 p = vUv;
-    vec3 color = vec3 (0.5, 0.5, 1.) ;
+    vec2 p = vUv * 0.01;
 
-    p -= FlowField (p) * 0.03;
-    vec3 col = Fbm2 (5. * p + vec2 (-0.1 * tCur, 0.)) * color;
-    gl_FragColor = vec4 (col, 1.);
+    float strength = sin(cnoise((mod(p +cos(uTime * 0.00001) * uTime * 0.0000000001 , 1.0) * p - uTime * 0.00000001 * step(0.0, uFrequenceAverage)) * 10.0) * 20.0 * uFrequenceAverage * 10.0);
+    float strength2 = sin(cnoise((mod(p * 10.0, 1.0) * p  ) * 10.0) * 200.0 );
+    vec3 color = vec3(  strength2 / strength );
 
-    //gl_FragColor = vec4(vTexture.rgb, 0.8);
+    gl_FragColor = vec4(color, 1.0);
 
 }

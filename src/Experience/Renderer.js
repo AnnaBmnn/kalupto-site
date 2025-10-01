@@ -28,8 +28,8 @@ export default class Renderer
         this.setInstance()
 
         // Add Passes
-        this.setPostProcessing()
-        this.setBloomPass()
+        // this.setPostProcessing()
+        // this.setBloomPass()
 
         // Add Animations
         window.setTimeout(() => {
@@ -48,7 +48,7 @@ export default class Renderer
         this.instance.toneMappingExposure = 1.5
         this.instance.shadowMap.enabled = true
         this.instance.shadowMap.type = THREE.PCFSoftShadowMap
-        this.instance.setClearColor('#FFFFFF')
+        this.instance.setClearColor('#000000')
         this.instance.setSize(this.sizes.width, this.sizes.height)
         this.instance.setPixelRatio(this.sizes.pixelRatio)
     }
@@ -130,8 +130,8 @@ export default class Renderer
 
     update()
     {
-        this.effectComposer.render(this.scene, this.camera.instance)
+        // this.effectComposer.render(this.scene, this.camera.instance)
 
-        //this.instance.render(this.scene, this.camera.instance)
+        this.instance.render(this.scene, this.camera.instance)
     }
 }

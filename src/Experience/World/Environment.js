@@ -21,7 +21,7 @@ export default class Environment
         }
 
         this.setSunLight()
-        this.setEnvironmentMap()
+        // this.setEnvironmentMap()
         window.setTimeout(()=>{
             this.setAnimations()
         }, 200)    
@@ -98,7 +98,7 @@ export default class Environment
         // this.scene.backgroundBlurriness = 0.9
         // this.scene.fog = new THREE.Fog( 0xcccccc, 10, 300);
 
-        this.scene.background =  new THREE.Color('#FFFFFF')
+        this.scene.background =  new THREE.Color('#000000')
         // this.scene.background = this.debugObject.color 
         this.environmentMap.updateMaterials()
 
