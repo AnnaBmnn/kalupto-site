@@ -122,7 +122,7 @@ export default class Plan
             opacity: 0.8,
             uniforms: {
                 uTime: {value: 0},
-                uFrequenceAverage: {value: 0},
+                uFrequenceAverage: {value: 1},
                 uTexture: { type: "t", value: this.textures[i]}
             }
         })
@@ -160,7 +160,7 @@ export default class Plan
     {
         // Uniforms
         this.material.uniforms.uTime.value = this.time.elapsed
-        this.material.uniforms.uFrequenceAverage.value = this.experience.world.audio.frequenceAverage 
+        //this.material.uniforms.uFrequenceAverage.value = this.experience.world.audio.frequenceAverage 
         
 
         // ANimation

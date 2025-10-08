@@ -65,10 +65,13 @@ void main()
 
     float tCur = uTime * 0.01;
     vec2 p = vUv * 0.01;
+    vec2 vUv2 = vUv * vec2(2.0);
 
-    float strength = sin(cnoise((mod(p +cos(uTime * 0.00001) * uTime * 0.0000000001 , 1.0) * p - uTime * 0.00000001 * step(0.0, uFrequenceAverage)) * 10.0) * 20.0 * uFrequenceAverage * 10.0);
-    float strength2 = sin(cnoise((mod(p * 10.0, 1.0) * p  ) * 10.0) * 200.0 );
-    vec3 color = vec3(  strength2 / strength );
+    float strength = sin(cnoise((mod(vUv2 +cos(uTime * 0.01) * uTime * 0.000001 , 1.0) * vUv2 - uTime * 0.01 * step(0.0, 0.5)) * 10.0) * 20.0 * 5.0 * 10.0 * 0.01);
+    float strength2 = sin(cnoise((mod(vUv2 * 100.0, 1.0) * vUv2.x  ) * 0.5 + uTime * 0.0001) * cnoise(sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001) * 200.0 + uTime * 0.001);
+    vec3 color = vec3(  strength2 );
+
+    //color = vec3(strength);
 
     gl_FragColor = vec4(color, 1.0);
 
