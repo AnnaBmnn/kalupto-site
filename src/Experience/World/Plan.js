@@ -95,7 +95,7 @@ export default class Plan
 
     setGeometry()
     {
-        this.geometry = new THREE.PlaneGeometry( 10, 10, 124, 124);
+        this.geometry = new THREE.BoxGeometry( 10, 10, 4, 124, 124, 124);
     }
 
     setMaterial(i)
