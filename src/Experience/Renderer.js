@@ -90,37 +90,6 @@ export default class Renderer
     setAnimations()
     {
         
-        this.experience.animations.on('animation-step-one-begin', ()=>{
-            this.unrealBloomPass.enabled = false
-            this.unrealBloomPass.strength = 0.0
-            this.unrealBloomPass.radius = 0.0
-
-        })
-        
-        this.experience.animations.on('animation-step-one-respi', ()=>{
-            this.unrealBloomPass.enabled = true
-            this.unrealBloomPass.strength = 1
-            this.unrealBloomPass.radius = 1
-            
-            window.setTimeout(() => {
-                // gsap.to(
-                //     this.unrealBloomPass,
-                //     {
-                //         duration: 1,
-                //         ease: 'power4.inOut',
-                //         strength: 1,
-                //         radius: 1.0,
-                //     }
-                // )
-            }, 2000);
-
-        })
-        this.experience.animations.on('animation-second-step', ()=>{
-            window.setTimeout(() => {
-                this.unrealBloomPass.strength = 1
-                this.unrealBloomPass.radius = 1
-            }, 6000);
-        })
     }
     resize()
     {

@@ -15,11 +15,10 @@ export default class Audio extends EventEmitter
         this.resources = this.experience.resources
         this.debug = this.experience.debug
         this.domAudio = document.querySelector('.js-audio')
-        this.domAudioNext = document.querySelector('.js-audio-next')
         this.domButtons = document.querySelectorAll('.js-play-audio')
 
         this.state = 'playing'
-        this.frequenceAverage = 50
+        this.frequenceAverage = 0
 
 
         this.onTimeUpdate = this.onTimeUpdate.bind(this)
@@ -33,47 +32,24 @@ export default class Audio extends EventEmitter
         for(let i = 0; i < this.domButtons.length; i++ )
         {
             this.domButtons[i].addEventListener('click', ()=>{
+                console.log('click')
 
                 if(!this.audioCtx){
                     this.setAnalyzer()
                 } 
-                if(this.domButtons[i].innerHTML !== 'pause'){
-                    // this.domAudio.currentTime = 50
-                    if(this.state !== 'resting'){
-                        this.domAudio.play()
-                    }else {
-                        this.domAudioNext.play()
-                    }
-                    // this.domButton.innerHTML = 'pause'
-                    for(let i = 0; i < this.domButtons.length; i++ )
-                    {
-                        this.domButtons[i].innerHTML = 'pause'
-                    }
-                } else {
-                    if(this.state !== 'resting'){
-                        this.domAudio.pause()
-                    }else {
-                        this.domAudioNext.pause()
-                    }
-                    // this.domButton.innerHTML = 'play'
-                    for(let i = 0; i < this.domButtons.length; i++ )
-                    {
-                        this.domButtons[i].innerHTML = 'play'
-                    }    
+                if(this.domAudio.paused){
+
+                    this.domAudio.play()
+                } else {  
+                    this.domAudio.pause()
+
                 }
             })
         }
 
         this.domAudio.addEventListener('timeupdate', this.onTimeUpdate)
         this.domAudio.addEventListener('ended', ()=>{
-            this.domAudioNext.play()
-            this.state = 'resting'
-            document.body.classList.add('resting')
-            this.setAnalyzerNext()
-            this.trigger('main-audio-end')
-        })
-        this.domAudioNext.addEventListener('ended', ()=>{
-            this.domAudioNext.play()
+            this.domAudio.play()
         })
 
     }
@@ -94,19 +70,7 @@ export default class Audio extends EventEmitter
             this.analyser.connect(this.audioCtx.destination);
         }
     }
-    setAnalyzerNext(){
-        this.source = this.audioCtx.createMediaElementSource(this.domAudioNext)
 
-        // Create an analyser
-        this.analyser = this.audioCtx.createAnalyser()
-        this.analyser.fftSize = 256
-        this.bufferLength = this.analyser.frequencyBinCount
-        this.dataArray = new Uint8Array(this.bufferLength)
-    
-        // Connect part
-        this.source.connect(this.analyser);
-        this.analyser.connect(this.audioCtx.destination);
-    }
     onTimeUpdate()
     {
         if(this.domAudio)
@@ -130,9 +94,11 @@ export default class Audio extends EventEmitter
         if(this.analyser){
             this.analyser.getByteFrequencyData(this.dataArray)
             this.frequenceAverage = this.state === 'resting' ? 20 + 1.8 * this.getAverage(this.dataArray, 0, this.dataArray.length) : this.getAverage(this.dataArray, 0, this.dataArray.length)
-            this.frequenceBassAverage = this.getAverage(this.dataArray, 0, 70)
-            this.frequenceMidAverage = this.getAverage(this.dataArray, 70, 80)
-            this.frequenceHightAverage = this.getAverage(this.dataArray, 80, 128)
+            this.frequenceBassAverage = this.getAverage(this.dataArray, 0, 20) * 2
+            this.frequenceMidAverage = this.getAverage(this.dataArray,  20, 40) * 2
+            this.frequenceHightAverage = this.getAverage(this.dataArray, 40, 60) * 2
+
+            console.log(this.frequenceHightAverage)
             // this.frequenceAverage = this.dataArray[100]
         }
 

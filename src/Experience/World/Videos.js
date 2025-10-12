@@ -1,8 +1,8 @@
 import * as THREE from 'three'
 import Experience from '../Experience.js'
 import gsap from 'gsap'
-import screenVertexShader from '../../shaders/vertex.glsl'
-import screenFragmentShader from '../../shaders/fragment.glsl'
+import screenVertexShader from '../../shaders/box/vertex.glsl'
+import screenFragmentShader from '../../shaders/box/fragment.glsl'
 
 export default class Videos
 {

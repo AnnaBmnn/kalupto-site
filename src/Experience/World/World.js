@@ -7,7 +7,7 @@ import Rocks from './Rocks.js'
 import Snow from './Snow.js'
 
 import Plans from './Plans.js'
-import Plan from './Plan.js'
+import Plan from './Box.js'
 import Videos from './Videos.js'
 import Audio from './Audio.js'
 import Lyrics from './Lyrics.js'

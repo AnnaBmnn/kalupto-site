@@ -24,7 +24,10 @@ export default class Animations  extends EventEmitter
             this.world.audio.domAudio.addEventListener('ended', () =>{
                 this.resetAnim()
             })
+
         })
+
+
 
 
         this.animationCameraIndex = 0
@@ -37,9 +40,9 @@ export default class Animations  extends EventEmitter
         this.allTimingAnimation = [
 
             {
-                timing: 0.0,
+                timing: 18.0,
                 eventName: 'animation-step-one-begin'
-            }
+            },
         ]
         this.animationsCamera = [
             {
