@@ -43,13 +43,33 @@ export default class Animations  extends EventEmitter
                 timing: 18.0,
                 eventName: 'animation-step-one-begin'
             },
+            {
+                timing: 88.0,
+                eventName: 'animation-rott-and-wander'
+            },
+            {
+                timing: 112.0,
+                eventName: 'animation-explosion'
+            },
+            {
+                timing: 112.0,
+                eventName: 'animation-under-water-bliss'
+            },
+            {
+                timing: 160.0,
+                eventName: 'animation-80-band'
+            },
+            {
+                timing: 204.0,
+                eventName: 'animation-outro'
+            },
         ]
         this.animationsCamera = [
             {
                 // 0
                 x: 0.0,
                 y: 0.0,
-                z: 10,
+                z: 100,
                 xRotation: 0,
                 yRotation: 0,
                 zRotation: 0,

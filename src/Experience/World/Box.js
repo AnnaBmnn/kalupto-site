@@ -23,7 +23,7 @@ export default class Box
         this.debug = this.experience.debug
 
 
-        this.setGeometry()
+        this.setGeometries()
         this.setMaterial(0)
         this.setMesh(0)
         this.setAnimations()
@@ -98,22 +98,27 @@ export default class Box
         }
     }
 
-    setGeometry()
+    setGeometries()
     {
-        this.geometry = new THREE.BoxGeometry( 10, 10, 4, 124, 124, 124);
+        this.boxGeometry = new THREE.BoxGeometry( 5, 3, 0.1, 124, 124, 124);
+        this.planeGeometry = new THREE.PlaneGeometry( 5, 10, 62, 62);
     }
 
     setMaterial(i)
     {
         
-        // this.material = new THREE.MeshStandardMaterial({
-        //     map: this.resources.items.lakeIceTexture,
-        //     //normalMap: new THREE.VideoTexture( this.videos[i]),
-        //     transparent: true,
-        //     opacity: 0.9,
-        //     side: THREE.DoubleSide,
-        //     blending: THREE.MultiplyBlending  
-        // })
+        this.resources.items.lyricTexture.minFilter = THREE.LinearFilter
+        
+        this.lyricMaterial = new THREE.MeshBasicMaterial({
+            map: this.resources.items.lyricTexture,
+            alphaMap: this.resources.items.lyricTexture,
+            // color: new THREE.Color(1.0, 0 ,0),
+            //normalMap: new THREE.VideoTexture( this.videos[i]),
+            transparent: true,
+            opacity: 1.0,
+            // side: THREE.DoubleSide,
+            // blending: THREE.MultiplyBlending  
+        })
         
         
         this.material = new THREE.ShaderMaterial({
@@ -137,25 +142,39 @@ export default class Box
         
     }
     
-    setMesh(i)
+    setMesh()
     {
-        this.mesh = new THREE.Mesh(this.geometry, this.material)
+        this.group = new THREE.Group()
+
+        this.mesh = new THREE.Mesh(this.boxGeometry, this.material)
+        this.lyricMesh = new THREE.Mesh(this.planeGeometry, this.lyricMaterial)
+
+
+        this.lyricMesh.position.y = -3.5
+        this.lyricMesh.position.z += 0.1
+
         this.mesh.position.x = 0
         this.mesh.position.y = -0
         this.mesh.position.z = 0
 
-        this.mesh.scale.x = 1.6
-        this.mesh.scale.y = 0.9
-        this.mesh.scale.z = 0.1
-        this.mesh.renderOrder = 0
+        // this.group.scale.x = 0.1
+        // this.group.scale.y = 0.1
+        // this.group.scale.z = 0.1
 
-        this.mesh.rotation.x = Math.PI
+
+        this.mesh.renderOrder = 0
+        this.lyricMesh.renderOrder = 1
+
+        // this.group.rotation.x = Math.PI
 
 
         // this.mesh.rotation.x = - Math.PI * 0.5
 
         this.mesh.receiveShadow = false
-        this.scene.add(this.mesh)
+        
+        this.group.add(this.mesh)
+        this.group.add(this.lyricMesh)
+        this.scene.add(this.group)
     }
     setAnimations()
     {
@@ -185,7 +204,7 @@ export default class Box
         // console.log(this.material.uniforms.uFrequenceBassAverage.value)
         
         // Box rotation
-        this.mesh.rotation.y += this.rotationAmount
+        this.group.rotation.y += this.rotationAmount
         // ANimation
         // this.mesh.lookAt(this.camera.controls.object.position)
 

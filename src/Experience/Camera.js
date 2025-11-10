@@ -11,6 +11,8 @@ export default class Camera
         this.scene = this.experience.scene
         this.canvas = this.experience.canvas
 
+        this.frustumSize = 5
+
         this.setInstance()
         this.setControls()
         // this.setButtonDebug()
@@ -19,7 +21,17 @@ export default class Camera
     }
     setInstance()
     {
-        this.instance = new THREE.PerspectiveCamera(80, this.sizes.width / this.sizes.height, 0.01, 300)
+        const aspect = this.sizes.width / this.sizes.height;
+
+        this.instance = new THREE.OrthographicCamera(
+            -this.frustumSize * aspect / 2,
+            this.frustumSize * aspect / 2,
+            this.frustumSize / 2,
+            -this.frustumSize / 2,
+            1,
+            1000
+        )
+
         this.instance.position.set(
             0,
             0,
@@ -53,12 +65,20 @@ export default class Camera
 
     resize()
     {
-        this.instance.aspect = this.sizes.width / this.sizes.height
-        this.instance.updateProjectionMatrix()
+        const aspect = this.sizes.width / this.sizes.height;
+
+        this.instance.left   = -this.frustumSize * aspect / 2;
+        this.instance.right  =  this.frustumSize * aspect / 2;
+        this.instance.top    =  this.frustumSize / 2;
+        this.instance.bottom = -this.frustumSize / 2;
+
+        this.instance.updateProjectionMatrix();
+
     }
 
     update()
     {
-        this.controls.update()
+        if(this.controls)
+            this.controls.update()
     }
 }

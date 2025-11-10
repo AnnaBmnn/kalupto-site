@@ -7,7 +7,7 @@ import Rocks from './Rocks.js'
 import Snow from './Snow.js'
 
 import Plans from './Plans.js'
-import Plan from './Box.js'
+import Box from './Box.js'
 import Videos from './Videos.js'
 import Audio from './Audio.js'
 import Lyrics from './Lyrics.js'
@@ -35,7 +35,7 @@ export default class World
 
 
             // this.plans = new Plans()
-            this.plan = new Plan()
+            this.box = new Box()
             // this.lyrics = new Lyrics()
             // this.videos = new Videos()
 
@@ -51,8 +51,8 @@ export default class World
     {
         if(this.plans)
             this.plans.update()
-        if(this.plan)
-            this.plan.update()
+        if(this.box)
+            this.box.update()
         if(this.videos)
             this.videos.update()
         if(this.snow)

@@ -61,7 +61,7 @@ export default class Audio extends EventEmitter
     
             // Create an analyser
             this.analyser = this.audioCtx.createAnalyser()
-            this.analyser.fftSize = 256
+            this.analyser.fftSize = 512
             this.bufferLength = this.analyser.frequencyBinCount
             this.dataArray = new Uint8Array(this.bufferLength)
         
@@ -93,12 +93,16 @@ export default class Audio extends EventEmitter
     {
         if(this.analyser){
             this.analyser.getByteFrequencyData(this.dataArray)
-            this.frequenceAverage = this.state === 'resting' ? 20 + 1.8 * this.getAverage(this.dataArray, 0, this.dataArray.length) : this.getAverage(this.dataArray, 0, this.dataArray.length)
-            this.frequenceBassAverage = this.getAverage(this.dataArray, 0, 20) * 2
-            this.frequenceMidAverage = this.getAverage(this.dataArray,  20, 40) * 2
-            this.frequenceHightAverage = this.getAverage(this.dataArray, 40, 60) * 2
+            this.frequenceAverage = this.getAverage(this.dataArray, 0, this.dataArray.length)
+            // voice
+            //this.frequenceBassAverage = this.getAverage(this.dataArray, 10, 20) 
+            this.frequenceBassAverage = this.getAverage(this.dataArray, 0, 1) 
+            this.frequenceMidAverage = this.getAverage(this.dataArray,  3, 23) 
+            this.frequenceHightAverage = this.getAverage(this.dataArray, 23, 127) 
 
-            console.log(this.frequenceHightAverage)
+            // console.log('frequenceBassAverage : ', this.frequenceBassAverage)
+            // console.log('frequenceMidAverage : ', this.frequenceMidAverage)
+            // console.log('frequenceHightAverage : ', this.frequenceHightAverage)
             // this.frequenceAverage = this.dataArray[100]
         }
 
