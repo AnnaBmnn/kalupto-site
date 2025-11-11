@@ -11,6 +11,7 @@ uniform float uFrequenceBassAverage;
 uniform float uFrequenceMidAverage;
 uniform float uFrequenceHightAverage;
 uniform float uColorChange;
+uniform int uCurrentStep;
 
 varying vec2 vUv;
 varying vec4 vTexture;
@@ -71,9 +72,13 @@ void main()
     vec2 p = vUv * 0.01;
     vec2 vUv2 = vUv * vec2(2.0 );
 
-    float strength = sin(cnoise((mod(vUv2 +cos(uTime * 0.01) * uTime * 0.000001 , 1.0) * vUv2 - uTime * 0.01 * step(0.0, 0.5)) * 10.0) * 20.0 * 5.0 * 10.0 * 0.01);
-    float strength2 = uColorChange * 1.0 +  sin(cnoise(uFrequenceBassAverage * 0.005 * (mod(vUv2 * 100.0 ,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceBassAverage * 0.001 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 200.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
-    // float strength2 = uColorChange * 0.0 +  sin(cnoise(uFrequenceBassAverage * 0.005 * (mod(vUv2 * 10.0 , uFrequenceBassAverage * 0.1  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceBassAverage * 0.001 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 200.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
+    vec2 wavedUv = vec2(
+        vUv.x,
+        vUv.y + sin(vUv.x * 10.0 + uTime * -0.001) * 0.2
+    );
+
+    float strength = 1.0;
+    float strength2 = 1.0;
 
     
     vec3 color = vec3(  strength2 );
@@ -84,9 +89,78 @@ void main()
     stripes = pow(stripes, 3.0);
     stripes = 1.0;
 
-    strength2 = 1.0 - 0.1 * (strength2 * 1.0 ) ;
+    if(uCurrentStep == 0)
+    {
+        // Blanc little effect
+        strength2 = 
+            1.0 - sin(
+                    0.001 *
+                    cnoise(
+                        mod(wavedUv * 0.1 + cnoise(vUv * 100.0  + uTime * 0.00001) ,  1.0  ) * 100.0
+                    ) * 1.0
+                    // *(cnoise(
+                    //     uFrequenceMidAverage * 0.001 
+                    //     * (sin(vUv2.y) - 1.0)
+                    //     + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 * 0.0
+                    //     + uTime * 0.0001 
+                    // ) )
+                * 20.0 
+                * (uColorChange + 1.0 )
+            ) * 0.1  * uFrequenceBassAverage * 0.5;
 
-    color = vec3(strength2);
+        color = vec3(strength2);
+    }
+    else if(uCurrentStep == 1)
+    {
+        // rott and wander
+        strength2 = 
+            1.0 - sin(
+                    0.001 *
+                    cnoise(
+                        mod(wavedUv * 0.1 + cnoise(vUv * 100.0  + uTime * 0.00001) ,  1.0  ) * 100.0
+                    ) * 1.0
+                    // *(cnoise(
+                    //     uFrequenceMidAverage * 0.001 
+                    //     * (sin(vUv2.y) - 1.0)
+                    //     + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 * 0.0
+                    //     + uTime * 0.0001 
+                    // ) )
+                * 20.0 
+                * (uColorChange + 1.0 )
+            ) * 0.1  * uFrequenceBassAverage * 0.5;
+        strength2 = sin(cnoise(uFrequenceBassAverage * 0.005 * (mod(vUv2 * 100.0 ,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceBassAverage * 0.001 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 200.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) / strength2 ;
+        color = vec3(strength2);
+    }
+    else if(uCurrentStep == 2) {
+        // Explosion
+        strength2 =  (strength2 * 1.0 ) ;
+        color = vec3(strength2);
+    }
+    else if(uCurrentStep == 3) {
+        // Under water bliss
+        strength = sin(cnoise((mod(vUv2 +cos(uTime * 0.01) * uTime * 0.000001 , 1.0) * vUv2 - uTime * 0.01 * step(0.0, 0.5)) * 10.0) * 20.0 * 5.0 * 10.0 * 0.01);
+        strength2 = uColorChange * 1.0 +  sin(cnoise(uFrequenceBassAverage * 0.005 * (mod(vUv2 * 100.0 ,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceBassAverage * 0.001 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 200.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
+        color = vec3(strength2);
+        color.r = 0.1;
+    }
+    else if(uCurrentStep == 4) {
+        // 80's animation
+        strength = sin(cnoise((mod(vUv2 +cos(uTime * 0.01) * uTime * 0.000001 , 1.0) * vUv2 - uTime * 0.01 * step(0.0, 0.5)) * 10.0) * 20.0 * 5.0 * 10.0 * 0.01);
+        strength2 = uColorChange * 1.0 +  sin(cnoise(uFrequenceBassAverage * 0.005 * (mod(vUv2 * 100.0 ,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceBassAverage * 0.001 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 200.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
+        color = vec3(strength2);
+        color.r *= vUv.x * 0.1;
+    }
+    else if(uCurrentStep == 5) {
+        // outro
+        strength2 =  (strength2 * 1.0 ) ;
+        color = vec3(strength2);
+    }
+
+    // Alexis jamet ish 
+    //strength2 = 1.0 - cnoise( (mod(vUv * 10.0  , 10.0 ) * wavedUv.y +   uTime * 0.0001 )  * 20.0 ) * 0.001 * uFrequenceBassAverage;
+    // PEtit rond arorndi au milieu 
+    //color = vec3( 1.0 - (0.0001 * uFrequenceBassAverage * 0.75) / (distance(wavedUv,vec2(0.5))));
+
 
     gl_FragColor = vec4(color, 1.0);
 

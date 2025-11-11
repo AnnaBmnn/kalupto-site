@@ -40,26 +40,32 @@ export default class Animations  extends EventEmitter
         this.allTimingAnimation = [
 
             {
+                // 1
+                // timing: 3.0,
                 timing: 18.0,
-                eventName: 'animation-step-one-begin'
-            },
-            {
-                timing: 88.0,
                 eventName: 'animation-rott-and-wander'
             },
             {
-                timing: 112.0,
+                // 2
+                // timing: 10.0,
+                timing: 88.0,
                 eventName: 'animation-explosion'
             },
             {
+                // 3
+                // timing: 12.0,
                 timing: 112.0,
                 eventName: 'animation-under-water-bliss'
             },
             {
+                // 4
+                // timing: 20.0,
                 timing: 160.0,
                 eventName: 'animation-80-band'
             },
             {
+                // 5
+                // timing: 22.0,
                 timing: 204.0,
                 eventName: 'animation-outro'
             },

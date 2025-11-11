@@ -19,6 +19,7 @@ export default class Box
         this.rotationAmount = 0
 
         this.uniformColorChange = 1
+        this.uniformCurrentStep = 0
 
         this.debug = this.experience.debug
 
@@ -136,7 +137,8 @@ export default class Box
                 uFrequenceBassAverage: {value: 1},
                 uFrequenceMidAverage: {value: 1},
                 uFrequenceHightAverage: {value: 1},
-                uColorChange: { value: 1}
+                uColorChange: { value: 1},
+                uCurrentStep: { value: this.uniformCurrentStep},
             }
         })
         
@@ -178,17 +180,36 @@ export default class Box
     }
     setAnimations()
     {
-        this.experience.animations.on('animation-step-one-begin', ()=>{
+        this.experience.animations.on('animation-rott-and-wander', ()=>{
             gsap.to(
                 this,
                 {
                     duration: 0.5,
                     ease: 'power2.inOut',
                     rotationAmount: 0.0005,
-                    uniformColorChange: 0,
+                    uniformColorChange: 0,    
                     delay: 0
                 }
             )
+            this.uniformCurrentStep = 1
+            this.material.uniforms.uCurrentStep.value = this.uniformCurrentStep
+        })
+        this.experience.animations.on('animation-explosion', ()=>{
+            this.uniformCurrentStep = 2
+            this.material.uniforms.uCurrentStep.value = this.uniformCurrentStep
+
+        })
+        this.experience.animations.on('animation-under-water-bliss', ()=>{
+            this.uniformCurrentStep = 3
+            this.material.uniforms.uCurrentStep.value = this.uniformCurrentStep
+        })
+        this.experience.animations.on('animation-80-band', ()=>{
+            this.uniformCurrentStep = 4
+            this.material.uniforms.uCurrentStep.value = this.uniformCurrentStep
+        })
+        this.experience.animations.on('animation-outro', ()=>{
+            this.uniformCurrentStep = 5
+            this.material.uniforms.uCurrentStep.value = this.uniformCurrentStep
         })
     }
     update()
