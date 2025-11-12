@@ -195,13 +195,49 @@ export default class Box
             this.material.uniforms.uCurrentStep.value = this.uniformCurrentStep
         })
         this.experience.animations.on('animation-explosion', ()=>{
-            this.uniformCurrentStep = 2
-            this.material.uniforms.uCurrentStep.value = this.uniformCurrentStep
+            gsap.to(
+                this,
+                {
+                    duration: 1,
+                    ease: 'power2.inOut',
+                    uniformCurrentStep: 2,    
+                    delay: 0,
+                    onUpdate : (e)=>{
+                        this.material.uniforms.uCurrentStep.value = this.uniformCurrentStep
 
+                        console.log(this.uniformCurrentStep)
+                    }
+                }
+            )
+        })
+        this.experience.animations.on('animation-explosion-bigger', ()=>{
+            // gsap.to(
+            //     this.mesh.scale,
+            //     {
+            //         duration: 0.5,
+            //         ease: 'power2.inOut',
+            //         x: 100,
+            //         y: 100,
+            //         z: 100,    
+            //         delay: 0
+            //     }
+            // )
         })
         this.experience.animations.on('animation-under-water-bliss', ()=>{
             this.uniformCurrentStep = 3
             this.material.uniforms.uCurrentStep.value = this.uniformCurrentStep
+            this.isBigger = false
+            // gsap.to(
+            //     this.mesh.scale,
+            //     {
+            //         duration: 0.5,
+            //         ease: 'power2.inOut',
+            //         x: 1,
+            //         y: 1,
+            //         z: 1,    
+            //         delay: 0
+            //     }
+            // )
         })
         this.experience.animations.on('animation-80-band', ()=>{
             this.uniformCurrentStep = 4

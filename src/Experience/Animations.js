@@ -42,15 +42,21 @@ export default class Animations  extends EventEmitter
             {
                 // 1
                 // timing: 3.0,
-                timing: 18.0,
+                timing: 18.5,
                 eventName: 'animation-rott-and-wander'
             },
             {
                 // 2
-                // timing: 10.0,
                 timing: 88.0,
+                // timing: 92.5,
                 eventName: 'animation-explosion'
             },
+            // {
+            //     // 2
+            //     // timing: 10.0,
+            //     timing: 93.0,
+            //     eventName: 'animation-explosion-bigger'
+            // },
             {
                 // 3
                 // timing: 12.0,
