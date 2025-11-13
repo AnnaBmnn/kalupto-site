@@ -101,7 +101,7 @@ export default class Box
 
     setGeometries()
     {
-        this.boxGeometry = new THREE.BoxGeometry( 5, 3, 0.1, 124, 124, 124);
+        this.boxGeometry = new THREE.BoxGeometry( 5, 3, 0.3, 124, 124, 124);
         this.planeGeometry = new THREE.PlaneGeometry( 5, 10, 62, 62);
     }
 
@@ -153,7 +153,7 @@ export default class Box
 
 
         this.lyricMesh.position.y = -3.5
-        this.lyricMesh.position.z += 0.1
+        this.lyricMesh.position.z += 0.3
 
         this.mesh.position.x = 0
         this.mesh.position.y = -0
@@ -198,8 +198,8 @@ export default class Box
             gsap.to(
                 this,
                 {
-                    duration: 1,
-                    ease: 'power2.inOut',
+                    duration: 8,
+                    ease: 'power4.inOut',
                     uniformCurrentStep: 2,    
                     delay: 0,
                     onUpdate : (e)=>{
