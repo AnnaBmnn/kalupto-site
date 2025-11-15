@@ -28,6 +28,7 @@ export default class Box
         this.setMaterial(0)
         this.setMesh(0)
         this.setAnimations()
+        // this.setAnimationsRotation()
 
         // Debug
         if(this.debug.active)
@@ -180,17 +181,10 @@ export default class Box
     }
     setAnimations()
     {
+        this.experience.animations.on('animation-start', ()=>{
+            this.setAnimationsRotation()
+        })
         this.experience.animations.on('animation-rott-and-wander', ()=>{
-            gsap.to(
-                this,
-                {
-                    duration: 0.5,
-                    ease: 'power2.inOut',
-                    rotationAmount: 0.0005,
-                    uniformColorChange: 0,    
-                    delay: 0
-                }
-            )
             this.uniformCurrentStep = 1
             this.material.uniforms.uCurrentStep.value = this.uniformCurrentStep
         })
@@ -204,8 +198,6 @@ export default class Box
                     delay: 0,
                     onUpdate : (e)=>{
                         this.material.uniforms.uCurrentStep.value = this.uniformCurrentStep
-
-                        console.log(this.uniformCurrentStep)
                     }
                 }
             )
@@ -248,6 +240,84 @@ export default class Box
             this.material.uniforms.uCurrentStep.value = this.uniformCurrentStep
         })
     }
+    setAnimationsRotation()
+    {
+        gsap.to(
+            this.group.rotation,
+            {
+                duration: 36,
+                ease: 'linear',
+                y: Math.PI * 0.5,
+                delay: 19
+            }
+        )
+        gsap.to(
+            this.group.rotation,
+            {
+                duration: 20,
+                ease: 'linear',
+                y: Math.PI * 1,
+                delay: 56.3
+            }
+        )
+        gsap.to(
+            this.camera.instance,
+            {
+                duration: 43,
+                // ease: 'elastic.out',
+                ease: 'power3.inOut',
+                zoom: 3,
+                delay: 65,
+                onUpdate: () => this.camera.instance.updateProjectionMatrix()
+            }
+        )
+        gsap.to(
+            this.camera.instance,
+            {
+                duration: 44,
+                ease: 'power3.inOut',
+                zoom: 1,
+                delay: 120,
+                onUpdate: () => this.camera.instance.updateProjectionMatrix()
+            }
+        )
+        gsap.to(
+            this.group.rotation,
+            {
+                duration: 43,
+                ease: 'power3.inOut',
+                x: Math.PI * 2,
+                delay: 136
+            }
+        )
+        gsap.to(
+            this.group.rotation,
+            {
+                duration: 10,
+                ease: 'linear',
+                z: Math.PI * 0.3,
+                delay: 136
+            }
+        )
+        gsap.to(
+            this.group.rotation,
+            {
+                duration: 10,
+                ease: 'linear',
+                z: 0,
+                delay: 169
+            }
+        )
+        gsap.to(
+            this.group.rotation,
+            {
+                duration: 52,
+                ease: 'power4.inOut',
+                y: Math.PI * 2,
+                delay: 159
+            }
+        )
+    }
     update()
     {
         // Uniforms
@@ -261,7 +331,7 @@ export default class Box
         // console.log(this.material.uniforms.uFrequenceBassAverage.value)
         
         // Box rotation
-        this.group.rotation.y += this.rotationAmount
+        // this.group.rotation.y += this.rotationAmount
         // ANimation
         // this.mesh.lookAt(this.camera.controls.object.position)
 

@@ -38,7 +38,12 @@ export default class Animations  extends EventEmitter
             // 109
         ]
         this.allTimingAnimation = [
-
+            {
+                // 1
+                // timing: 3.0,
+                timing: 0.01,
+                eventName: 'animation-start'
+            },
             {
                 // 1
                 // timing: 3.0,
@@ -72,7 +77,7 @@ export default class Animations  extends EventEmitter
             {
                 // 5
                 // timing: 22.0,
-                timing: 204.0,
+                timing: 202.0,
                 eventName: 'animation-outro'
             },
         ]
@@ -148,7 +153,7 @@ export default class Animations  extends EventEmitter
         if(this.animationCameraIndex < this.animationsCamera.length && this.audio.currentTime >= this.currentTimingAnimation )
         {
 
-            this.animateCamera()
+            // this.animateCamera()
             this.setNextAnimation()
         }
 

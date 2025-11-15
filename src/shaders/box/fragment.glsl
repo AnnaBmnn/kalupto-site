@@ -94,7 +94,7 @@ void main()
         // Blanc little effect
         strength2 =  sin(cnoise( (mod(vUv2 * 100.0 ,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceBassAverage * 0.001 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 100.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
 
-
+        // TO DO : 0.1 to animate from 0 -> 0.1
         strength2 = 1.0 - (strength2 * 0.1);
 
         color = vec3(strength2);
@@ -114,7 +114,7 @@ void main()
         // Explosion
 
         float mixStrength = mix(100.0, 4.0, (uCurrentStep - 1.0));
-        mixStrength = mix(100.0, 4.0, uFrequenceBassAverage);
+        mixStrength = mix(100.0, 1.0, uFrequenceBassAverage * 1.5);
 
 
         strength2 = uColorChange * 1.0 +  sin(cnoise( (mod(vUv2 * mixStrength,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceBassAverage * 0.001 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 100.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
@@ -129,7 +129,8 @@ void main()
     else if(uCurrentStep == 3.0) {
         // Under water bliss
         strength = sin(cnoise((mod(vUv2 +cos(uTime * 0.01) * uTime * 0.000001 , 1.0) * vUv2 - uTime * 0.01 * step(0.0, 0.5)) * 10.0) * 20.0 * 5.0 * 10.0 * 0.01);
-        strength2 = sin(cnoise( (mod(vUv2 * 100.0 ,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceBassAverage * 0.001 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 100.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
+        // strength2 = sin(cnoise( (mod(vUv2 * 200.0 ,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceBassAverage * 0.001 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 100.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
+        strength2 = sin(cnoise( (mod(vUv2 * 200.0 ,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise( sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 100.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
 
         color = vec3(strength2);
         color.r = 0.0;
