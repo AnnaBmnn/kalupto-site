@@ -51,6 +51,21 @@ export default class Animations  extends EventEmitter
                 eventName: 'animation-rott-and-wander'
             },
             {
+                // timing: 3.0,
+                timing: 53,
+                eventName: 'animation-rott-and-wander-guit'
+            },
+            {
+                // timing: 3.0,
+                timing: 55,
+                eventName: 'animation-rott-and-wander-gun'
+            },
+            {
+                // timing: 3.0,
+                timing: 56,
+                eventName: 'animation-rott-and-wander-doing'
+            },
+            {
                 // 2
                 timing: 88.0,
                 // timing: 92.5,
@@ -71,7 +86,7 @@ export default class Animations  extends EventEmitter
             {
                 // 4
                 // timing: 20.0,
-                timing: 150.0,
+                timing: 140.0,
                 eventName: 'animation-80-band'
             },
             {

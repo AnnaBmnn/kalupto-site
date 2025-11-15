@@ -20,6 +20,7 @@ export default class Box
 
         this.uniformColorChange = 1
         this.uniformCurrentStep = 0
+        this.uniformShot = 0
 
         this.debug = this.experience.debug
 
@@ -140,6 +141,7 @@ export default class Box
                 uFrequenceHightAverage: {value: 1},
                 uColorChange: { value: 1},
                 uCurrentStep: { value: this.uniformCurrentStep},
+                uShot: { value: this.uniformShot},
             }
         })
         
@@ -188,6 +190,9 @@ export default class Box
             this.uniformCurrentStep = 1
             this.material.uniforms.uCurrentStep.value = this.uniformCurrentStep
         })
+        // this.experience.animations.on('animation-rott-and-wander-guit', this.animationRottAndWanderShot )
+        // this.experience.animations.on('animation-rott-and-wander-gun', this.animationRottAndWanderShot )
+        // this.experience.animations.on('animation-rott-and-wander-doing', this.animationRottAndWanderShot )
         this.experience.animations.on('animation-explosion', ()=>{
             gsap.to(
                 this,
@@ -202,34 +207,36 @@ export default class Box
                 }
             )
         })
-        this.experience.animations.on('animation-explosion-bigger', ()=>{
-            // gsap.to(
-            //     this.mesh.scale,
-            //     {
-            //         duration: 0.5,
-            //         ease: 'power2.inOut',
-            //         x: 100,
-            //         y: 100,
-            //         z: 100,    
-            //         delay: 0
-            //     }
-            // )
-        })
         this.experience.animations.on('animation-under-water-bliss', ()=>{
             this.uniformCurrentStep = 3
             this.material.uniforms.uCurrentStep.value = this.uniformCurrentStep
-            this.isBigger = false
-            // gsap.to(
-            //     this.mesh.scale,
-            //     {
-            //         duration: 0.5,
-            //         ease: 'power2.inOut',
-            //         x: 1,
-            //         y: 1,
-            //         z: 1,    
-            //         delay: 0
-            //     }
-            // )
+
+            // animate the current step to do a mix between old and new and smoothen the transition
+            gsap.to(
+                this,
+                {
+                    duration: 1.4,
+                    ease: 'power2.inOut',
+                    uniformCurrentStep: 3,
+                    delay: 0,
+                    onUpdate: () => {
+                        this.camera.instance.updateProjectionMatrix()
+                        this.material.uniforms.uCurrentStep.value = this.uniformCurrentStep
+                    }
+                }
+            )
+
+            // Zoom out to better see the water smooth
+            gsap.to(
+                this.camera.instance,
+                {
+                    duration: 3.5,
+                    ease: 'power2.inOut',
+                    zoom: 2,
+                    delay: 0,
+                    onUpdate: () => this.camera.instance.updateProjectionMatrix()
+                }
+            )
         })
         this.experience.animations.on('animation-80-band', ()=>{
             this.uniformCurrentStep = 4
@@ -242,6 +249,7 @@ export default class Box
     }
     setAnimationsRotation()
     {
+
         gsap.to(
             this.group.rotation,
             {
@@ -315,6 +323,36 @@ export default class Box
                 ease: 'power4.inOut',
                 y: Math.PI * 2,
                 delay: 159
+            }
+        )
+    }
+    animationRottAndWanderShot()
+    {
+        console.log('ROT AND WANDER')
+        gsap.to(
+            this,
+            {
+                duration: 0.5,
+                ease: 'power4.inOut',
+                uniformShot: 1,    
+                delay: 0,
+                onUpdate : (e)=>{
+                    this.material.uniforms.uShot.value = this.uniformShot
+                },
+                onComplete: ()=>{
+                    gsap.to(
+                        this,
+                        {
+                            duration: 0.5,
+                            ease: 'power4.inOut',
+                            uniformShot: 0,    
+                            delay: 0,
+                            onUpdate : (e)=>{
+                                this.material.uniforms.uShot.value = this.uniformShot
+                            },
+                        }
+                    )
+                }
             }
         )
     }
