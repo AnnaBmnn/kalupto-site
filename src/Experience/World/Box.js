@@ -18,7 +18,7 @@ export default class Box
         
         this.rotationAmount = 0
 
-        this.uniformColorChange = 1
+        this.uniformColorChange = 0
         this.uniformCurrentStep = 0
         this.uniformShot = 0
 
@@ -109,12 +109,12 @@ export default class Box
 
     setMaterial(i)
     {
-        
+        console.log(this.resources.items.lyricTexture)
         this.resources.items.lyricTexture.minFilter = THREE.LinearFilter
         
         this.lyricMaterial = new THREE.MeshBasicMaterial({
             map: this.resources.items.lyricTexture,
-            alphaMap: this.resources.items.lyricTexture,
+            // alphaMap: this.resources.items.lyricTexture,
             // color: new THREE.Color(1.0, 0 ,0),
             //normalMap: new THREE.VideoTexture( this.videos[i]),
             transparent: true,
@@ -122,6 +122,7 @@ export default class Box
             // side: THREE.DoubleSide,
             // blending: THREE.MultiplyBlending  
         })
+        console.log(this.lyricMaterial)
         
         
         this.material = new THREE.ShaderMaterial({
@@ -189,10 +190,32 @@ export default class Box
         this.experience.animations.on('animation-rott-and-wander', ()=>{
             this.uniformCurrentStep = 1
             this.material.uniforms.uCurrentStep.value = this.uniformCurrentStep
+            gsap.to(
+                this,
+                {
+                    duration: 0.2,
+                    ease: 'power4.out',
+                    uniformColorChange: 1,    
+                    delay: 0,
+                    repeat: 1,
+                    repeatDelay: 1.5,
+                    yoyo: true,
+                    yoyoEase: 'power4.out',
+                    onUpdate : (e)=>{
+                        this.material.uniforms.uColorChange.value = this.uniformColorChange
+                    }
+                }
+            )
         })
         // this.experience.animations.on('animation-rott-and-wander-guit', this.animationRottAndWanderShot )
         // this.experience.animations.on('animation-rott-and-wander-gun', this.animationRottAndWanderShot )
         // this.experience.animations.on('animation-rott-and-wander-doing', this.animationRottAndWanderShot )
+        this.experience.animations.on('animation-rott-and-wander-doing', ()=>{
+            this.uniformCurrentStep = 1.5
+            this.material.uniforms.uCurrentStep.value = this.uniformCurrentStep
+
+
+        })
         this.experience.animations.on('animation-explosion', ()=>{
             gsap.to(
                 this,
@@ -250,21 +273,21 @@ export default class Box
     setAnimationsRotation()
     {
 
-        gsap.to(
-            this.group.rotation,
-            {
-                duration: 36,
-                ease: 'linear',
-                y: Math.PI * 0.5,
-                delay: 19
-            }
-        )
+        // gsap.to(
+        //     this.group.rotation,
+        //     {
+        //         duration: 36,
+        //         ease: 'linear',
+        //         y: Math.PI * -0.5,
+        //         delay: 19
+        //     }
+        // )
         gsap.to(
             this.group.rotation,
             {
                 duration: 20,
                 ease: 'linear',
-                y: Math.PI * 1,
+                y: Math.PI * -1.0,
                 delay: 56.3
             }
         )
@@ -289,39 +312,39 @@ export default class Box
                 onUpdate: () => this.camera.instance.updateProjectionMatrix()
             }
         )
-        gsap.to(
-            this.group.rotation,
-            {
-                duration: 43,
-                ease: 'power3.inOut',
-                x: Math.PI * 2,
-                delay: 136
-            }
-        )
-        gsap.to(
-            this.group.rotation,
-            {
-                duration: 10,
-                ease: 'linear',
-                z: Math.PI * 0.3,
-                delay: 136
-            }
-        )
-        gsap.to(
-            this.group.rotation,
-            {
-                duration: 10,
-                ease: 'linear',
-                z: 0,
-                delay: 169
-            }
-        )
+        // gsap.to(
+        //     this.group.rotation,
+        //     {
+        //         duration: 43,
+        //         ease: 'power3.inOut',
+        //         x: Math.PI * -2,
+        //         delay: 136
+        //     }
+        // )
+        // gsap.to(
+        //     this.group.rotation,
+        //     {
+        //         duration: 10,
+        //         ease: 'linear',
+        //         z: Math.PI * -0.3,
+        //         delay: 136
+        //     }
+        // )
+        // gsap.to(
+        //     this.group.rotation,
+        //     {
+        //         duration: 10,
+        //         ease: 'linear',
+        //         z: 0,
+        //         delay: 169
+        //     }
+        // )
         gsap.to(
             this.group.rotation,
             {
                 duration: 52,
                 ease: 'power4.inOut',
-                y: Math.PI * 2,
+                y: -Math.PI * 2,
                 delay: 159
             }
         )
@@ -360,7 +383,7 @@ export default class Box
     {
         // Uniforms
         this.material.uniforms.uTime.value = this.time.elapsed
-        this.material.uniforms.uColorChange.value = this.uniformColorChange
+        // this.material.uniforms.uColorChange.value = this.uniformColorChange
         this.material.uniforms.uFrequenceAverage.value = this.experience.world.audio.frequenceAverage 
         this.material.uniforms.uFrequenceBassAverage.value = this.experience.world.audio.frequenceBassAverage 
         this.material.uniforms.uFrequenceMidAverage.value = this.experience.world.audio.frequenceMidAverage 
