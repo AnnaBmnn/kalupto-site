@@ -61,8 +61,8 @@ export default class Animations  extends EventEmitter
                 eventName: 'animation-rott-and-wander-gun'
             },
             {
-                // timing: 3.0,
-                timing: 56,
+                // timing: 3.0,oc
+                timing: 48,
                 eventName: 'animation-rott-and-wander-doing'
             },
             {
