@@ -15,12 +15,14 @@ export default class Audio extends EventEmitter
         this.resources = this.experience.resources
         this.debug = this.experience.debug
         this.domAudio = document.querySelector('.js-audio')
+        this.domAudioReel = document.querySelector('.js-audio-reel')
         this.domButtons = document.querySelectorAll('.js-play-audio')
 
         this.state = 'playing'
         this.frequenceAverage = 0
 
         // this.domAudio.currentTime = 54;
+        // this.domAudioReel.currentTime = 54;
         this.onTimeUpdate = this.onTimeUpdate.bind(this)
         // Debug
         if(this.debug.active)
@@ -40,8 +42,10 @@ export default class Audio extends EventEmitter
                 if(this.domAudio.paused){
 
                     this.domAudio.play()
+                    // this.domAudioReel.play()
                 } else {  
                     this.domAudio.pause()
+                    // this.domAudioReel.pause()
 
                 }
             })
@@ -91,7 +95,7 @@ export default class Audio extends EventEmitter
     }
     update()
     {
-        console.log(this.domAudio.currentTime)
+        // console.log(this.domAudio.currentTime)
         if(this.analyser){
             this.analyser.getByteFrequencyData(this.dataArray)
             this.frequenceAverage = this.getAverage(this.dataArray, 0, this.dataArray.length)
@@ -101,7 +105,7 @@ export default class Audio extends EventEmitter
             this.frequenceMidAverage = this.getAverage(this.dataArray,  3, 23) 
             this.frequenceHightAverage = this.getAverage(this.dataArray, 23, 127) 
 
-            console.log(this.frequenceAverage)
+            // console.log(this.frequenceAverage)
 
             // console.log('frequenceBassAverage : ', this.frequenceBassAverage)
             // console.log('frequenceMidAverage : ', this.frequenceMidAverage)
