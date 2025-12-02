@@ -106,7 +106,7 @@ export default class Box
         this.boxGeometry = new THREE.BoxGeometry( 4.975, 2.81, 0.3, 124, 124, 124);
         // this.boxGeometry = new THREE.BoxGeometry( 5, 3, 0.3, 124, 124, 124);
         // this.planeGeometry = new THREE.PlaneGeometry( 5, 10, 62, 62);
-        this.planeGeometry = new THREE.PlaneGeometry( 4.975, 9.95, 124, 124);
+        this.planeGeometry = new THREE.PlaneGeometry( 4.975, 9.95, 62, 62);
     }
 
     setMaterial(i)
@@ -205,7 +205,7 @@ export default class Box
             window.setTimeout(()=>{
                 this.material.uniforms.uColorChange.value = 0
 
-            }, 800)
+            }, 900)
             gsap.to(
                 this,
                 {
@@ -308,21 +308,21 @@ export default class Box
         gsap.to(
             this.camera.instance,
             {
-                duration: 43,
+                duration: 32,
                 // ease: 'elastic.out',
-                ease: 'power3.inOut',
+                ease: 'linear',
                 zoom: 3,
-                delay: 65,
+                delay: 70,
                 onUpdate: () => this.camera.instance.updateProjectionMatrix()
             }
         )
         gsap.to(
             this.camera.instance,
             {
-                duration: 44,
-                ease: 'power3.inOut',
+                duration: 26,
+                ease: 'linear',
                 zoom: 1,
-                delay: 120,
+                delay: 107,
                 onUpdate: () => this.camera.instance.updateProjectionMatrix()
             }
         )
@@ -335,15 +335,7 @@ export default class Box
         //         delay: 136
         //     }
         // )
-        // gsap.to(
-        //     this.group.rotation,
-        //     {
-        //         duration: 10,
-        //         ease: 'linear',
-        //         z: Math.PI * -0.3,
-        //         delay: 136
-        //     }
-        // )
+
         // gsap.to(
         //     this.group.rotation,
         //     {
@@ -356,10 +348,28 @@ export default class Box
         gsap.to(
             this.group.rotation,
             {
-                duration: 52,
-                ease: 'power4.inOut',
-                y: -Math.PI * 2,
-                delay: 159
+                duration: 80,
+                ease: 'linear',
+                y: -Math.PI * 4,
+                delay: 137
+            }
+        )
+        gsap.to(
+            this.group.rotation,
+            {
+                duration: 30,
+                ease: 'linear',
+                z: Math.PI * -0.3,
+                delay: 137
+            }
+        )
+        gsap.to(
+            this.group.rotation,
+            {
+                duration: 30,
+                ease: 'linear',
+                z: 0,
+                delay: 220
             }
         )
     }
