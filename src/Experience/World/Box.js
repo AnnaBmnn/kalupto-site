@@ -37,41 +37,41 @@ export default class Box
             this.debugFolder = this.debug.ui.addFolder('Plan')
 
             this.debugFolder
-                .add(this.mesh.position, 'x')
+                .add(this.lyricMesh.position, 'x')
                 .name('position x')
-                .min(-100)
-                .max(100)
+                .min(-4)
+                .max(4)
                 .step(0.01)
             this.debugFolder
-                .add(this.mesh.position, 'y')
+                .add(this.lyricMesh.position, 'y')
                 .name('position y')
-                .min(-100)
+                .min(-4)
                 .max(100)
-                .step(0.01)
+                .step(0.00001)
             this.debugFolder
-                .add(this.mesh.position, 'z')
+                .add(this.lyricMesh.position, 'z')
                 .name('position z')
-                .min(-100)
-                .max(100)
+                .min(-4)
+                .max(4)
                 .step(0.01)
 
             this.debugFolder
-                .add(this.mesh.scale, 'x')
+                .add(this.lyricMesh.scale, 'x')
                 .name('scale x')
                 .min(0)
-                .max(100)
-                .step(0.01)
+                .max(2)
+                .step(0.00001)
             this.debugFolder
-                .add(this.mesh.scale, 'y')
+                .add(this.lyricMesh.scale, 'y')
                 .name('scale y')
                 .min(0)
-                .max(100)
+                .max(1200)
                 .step(0.01)
             this.debugFolder
-                .add(this.mesh.scale, 'z')
+                .add(this.lyricMesh.scale, 'z')
                 .name('scale z')
                 .min(0)
-                .max(100)
+                .max(2)
                 .step(0.01)
 
             this.debugFolder
@@ -103,8 +103,10 @@ export default class Box
 
     setGeometries()
     {
-        this.boxGeometry = new THREE.BoxGeometry( 5, 3, 0.3, 124, 124, 124);
-        this.planeGeometry = new THREE.PlaneGeometry( 5, 10, 62, 62);
+        this.boxGeometry = new THREE.BoxGeometry( 4.975, 2.81, 0.3, 124, 124, 124);
+        // this.boxGeometry = new THREE.BoxGeometry( 5, 3, 0.3, 124, 124, 124);
+        // this.planeGeometry = new THREE.PlaneGeometry( 5, 10, 62, 62);
+        this.planeGeometry = new THREE.PlaneGeometry( 4.975, 9.95, 124, 124);
     }
 
     setMaterial(i)
@@ -156,16 +158,24 @@ export default class Box
         this.lyricMesh = new THREE.Mesh(this.planeGeometry, this.lyricMaterial)
 
 
-        this.lyricMesh.position.y = -3.5
-        this.lyricMesh.position.z += 0.3
+        this.lyricMesh.position.x = 0.06
+        this.lyricMesh.position.y = -3.670
+        this.lyricMesh.position.z += 0.0
+
+        this.lyricMesh.scale.x = 1.017
+        this.lyricMesh.scale.y = 1.02
+
 
         this.mesh.position.x = 0
         this.mesh.position.y = -0
-        this.mesh.position.z = 0
+        this.mesh.position.z = -0.16
 
-        // this.group.scale.x = 0.1
-        // this.group.scale.y = 0.1
-        // this.group.scale.z = 0.1
+        this.group.scale.x = 0.928
+        this.group.scale.y = 0.928
+        this.group.scale.z = 0.928
+
+        this.group.position.y = 0.17
+
 
 
         this.mesh.renderOrder = 0
@@ -189,16 +199,20 @@ export default class Box
         })
         this.experience.animations.on('animation-rott-and-wander', ()=>{
             this.uniformCurrentStep = 1
+            this.material.uniforms.uColorChange.value = 1
+            
             this.material.uniforms.uCurrentStep.value = this.uniformCurrentStep
+            window.setTimeout(()=>{
+                this.material.uniforms.uColorChange.value = 0
+
+            }, 800)
             gsap.to(
                 this,
                 {
-                    duration: 0.2,
+                    duration: 9.0,
                     ease: 'power4.out',
                     uniformColorChange: 1,    
-                    delay: 0,
-                    repeat: 1,
-                    repeatDelay: 1.5,
+                    delay: 6,
                     yoyo: true,
                     yoyoEase: 'power4.out',
                     onUpdate : (e)=>{
@@ -273,15 +287,15 @@ export default class Box
     setAnimationsRotation()
     {
 
-        // gsap.to(
-        //     this.group.rotation,
-        //     {
-        //         duration: 36,
-        //         ease: 'linear',
-        //         y: Math.PI * -0.5,
-        //         delay: 19
-        //     }
-        // )
+        gsap.to(
+            this.group.rotation,
+            {
+                duration: 35,
+                ease: 'linear',
+                y: Math.PI * -0.5,
+                delay: 19
+            }
+        )
         gsap.to(
             this.group.rotation,
             {

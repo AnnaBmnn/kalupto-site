@@ -21,8 +21,8 @@ export default class Audio extends EventEmitter
         this.state = 'playing'
         this.frequenceAverage = 0
 
-        // this.domAudio.currentTime = 54;
-        // this.domAudioReel.currentTime = 54;
+        this.domAudio.currentTime = 0;
+        this.domAudioReel.currentTime = 0;
         this.onTimeUpdate = this.onTimeUpdate.bind(this)
         // Debug
         if(this.debug.active)
