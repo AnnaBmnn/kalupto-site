@@ -86,13 +86,13 @@ export default class Animations  extends EventEmitter
             {
                 // 4
                 // timing: 20.0,
-                timing: 140.0,
+                timing: 142.5,
                 eventName: 'animation-80-band'
             },
             {
                 // 5
                 // timing: 22.0,
-                timing: 202.0,
+                timing: 190.0,
                 eventName: 'animation-outro'
             },
         ]

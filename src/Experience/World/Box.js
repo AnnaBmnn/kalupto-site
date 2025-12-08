@@ -121,7 +121,7 @@ export default class Box
             //normalMap: new THREE.VideoTexture( this.videos[i]),
             transparent: true,
             opacity: 1.0,
-            // side: THREE.DoubleSide,
+            side: THREE.DoubleSide,
             // blending: THREE.MultiplyBlending  
         })
         console.log(this.lyricMaterial)
@@ -147,6 +147,8 @@ export default class Box
                 uShot: { value: this.uniformShot},
             }
         })
+
+
         
     }
     
@@ -209,13 +211,14 @@ export default class Box
             gsap.to(
                 this,
                 {
-                    duration: 9.0,
+                    duration: 18.0,
                     ease: 'power4.out',
                     uniformColorChange: 1,    
-                    delay: 6,
+                    delay: 50,
                     yoyo: true,
                     yoyoEase: 'power4.out',
                     onUpdate : (e)=>{
+                        console.log(this.uniformColorChange)
                         this.material.uniforms.uColorChange.value = this.uniformColorChange
                     }
                 }
@@ -263,25 +266,76 @@ export default class Box
                 }
             )
 
-            // Zoom out to better see the water smooth
+            this.uniformColorChange = 0
+            this.material.uniforms.uColorChange.value = 0
+
             gsap.to(
-                this.camera.instance,
+                this,
                 {
-                    duration: 3.5,
-                    ease: 'power2.inOut',
-                    zoom: 2,
+                    duration: 8.0,
+                    ease: 'power4.out',
+                    uniformColorChange: 1,    
                     delay: 0,
-                    onUpdate: () => this.camera.instance.updateProjectionMatrix()
+                    onUpdate : (e)=>{
+                        console.log(this.uniformColorChange)
+                        this.material.uniforms.uColorChange.value = this.uniformColorChange
+                    }
                 }
             )
+
+            // Zoom out to better see the water smooth
+            // gsap.to(
+            //     this.camera.instance,
+            //     {
+            //         duration: 3.5,
+            //         ease: 'power2.inOut',
+            //         zoom: 2,
+            //         delay: 0,
+            //         onUpdate: () => this.camera.instance.updateProjectionMatrix()
+            //     }
+            // )
         })
         this.experience.animations.on('animation-80-band', ()=>{
             this.uniformCurrentStep = 4
             this.material.uniforms.uCurrentStep.value = this.uniformCurrentStep
+
+            this.uniformColorChange = 0
+            this.material.uniforms.uColorChange.value = 0
+
+            gsap.to(
+                this,
+                {
+                    duration: 4.0,
+                    ease: 'power4.out',
+                    uniformColorChange: 1,    
+                    delay: 0,
+                    onUpdate : (e)=>{
+                        console.log(this.uniformColorChange)
+                        this.material.uniforms.uColorChange.value = this.uniformColorChange
+                    }
+                }
+            )
         })
         this.experience.animations.on('animation-outro', ()=>{
             this.uniformCurrentStep = 5
             this.material.uniforms.uCurrentStep.value = this.uniformCurrentStep
+            console.log(this.material.uniforms.uCurrentStep.value)
+            this.uniformColorChange = 0
+            this.material.uniforms.uColorChange.value = 0
+
+            gsap.to(
+                this,
+                {
+                    duration: 8.0,
+                    ease: 'power4.out',
+                    uniformColorChange: 1,    
+                    delay: 0,
+                    onUpdate : (e)=>{
+                        console.log(this.uniformColorChange)
+                        this.material.uniforms.uColorChange.value = this.uniformColorChange
+                    }
+                }
+            )
         })
     }
     setAnimationsRotation()
@@ -308,21 +362,21 @@ export default class Box
         gsap.to(
             this.camera.instance,
             {
-                duration: 32,
+                duration: 26,
                 // ease: 'elastic.out',
                 ease: 'linear',
                 zoom: 3,
-                delay: 70,
+                delay: 76,
                 onUpdate: () => this.camera.instance.updateProjectionMatrix()
             }
         )
         gsap.to(
             this.camera.instance,
             {
-                duration: 26,
+                duration: 31,
                 ease: 'linear',
                 zoom: 1,
-                delay: 107,
+                delay: 102,
                 onUpdate: () => this.camera.instance.updateProjectionMatrix()
             }
         )
@@ -348,10 +402,10 @@ export default class Box
         gsap.to(
             this.group.rotation,
             {
-                duration: 80,
+                duration: 88,
                 ease: 'linear',
                 y: -Math.PI * 4,
-                delay: 137
+                delay: 128
             }
         )
         gsap.to(
@@ -359,7 +413,7 @@ export default class Box
             {
                 duration: 30,
                 ease: 'linear',
-                z: Math.PI * -0.3,
+                z: Math.PI * 0.02,
                 delay: 137
             }
         )
@@ -369,7 +423,7 @@ export default class Box
                 duration: 30,
                 ease: 'linear',
                 z: 0,
-                delay: 220
+                delay: 170
             }
         )
     }
@@ -406,6 +460,7 @@ export default class Box
     update()
     {
         // Uniforms
+        console.log(this.material.uniforms.uCurrentStep.value)
         this.material.uniforms.uTime.value = this.time.elapsed
         // this.material.uniforms.uColorChange.value = this.uniformColorChange
         this.material.uniforms.uFrequenceAverage.value = this.experience.world.audio.frequenceAverage 

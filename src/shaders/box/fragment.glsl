@@ -198,7 +198,7 @@ void main()
         // strength2 = sin(cnoise( (mod(vUv2 * 200.0 ,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise( sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 100.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
         strength2 =  1.2 * sin( cnoise( (mod((vUv2) * 200.0 ,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.00001 ) * cnoise( sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 10.1 + uTime * 0.0001 ) * 100.0 + uTime * 0.0001  ) ;
 
-        float mixStrength = mix(strengthOld, strength2,  uCurrentStep - 2.0);
+        float mixStrength = mix(strengthOld, strength2,  uColorChange);
 
         color = vec3(
             mixStrength,
@@ -209,37 +209,55 @@ void main()
     }
     else if(uCurrentStep == 4.0) {
         // 80's animation
-        // float mixStrength = mix(40.0, 100.0, uFrequenceBassAverage * 0.0001);
-        
 
-        // strength2 =  sin(cnoise(uFrequenceBassAverage * 0.005 * (mod((vUv2) * mixStrength ,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceBassAverage * 0.001 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 200.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
-        // float strength2G =  sin(cnoise(uFrequenceBassAverage * 0.005 * (mod((vUv2 + vec2(mixStrength * 0.001)) * 100.0 ,  1.0  ) * (vUv2.x + (uFrequenceBassAverage * 0.001))  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceBassAverage * 0.001 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * (vUv2 + vec2(uFrequenceBassAverage * 0.001)) * 0.01  ) * 6.0 + uTime * 0.0001 ) * 200.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
-        // color = vec3(strength2,strength2G, strength2);
+        float oldStrength =  1.2 * sin( cnoise( (mod((vUv2) * 200.0 ,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.00001 ) * cnoise( sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 10.1 + uTime * 0.0001 ) * 100.0 + uTime * 0.0001  ) ;
+        
 
         float mixStrength = mix(40.0, 100.0, uFrequenceAverage * 3.0 * 0.0001);
         
 
         strength2 =  sin(cnoise(uFrequenceAverage * 2.0 * 0.005 * (mod((vUv2) * mixStrength ,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceAverage * 2.0 * 0.001 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 200.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
         float strength2G =  sin(cnoise(uFrequenceAverage * 3.0 * 0.005 * (mod((vUv2 + vec2(mixStrength * 0.001)) * 100.0 ,  1.0  ) * (vUv2.x + (uFrequenceAverage * 2.0 * 0.001))  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceBassAverage * 0.001 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * (vUv2 + vec2(uFrequenceBassAverage * 0.001)) * 0.01  ) * 6.0 + uTime * 0.0001 ) * 200.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
-        color = vec3(strength2,strength2G, strength2);
+        color = vec3(
+            mix(oldStrength, strength2, uColorChange),
+            mix(oldStrength, strength2G, uColorChange),
+            mix(oldStrength, strength2, uColorChange)
+        );
     }
     else if(uCurrentStep == 5.0) {
         // outro
+        float mixOldStrength = mix(40.0, 100.0, uFrequenceAverage * 3.0 * 0.0001);
+        
+
+        float strengthOld =  sin(cnoise(uFrequenceAverage * 2.0 * 0.005 * (mod((vUv2) * mixOldStrength ,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceAverage * 2.0 * 0.001 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 200.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
+        float strength2G =  sin(cnoise(uFrequenceAverage * 3.0 * 0.005 * (mod((vUv2 + vec2(mixOldStrength * 0.001)) * 100.0 ,  1.0  ) * (vUv2.x + (uFrequenceAverage * 2.0 * 0.001))  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceBassAverage * 0.001 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * (vUv2 + vec2(uFrequenceBassAverage * 0.001)) * 0.01  ) * 6.0 + uTime * 0.0001 ) * 200.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
+        // strengthOld = vec3(strength2,strength2G, strength2);
+
+
         // Blanc little effect
-        strength2 =  sin(cnoise( (mod(vUv2 * 100.0 ,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceAverage * 2.0 * 0.001 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 100.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
-
-
+        strength2 =  sin(cnoise( (mod(vUv2 * 100.0 ,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceAverage * 2.0 * 0.001 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 100.0 * ( 1.0 )+ uTime * 0.001  ) ;
         strength2 = 1.0 - (strength2 * 0.7) * uFrequenceAverage;
-        color = vec3(strength2 + 1.0);
+
+
+        color = vec3(
+            mix(strengthOld, (strength2 + 1.0),  uColorChange),
+            mix(strength2G, (strength2 + 1.0),  uColorChange),
+            mix(strengthOld, (strength2 + 1.0),  uColorChange)
+        );
     }
 
     // Alexis jamet ish 
     //strength2 = 1.0 - cnoise( (mod(vUv * 10.0  , 10.0 ) * wavedUv.y +   uTime * 0.0001 )  * 20.0 ) * 0.001 * uFrequenceBassAverage;
     // PEtit rond arorndi au milieu 
     //color = vec3( 1.0 - (0.0001 * uFrequenceBassAverage * 0.75) / (distance(wavedUv,vec2(0.5))));
-    
+
+
+
     // Cadre
     color = (1.0 - step(0.499, max(abs(vUv.x - 0.5), abs(vUv.y - 0.5)))) * color;
+
+
+
 
     gl_FragColor = vec4(color, 1.0);
 

@@ -21,7 +21,7 @@ export default class Audio extends EventEmitter
         this.state = 'playing'
         this.frequenceAverage = 0
 
-        this.domAudio.currentTime = 0;
+        this.domAudio.currentTime = 130;
         this.domAudioReel.currentTime = 0;
         this.onTimeUpdate = this.onTimeUpdate.bind(this)
         // Debug
@@ -95,7 +95,7 @@ export default class Audio extends EventEmitter
     }
     update()
     {
-        console.log(this.domAudio.currentTime)
+        // console.log(this.domAudio.currentTime)
         if(this.analyser){
             this.analyser.getByteFrequencyData(this.dataArray)
             this.frequenceAverage = this.getAverage(this.dataArray, 0, this.dataArray.length)
