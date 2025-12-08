@@ -1,3 +1,5 @@
+
+
 /*
 * Shaderto
 * https://www.shadertoy.com/view/MtKXRh
@@ -124,6 +126,7 @@ void main()
     else if(uCurrentStep == 1.5)
     {
         // rott and wander
+        // rott and wander
         wavedUv.y = vUv.y + sin(vUv.x * 7.0 ) *  uFrequenceAverage * 0.1 * cos(vUv.x * 2.0 + uTime * -0.0001);
         strength2 = uColorChange * 1.0 +  sin(cnoise( (mod(wavedUv * 10.0 ,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * 0.001 * cnoise(uFrequenceAverage * 0.001 * sin(wavedUv.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 100.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
         float strength2R = uColorChange * 1.0 + uFrequenceAverage *  sin(cnoise( (mod((wavedUv ) * 100.0 ,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceBassAverage * 0.001 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * wavedUv * 0.01  ) * 6.0 + uTime * 0.0001 ) * 100.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
@@ -145,7 +148,7 @@ void main()
         if(uFrequenceAverage == 0.0){
             strength2R = 1.0;
         }
-        strength2R = uFrequenceBassAverage * cnoise(wavedUv * uTime * 0.0001 + uFrequenceAverage * 0.001) ;
+        strength2R = cnoise(wavedUv * uTime * 0.0001 + uFrequenceAverage * 0.001) ;
         wavedUv.y = vUv.y + sin(vUv.x * 7.0 + uTime * 0.001);
 
         float strength2N = sin(uTime * 0.001 + vUv.y) * uFrequenceAverage * 100.0;
@@ -159,19 +162,13 @@ void main()
         // strength2R = (strength2R + 1.0) / (strength2 * 20.2);
         strength2R = (strength2R + 1.0) - (strength2 * 0.5 );
 
-        strength2R = mix(strength2, strength2R, uFrequenceAverage * 0.3 );
+        strength2R = mix(strength2, strength2R, uFrequenceAverage * 0.1 );
 
         color = vec3(
             0.0 + uColorChange * (strength2R),
             strength2R + 1.0 ,
             strength2R + 1.0 
         );
-
-        // color = vec3(
-        //     0.0 + uColorChange * (strength2R),
-        //     strength2R + 1.0 ,
-        //     strength2R + 1.0 
-        // );
     }
     else if(uCurrentStep > 1.5 && uCurrentStep <= 2.0) {
         // Explosion
@@ -233,7 +230,7 @@ void main()
 
 
         strength2 = 1.0 - (strength2 * 0.7) * uFrequenceAverage;
-        color = vec3(strength2);
+        color = vec3(strength2 + 1.0);
     }
 
     // Alexis jamet ish 
@@ -241,8 +238,10 @@ void main()
     // PEtit rond arorndi au milieu 
     //color = vec3( 1.0 - (0.0001 * uFrequenceBassAverage * 0.75) / (distance(wavedUv,vec2(0.5))));
     
-
+    // Cadre
+    color = (1.0 - step(0.499, max(abs(vUv.x - 0.5), abs(vUv.y - 0.5)))) * color;
 
     gl_FragColor = vec4(color, 1.0);
 
 }
+
