@@ -154,18 +154,18 @@ void main()
         float strength2N = sin(uTime * 0.001 + vUv.y) * uFrequenceAverage * 100.0;
 
 
+        float mixOldStrength = mix(40.0, 100.0, uFrequenceHightAverage * 3.0 * 0.0001);
 
-        strength2R =  sin(cnoise( (mod(vUv2 * 100.0 ,  1.0  ) * wavedUv.x  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceBassAverage * 0.00003 * cos(vUv2.y) * sin(vUv2.y) + (sin(wavedUv.x * 0.01) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 100.0 * (uColorChange + 1.0 ) ) ;
+        strength2R = (0.5) + sin(mixOldStrength * 0.01 * cnoise( (mod(vUv2 * 100.0 * uFrequenceAverage * 0.2 ,  1.0  )  ) * 0.5 + uTime * 0.00001 ) * cnoise(uFrequenceBassAverage * 0.00001 + ( vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 100.0  ) ;
 
-        strength2 = 1.0 - cnoise( (mod(vUv * 10.0  , 10.0 ) * vUv.y +   uTime * 0.0001 )  * 20.0 ) * 0.001 * uFrequenceBassAverage;
+        strength2 =( 0.75 + uFrequenceAverage * 0.001) * (1.0 - cnoise( (mod(vUv * 10.0 , 10.0 ) * (vUv.y + 0.5) + uTime * 0.001 )  * 20.0 ));
 
-        // strength2R = (strength2R + 1.0) / (strength2 * 20.2);
         strength2R = (strength2R + 1.0) - (strength2 * 0.5 );
 
         strength2R = mix(strength2, strength2R, uFrequenceAverage * 0.1 );
 
         color = vec3(
-            0.0 + uColorChange * (strength2R),
+            0.0 + uColorChange * (strength2R ) ,
             strength2R + 1.0 ,
             strength2R + 1.0 
         );
@@ -251,10 +251,26 @@ void main()
     // PEtit rond arorndi au milieu 
     //color = vec3( 1.0 - (0.0001 * uFrequenceBassAverage * 0.75) / (distance(wavedUv,vec2(0.5))));
 
+    wavedUv.y = wavedUv.y + sin(vUv.x * 0.001 ) * 100.0 ;
 
+    // Test 1
+    // strength2 = cnoise(uTime * 0.001 + mod((vUv ) * 10.0  ,  1.0  ) * 1.01);
+    // strength2 -= cnoise(vUv + uTime * 0.0001)  * uFrequenceAverage * 0.10;
+    // color = vec3(strength2 );
+
+    // strength2 = cnoise(uTime * 0.001 + mod((vUv ) * 10.0  ,  1.0  ) * 1.01);
+    // strength2 -= cnoise(vUv + uTime * 0.0001)  * uFrequenceAverage * 0.10 * wavedUv.y;
+    // strength2 *= cos(uTime * 0.001 + mod((vUv ) * 100.0  ,  1.0  ).y * 1.01) * cos(uTime * 0.001 + mod((vUv ) * 100.0  ,  1.0  ).y * 1.01);
+    // strength2 *= cos(vUv);
+
+    // color = vec3(strength2 );
+    
+    if(uFrequenceAverage == 0.0){
+        color = vec3(1.0);
+    }
 
     // Cadre
-    color = (1.0 - step(0.499, max(abs(vUv.x - 0.5), abs(vUv.y - 0.5)))) * color;
+    color = (1.0 - step(0.497, max(abs(vUv.x - 0.5), abs(vUv.y - 0.5)))) * (color) ;
 
 
 

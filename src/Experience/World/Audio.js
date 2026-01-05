@@ -21,7 +21,7 @@ export default class Audio extends EventEmitter
         this.state = 'playing'
         this.frequenceAverage = 0
 
-        this.domAudio.currentTime = 130;
+        this.domAudio.currentTime = 0;
         this.domAudioReel.currentTime = 0;
         this.onTimeUpdate = this.onTimeUpdate.bind(this)
         // Debug
@@ -34,8 +34,7 @@ export default class Audio extends EventEmitter
         for(let i = 0; i < this.domButtons.length; i++ )
         {
             this.domButtons[i].addEventListener('click', ()=>{
-                console.log('click')
-
+                this.domButtons[i].classList.add('hidden')
                 if(!this.audioCtx){
                     this.setAnalyzer()
                 } 

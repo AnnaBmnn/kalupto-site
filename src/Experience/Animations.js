@@ -67,7 +67,7 @@ export default class Animations  extends EventEmitter
             },
             {
                 // 2
-                timing: 88.0,
+                timing: 93.0,
                 // timing: 92.5,
                 eventName: 'animation-explosion'
             },

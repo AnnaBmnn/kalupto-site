@@ -35,6 +35,10 @@ video {
     /* display: none; */
 }
 
+.js-play-audio.hidden {
+    opacity: 0;
+}
+
 .cover {
     display: none;
     border: 2px solid red;
