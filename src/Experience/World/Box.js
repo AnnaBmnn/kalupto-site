@@ -100,43 +100,6 @@ export default class Box
                 .max(100)
                 .step(0.001)
 
-            this.glowDebugFolder = this.debug.ui.addFolder('Glow')
-            this.glowDebugFolder
-                .add(this.glowMaterial.uniforms.falloff, 'value')
-                .min(0)
-                .max(1)
-                .step(0.01)
-                .name('Falloff');
-            this.glowDebugFolder
-                .add(this.glowMaterial.uniforms.glowInternalRadius, 'value')
-                .min(-10)
-                .max(10)
-                .step(0.01)
-                .name('Glow Internal Radius');
-            this.glowDebugFolder
-                .addColor(
-                    {
-                    GlowColor: this.glowMaterial.uniforms.glowColor.value.getStyle()
-                    },
-                    'GlowColor'
-                )
-                .onChange((color) => {
-                    this.glowMaterial.uniforms.glowColor.value.setStyle(color);
-                    this.glowMaterial.needsUpdate = true;
-                })
-                .name('Glow Color');
-                this.glowDebugFolder
-                    .add(this.glowMaterial.uniforms.glowSharpness, 'value')
-                    .min(0)
-                    .max(1)
-                    .step(0.01)
-                    .name('Glow Sharpness');
-                this.glowDebugFolder
-                    .add(this.glowMaterial.uniforms.opacity, 'value')
-                    .min(0)
-                    .max(1)
-                    .step(0.01)
-                    .name('Opacity');
         }
     }
 
@@ -189,7 +152,7 @@ export default class Box
             }
         })
 
-        this.glowMaterial = new FakeGlowMaterial({ glowColor: '#ffffffff' })
+        // this.glowMaterial = new FakeGlowMaterial({ glowColor: '#ffffffff' })
         console.log(this.glowMaterial)
     }
     
@@ -199,7 +162,7 @@ export default class Box
 
         this.mesh = new THREE.Mesh(this.boxGeometry, this.material)
         this.lyricMesh = new THREE.Mesh(this.planeGeometry, this.lyricMaterial)
-        this.glowMesh = new THREE.Mesh(this.sphereGeometry, this.glowMaterial)
+        // this.glowMesh = new THREE.Mesh(this.sphereGeometry, this.glowMaterial)
 
 
         this.lyricMesh.visible = true
@@ -221,9 +184,9 @@ export default class Box
         // this.glowMesh.scale.z = 0.5
 
 
-        this.glowMesh.position.x = 0
-        this.glowMesh.position.y = -0
-        this.glowMesh.position.z = -0.16
+        // this.glowMesh.position.x = 0
+        // this.glowMesh.position.y = -0
+        // this.glowMesh.position.z = -0.16
 
         this.group.scale.x = 0.928
         this.group.scale.y = 0.928
@@ -360,7 +323,7 @@ export default class Box
             gsap.to(
                 this,
                 {
-                    duration: 4.0,
+                    duration: 10.0,
                     ease: 'power4.out',
                     uniformColorChange: 1,    
                     delay: 0,
@@ -381,7 +344,7 @@ export default class Box
             gsap.to(
                 this,
                 {
-                    duration: 8.0,
+                    duration: 16.0,
                     ease: 'power4.inOut',
                     uniformColorChange: 1,    
                     delay: 0,
@@ -399,21 +362,21 @@ export default class Box
         gsap.to(
             this.group.rotation,
             {
-                duration: 35.5,
-                ease: 'power2.out',
-                y: Math.PI * -0.5,
+                duration: 70,
+                ease: 'linear',
+                y: Math.PI * -1.0,
                 delay: 20
             }
         )
-        gsap.to(
-            this.group.rotation,
-            {
-                duration: 20,
-                ease: 'power2.inOut',
-                y: Math.PI * -1.0,
-                delay: 55.6
-            }
-        )
+        // gsap.to(
+        //     this.group.rotation,
+        //     {
+        //         duration: 20,
+        //         ease: 'power1.inOut',
+        //         y: Math.PI * -1.0,
+        //         delay: 55.6
+        //     }
+        // )
         gsap.to(
             this.camera.instance,
             {
@@ -428,10 +391,10 @@ export default class Box
         gsap.to(
             this.camera.instance,
             {
-                duration: 65,
-                ease: 'power2.inOut',
-                zoom: 1.1,
-                delay: 98,
+                duration: 115,
+                ease: "back.out(2)",
+                zoom: 1,
+                delay: 112,
                 onUpdate: () => this.camera.instance.updateProjectionMatrix()
             }
         )

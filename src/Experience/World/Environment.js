@@ -12,7 +12,7 @@ export default class Environment
         this.scene = this.experience.scene
         this.resources = this.experience.resources
         this.debug = this.experience.debug
-        this.debugObject = {color: '#a778d8'}
+        this.debugObject = {color: '#202125'}
         
         // Debug
         if(this.debug.active)
@@ -20,8 +20,9 @@ export default class Environment
             this.debugFolder = this.debug.ui.addFolder('environment')
         }
 
-        this.setSunLight()
-        // this.setEnvironmentMap()
+        // this.setSunLight()
+        this.setBackground()
+        
         window.setTimeout(()=>{
             this.setAnimations()
         }, 200)    
@@ -73,7 +74,25 @@ export default class Environment
 
         }
     }
+    setBackground()
+    {
 
+        this.scene.background =  new THREE.Color('rgba(32, 33, 37, 1)')
+
+        // Debug
+        if(this.debug.active)
+        {
+            this.debugFolder
+                .addColor(this.debugObject , 'color')
+                .name('background color')
+                .onChange((value) =>
+                {
+                    console.log(value)
+                    this.debugObject.color = value
+                    this.scene.background =  new THREE.Color(this.debugObject.color)
+                })
+        }
+    }
     setEnvironmentMap()
     {
         this.environmentMap = {}
@@ -98,48 +117,35 @@ export default class Environment
         // this.scene.backgroundBlurriness = 0.9
         // this.scene.fog = new THREE.Fog( 0xcccccc, 10, 300);
 
-        this.scene.background =  new THREE.Color('#202125')
-        // this.scene.background = this.debugObject.color 
-        this.environmentMap.updateMaterials()
-
-        // Debug
-        if(this.debug.active)
-        {
-            this.debugFolder
-                .add(this.environmentMap, 'intensity')
-                .name('envMapIntensity')
-                .min(0)
-                .max(4)
-                .step(0.001)
-                .onChange(this.environmentMap.updateMaterials)
-
-            this.debugFolder
-                .addColor(this.debugObject , 'color')
-                .name('background color')
-                .onChange((value) =>
-                {
-                    console.log(value)
-                    this.debugObject.color = value
-                    this.scene.background =  new THREE.Color(this.debugObject.color)
-                })
-        }
     }
     setAnimations()
     {
-        this.experience.animations.on('animation-second-step', ()=>{
+        this.experience.animations.on('animation-rott-and-wander', ()=>{
             gsap.to(
                 this.scene.background,
                 {
-                    duration: 3,
+                    duration: 60,
                     ease: 'power2.inOut',
-                    r: 0.90,
-                    g: 0.90,
-                    b: 0.92,
-                    delay: 4
+                    r: 0,
+                    g: 0,
+                    b: 0,
+                    delay: 0
                 }
             )
         })
-
+        this.experience.animations.on('animation-under-water-bliss', ()=>{
+            gsap.to(
+                this.scene.background,
+                {
+                    duration: 60,
+                    ease: 'power2.inOut',
+                    r: 0.32,
+                    g: 0.33,
+                    b: 0.37,
+                    delay: 0
+                }
+            )
+        })
 
     }
     setSky()

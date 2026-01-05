@@ -60,6 +60,7 @@ export default class Camera
         this.buttonShowCamera.addEventListener('click', ()=>{
             console.log(this.instance.position)
             console.log(this.instance.rotation)
+
         })
     }
 
@@ -78,6 +79,7 @@ export default class Camera
 
     update()
     {
+
         if(this.controls)
             this.controls.update()
     }
