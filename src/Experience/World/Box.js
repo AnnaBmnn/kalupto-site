@@ -252,6 +252,22 @@ export default class Box
 
         })
         this.experience.animations.on('animation-explosion', ()=>{
+            this.material.uniforms.uColorChange.value = 0
+            gsap.to(
+                this,
+                {
+                    duration: 10.0,
+                    ease: 'power4.inOut',
+                    uniformColorChange: 1, 
+                    repeat: 2,   
+                    yoyo: true,
+                    yoyoEase: 'power4.inOut',
+                    onUpdate : (e)=>{
+                        console.log(this.uniformColorChange)
+                        this.material.uniforms.uColorChange.value = this.uniformColorChange
+                    }
+                }
+            )
             gsap.to(
                 this,
                 {
@@ -389,6 +405,16 @@ export default class Box
             }
         )
         gsap.to(
+            this.group.position,
+            {
+                duration: 16,
+                // ease: 'elastic.out',
+                ease: 'power2.inOut',
+                y: 0,
+                delay: 76
+            }
+        )
+        gsap.to(
             this.camera.instance,
             {
                 duration: 115,
@@ -396,6 +422,16 @@ export default class Box
                 zoom: 1,
                 delay: 112,
                 onUpdate: () => this.camera.instance.updateProjectionMatrix()
+            }
+        )
+        gsap.to(
+            this.group.position,
+            {
+                duration: 39,
+                // ease: 'elastic.out',
+                ease: 'power2.inOut',
+                y: 0.17,
+                delay: 140
             }
         )
         // gsap.to(

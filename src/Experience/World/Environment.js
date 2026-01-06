@@ -137,12 +137,12 @@ export default class Environment
             gsap.to(
                 this.scene.background,
                 {
-                    duration: 60,
+                    duration: 80,
                     ease: 'power2.inOut',
                     r: 0.32,
                     g: 0.33,
                     b: 0.37,
-                    delay: 0
+                    delay: 20
                 }
             )
         })

@@ -3,12 +3,14 @@ uniform sampler2D uTexture;
 
 varying vec2 vUv;
 varying vec4 vTexture;
+varying vec3 vPosition;
 
 
 void main()
 {
     vTexture = texture2D(uTexture, uv);
-    
+    vPosition = position; // LOCAL space position
+
     vec4 modelPosition = modelMatrix * vec4(position, 1.0);
 
     // elevation

@@ -18,7 +18,7 @@ uniform float uShot;
 
 varying vec2 vUv;
 varying vec4 vTexture;
-
+varying vec3 vPosition;
 
 //  Classic Perlin 2D Noise 
 //  by Stefan Gustavson
@@ -172,18 +172,18 @@ void main()
     }
     else if(uCurrentStep > 1.5 && uCurrentStep <= 2.0) {
         // Explosion
+        float mixStrength = mix(100.0, 1.0, uFrequenceAverage * 3.0);
 
+        vUv2.x = vUv2.x * (uColorChange+ 1.0) * 1.0;
+        vUv2.y = vUv2.y * (uColorChange+ 1.0) * 1.0;
+        strength2 = sin(cnoise( (mod(vUv2 * mixStrength,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceAverage * 0.003 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 100.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
 
-        float mixStrength = mix(100.0, 4.0, (uCurrentStep - 1.0));
-        mixStrength = mix(100.0, 1.0, uFrequenceAverage * 3.0);
-
-
-        strength2 = uColorChange * 1.0 +  sin(cnoise( (mod(vUv2 * mixStrength,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceAverage * 0.003 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 100.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
-
+        // first video
+        
 
         color = vec3(
-            strength2 , 
-            strength2 , 
+            strength2  , 
+            strength2  , 
             strength2  
         );
     }
@@ -216,7 +216,7 @@ void main()
         float mixStrength = mix(40.0, 100.0, uFrequenceAverage * 3.0 * 0.0001);
         
 
-        strength2 =  sin(cnoise(uFrequenceAverage * 2.0 * 0.005 * (mod((vUv2) * mixStrength ,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceAverage * 2.0 * 0.001 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 200.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
+        strength2 =  sin(cnoise(uFrequenceAverage * 2.0 * 0.005 * (mod((vUv2) * mixStrength ,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceAverage * 2.0 * 0.001 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * (vUv2) * 0.01  ) * 6.0 + uTime * 0.0001 ) * 200.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
         float strength2G =  sin(cnoise(uFrequenceAverage * 3.0 * 0.005 * (mod((vUv2 + vec2(mixStrength * 0.001)) * 100.0 ,  1.0  ) * (vUv2.x + (uFrequenceAverage * 2.0 * 0.001))  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceBassAverage * 0.001 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * (vUv2 + vec2(uFrequenceBassAverage * 0.001)) * 0.01  ) * 6.0 + uTime * 0.0001 ) * 200.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
         color = vec3(
             mix(oldStrength, strength2, uColorChange),
@@ -270,9 +270,17 @@ void main()
     }
 
     // Cadre
-    color = (1.0 - step(0.497, max(abs(vUv.x - 0.5), abs(vUv.y - 0.5)))) * (color) ;
 
+    float d = max(abs(vUv.x - 0.5), abs(vUv.y - 0.5));
+    float w = fwidth(d);
 
+    float frame = 1.0 - smoothstep(
+        0.497 - w,
+        0.497 + w,
+        d
+    );
+
+    color *= frame;
 
 
     gl_FragColor = vec4(color, 1.0);
