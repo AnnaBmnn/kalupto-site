@@ -79,6 +79,9 @@ export default class Environment
 
         this.scene.background =  new THREE.Color('rgba(32, 33, 37, 1)')
 
+        this.scene.background = new THREE.Color(0.01, 0.01, 0.01)
+
+
         // Debug
         if(this.debug.active)
         {
@@ -139,10 +142,11 @@ export default class Environment
                 {
                     duration: 80,
                     ease: 'power2.inOut',
-                    r: 0.32,
-                    g: 0.33,
-                    b: 0.37,
-                    delay: 20
+                    delay: 20,
+                    onUpdate: () => {
+                        // Set the target color as a string every frame
+                        this.scene.background.set('rgb(32, 33, 37)');
+                    }
                 }
             )
         })

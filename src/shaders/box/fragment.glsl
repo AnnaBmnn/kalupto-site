@@ -108,10 +108,11 @@ void main()
     {
         // rott and wander
         // wavedUv.x = vUv.x + sin(vUv.y * 7.0 ) *  uFrequenceAverage * 0.1 * cos(vUv.y * 2.0 + uTime * -0.0001);
-        float strength2R =  1.0 - (uFrequenceAverage + 1.0) * 15.0 *  sin(cnoise( (mod((wavedUv * uTime ) * uFrequenceAverage * 2.0,  1.0  ) * wavedUv.x  ) * 10.5 + uTime * 0.0001 ) * cnoise( uFrequenceAverage * 10.0 *sin(vUv2.y) + (cos(vUv2.y * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 10.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
+        float fixedTime = uTime - 16000.0;
+        float strength2R =  1.0 - (uFrequenceAverage + 1.0) * 15.0 *  sin(cnoise( (mod((wavedUv * fixedTime ) * uFrequenceAverage * 2.0,  1.0  ) * wavedUv.x  ) * 10.5 + fixedTime * 0.0001 ) * cnoise( uFrequenceAverage * 10.0 *sin(vUv2.y) + (cos(vUv2.y * 0.0001) * vUv2 * 0.01  ) * 6.0 + fixedTime * 0.0001 ) * 10.0 * (uColorChange + 1.0 )+ fixedTime * 0.001  ) ;
         float mixStrength = mix(100.0, 1.0, uFrequenceAverage * 3.0);
 
-        strength2R = uColorChange * 1.0 +  sin(cnoise( (mod(vUv2 * mixStrength,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceAverage * 0.003 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 100.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
+        strength2R = uColorChange * 1.0 +  sin(cnoise( (mod(vUv2 * mixStrength,  1.0  ) * vUv2.x  ) * 0.5 + fixedTime * 0.0001 ) * cnoise(uFrequenceAverage * 0.003 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + fixedTime * 0.0001 ) * 100.0 * (uColorChange + 1.0 )+ fixedTime * 0.001  ) ;
 
         if(uFrequenceAverage == 0.0){
             strength2R = 1.0;
@@ -174,17 +175,20 @@ void main()
         // Explosion
         float mixStrength = mix(100.0, 1.0, uFrequenceAverage * 3.0);
 
-        vUv2.x = vUv2.x * (uColorChange+ 1.0) * 1.0;
-        vUv2.y = vUv2.y * (uColorChange+ 1.0) * 1.0;
-        strength2 = sin(cnoise( (mod(vUv2 * mixStrength,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceAverage * 0.003 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 100.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
+        vec2 vUvIncreasing =  vec2(vUv.x, vUv.y  + sin(uTime * 0.0001));
+
+        strength2 =  sin(cnoise( (mod(vUv2 * mixStrength,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceAverage * 2.0 * 0.001 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 100.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
+        // strength2 = sin(cnoise( (mod(vUv2 * mixStrength,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceAverage * 0.003 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 100.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
+        float poolNavigate =  (30.0 - uFrequenceAverage) * 0.0005 * (mixStrength * cnoise(  (mod(vUvIncreasing * 10.0 , 10.0 ) * (vUvIncreasing.y + 0.5) + (uTime ) * 0.002  )  * 20.0 )) * (vUv.y + sin(vUv.x + uTime * 0.0001));
+        float result = (poolNavigate * 0.001) + strength2;
 
         // first video
         
 
         color = vec3(
-            strength2  , 
-            strength2  , 
-            strength2  
+            result , 
+            result , 
+            result 
         );
     }
     else if(uCurrentStep > 2.0 && uCurrentStep <= 3.0) {
@@ -192,7 +196,7 @@ void main()
         // Under water bliss
         float mixStrengthYo = mix(100.0, 1.0, uFrequenceAverage * 2.0 * 1.5);
 
-        float strengthOld = uColorChange * 1.0 +  sin(cnoise( (mod(vUv2 * mixStrengthYo,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceAverage * 2.0 * 0.001 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 100.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
+        float strengthOld =  sin(cnoise( (mod(vUv2 * mixStrengthYo,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceAverage * 2.0 * 0.001 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 100.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
         // strength = sin(cnoise((mod(vUv2 +cos(uTime * 0.01) * uTime * 0.000001 , 1.0) * vUv2 - uTime * 0.01 * step(0.0, 0.5)) * 10.0) * 20.0 * 5.0 * 10.0 * 0.01);
         // strength2 = sin(cnoise( (mod(vUv2 * 200.0 ,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceAverage * 2.0 * 0.001 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 100.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
         // strength2 = sin(cnoise( (mod(vUv2 * 200.0 ,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise( sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 100.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;

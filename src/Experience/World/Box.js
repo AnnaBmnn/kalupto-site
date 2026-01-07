@@ -153,7 +153,6 @@ export default class Box
         })
 
         // this.glowMaterial = new FakeGlowMaterial({ glowColor: '#ffffffff' })
-        console.log(this.glowMaterial)
     }
     
     setMesh()
@@ -215,7 +214,8 @@ export default class Box
     {
         this.experience.animations.on('animation-start', ()=>{
             this.setAnimationsRotation()
-
+            this.time.hasStart = true
+            this.time.start = Date.now()
         })
         this.experience.animations.on('animation-rott-and-wander', ()=>{
             this.uniformCurrentStep = 1
@@ -253,21 +253,21 @@ export default class Box
         })
         this.experience.animations.on('animation-explosion', ()=>{
             this.material.uniforms.uColorChange.value = 0
-            gsap.to(
-                this,
-                {
-                    duration: 10.0,
-                    ease: 'power4.inOut',
-                    uniformColorChange: 1, 
-                    repeat: 2,   
-                    yoyo: true,
-                    yoyoEase: 'power4.inOut',
-                    onUpdate : (e)=>{
-                        console.log(this.uniformColorChange)
-                        this.material.uniforms.uColorChange.value = this.uniformColorChange
-                    }
-                }
-            )
+            // gsap.to(
+            //     this,
+            //     {
+            //         duration: 15.0,
+            //         ease: 'power4.inOut',
+            //         uniformColorChange: 1, 
+            //         repeat: 2,   
+            //         yoyo: true,
+            //         yoyoEase: 'power4.inOut',
+            //         onUpdate : (e)=>{
+            //             console.log(this.uniformColorChange)
+            //             this.material.uniforms.uColorChange.value = this.uniformColorChange
+            //         }
+            //     }
+            // )
             gsap.to(
                 this,
                 {

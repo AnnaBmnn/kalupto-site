@@ -1,4 +1,5 @@
 import EventEmitter from './EventEmitter.js'
+import Experience from '../Experience.js'
 
 export default class Time extends EventEmitter
 {
@@ -11,6 +12,9 @@ export default class Time extends EventEmitter
         this.current = this.start
         this.elapsed = 0
         this.delta = 16
+        this.hasStart = true
+
+        this.tick()
 
         window.requestAnimationFrame(() =>
         {
@@ -20,16 +24,18 @@ export default class Time extends EventEmitter
 
     tick()
     {
-        const currentTime = Date.now()
-        this.delta = currentTime - this.current
-        this.current = currentTime
-        this.elapsed = this.current - this.start
-
+        if(this.hasStart){
+            const currentTime = Date.now()
+            this.delta = currentTime - this.current
+            this.current = currentTime
+            this.elapsed = this.current - this.start
+        }
         this.trigger('tick')
 
         window.requestAnimationFrame(() =>
         {
             this.tick()
         })
+        
     }
 }
