@@ -79,7 +79,6 @@ export default class Environment
 
         this.scene.background =  new THREE.Color('rgba(32, 33, 37, 1)')
 
-        this.scene.background = new THREE.Color(0.01, 0.01, 0.01)
 
 
         // Debug
@@ -127,12 +126,12 @@ export default class Environment
             gsap.to(
                 this.scene.background,
                 {
-                    duration: 60,
-                    ease: 'power2.inOut',
+                    duration: 6,
+                    ease: 'linear',
                     r: 0,
                     g: 0,
                     b: 0,
-                    delay: 0
+                    delay: 5,
                 }
             )
         })
@@ -142,11 +141,10 @@ export default class Environment
                 {
                     duration: 80,
                     ease: 'power2.inOut',
-                    delay: 20,
-                    onUpdate: () => {
-                        // Set the target color as a string every frame
-                        this.scene.background.set('rgb(32, 33, 37)');
-                    }
+                    r: 0,
+                    g: 0,
+                    b: 0,
+                    delay: 20
                 }
             )
         })

@@ -72,10 +72,10 @@ export default class Renderer
     setBloomPass()
     {
         this.unrealBloomPass = new UnrealBloomPass()
-        this.unrealBloomPass.strength = 0.9
-        this.unrealBloomPass.radius = 0.082
-        this.unrealBloomPass.threshold = 0.918
-        this.unrealBloomPass.enabled = false
+        this.unrealBloomPass.strength = 0
+        this.unrealBloomPass.radius = 0
+        this.unrealBloomPass.threshold =  0.943
+        this.unrealBloomPass.enabled = true
 
         this.effectComposer.addPass(this.unrealBloomPass)
 
@@ -89,7 +89,51 @@ export default class Renderer
     }
     setAnimations()
     {
-        
+        // this.unrealBloomPass.strength = 0.943
+        // this.unrealBloomPass.radius = -0.213
+        // this.unrealBloomPass.threshold = 0.943
+
+        this.experience.animations.on('animation-rott-and-wander', ()=>{
+            gsap.to(
+                this.unrealBloomPass,
+                {
+                    duration: 30,
+                    ease: 'back.out(2)',
+                    strength: 0.9,       
+                    delay: 4,
+                    onUpdate : (e)=>{
+                        this.material.uniforms.uCurrentStep.value = this.uniformCurrentStep
+                    }
+                }
+            )
+            // gsap.to(
+            //     this.unrealBloomPass,
+            //     {
+            //         duration: 18.5,
+            //         ease: 'linear',
+            //         strength: 1.017,       
+            //         delay: 4,
+            //         onUpdate : (e)=>{
+            //             this.material.uniforms.uCurrentStep.value = this.uniformCurrentStep
+            //         }
+            //     }
+            // )
+        })
+        this.experience.animations.on('animation-outro', ()=>{
+            gsap.to(
+                this.unrealBloomPass,
+                {
+                    duration: 10.0,
+                    ease: 'linear',
+                    strength: 0,       
+                    delay: 4,
+                    onUpdate : (e)=>{
+                        this.material.uniforms.uCurrentStep.value = this.uniformCurrentStep
+                    }
+                }
+            )
+        })
+
     }
     resize()
     {
