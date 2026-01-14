@@ -91,7 +91,6 @@ export default class Animations  extends EventEmitter
             },
             {
                 // 5
-                // timing: 22.0,
                 timing: 190.0,
                 eventName: 'animation-outro'
             },

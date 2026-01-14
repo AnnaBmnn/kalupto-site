@@ -15,6 +15,6 @@ export default [
     {
         name: 'lyricTexture',
         type: 'texture',
-        path: 'textures/pictures/lyricSmall.png'
+        path: 'textures/pictures/lyric.png'
     },
 ]
