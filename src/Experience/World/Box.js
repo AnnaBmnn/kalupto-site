@@ -114,7 +114,6 @@ export default class Box
 
     setMaterial(i)
     {
-        console.log(this.resources.items.lyricTexture)
         this.resources.items.lyricTexture.minFilter = THREE.LinearFilter
         
         this.lyricMaterial = new THREE.MeshBasicMaterial({
@@ -236,7 +235,6 @@ export default class Box
                     yoyo: true,
                     yoyoEase: 'power4.out',
                     onUpdate : (e)=>{
-                        console.log(this.uniformColorChange)
                         this.material.uniforms.uColorChange.value = this.uniformColorChange
                     }
                 }

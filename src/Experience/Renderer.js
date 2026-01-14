@@ -42,12 +42,15 @@ export default class Renderer
     {
         this.instance = new THREE.WebGLRenderer({
             canvas: this.canvas,
-            antialias: true
+            antialias: true,
         })
         // this.instance.toneMapping = THREE.CineonToneMapping
         // this.instance.toneMappingExposure = 1.5
         this.instance.shadowMap.enabled = true
         this.instance.shadowMap.type = THREE.PCFSoftShadowMap
+        this.instance.outputColorSpace = THREE.SRGBColorSpace
+        this.instance.toneMapping = THREE.NoToneMapping;
+        this.instance.toneMappingExposure = 1;
         this.instance.setSize(this.sizes.width, this.sizes.height)
         this.instance.setPixelRatio(this.sizes.pixelRatio)
     }
@@ -101,9 +104,6 @@ export default class Renderer
                     ease: 'back.out(2)',
                     strength: 0.9,       
                     delay: 4,
-                    onUpdate : (e)=>{
-                        this.material.uniforms.uCurrentStep.value = this.uniformCurrentStep
-                    }
                 }
             )
             // gsap.to(
@@ -127,9 +127,6 @@ export default class Renderer
                     ease: 'linear',
                     strength: 0,       
                     delay: 4,
-                    onUpdate : (e)=>{
-                        this.material.uniforms.uCurrentStep.value = this.uniformCurrentStep
-                    }
                 }
             )
         })

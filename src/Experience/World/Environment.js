@@ -24,7 +24,7 @@ export default class Environment
         this.setBackground()
         
         window.setTimeout(()=>{
-            this.setAnimations()
+            //this.setAnimations()
         }, 200)    
 
         // this.setSky()
@@ -122,18 +122,38 @@ export default class Environment
     }
     setAnimations()
     {
-        this.experience.animations.on('animation-rott-and-wander', ()=>{
-            gsap.to(
-                this.scene.background,
-                {
-                    duration: 6,
-                    ease: 'linear',
-                    r: 0,
-                    g: 0,
-                    b: 0,
-                    delay: 5,
+        this.experience.animations.on('animation-start', ()=>{
+
+            // gsap.to(
+            //     this.scene.background,
+            //     {
+            //         duration: 5,
+            //         ease: "none",
+            //         r: target.r,
+            //         g: target.g,
+            //         b: target.b,
+            //         delay: 0,
+            //         onUpdate : ()=>{
+            //             console.log(this.scene.background.r)
+            //             console.log(this.scene.background.g)
+            //             console.log(this.scene.background.b)
+            //         }
+            //     }
+            // )
+            const start =  new THREE.Color(32 / 255, 33 / 255, 37 / 255).convertSRGBToLinear();
+            const target = new THREE.Color(0, 0, 0).convertSRGBToLinear();
+            // const target = new THREE.Color(32 / 255, 33 / 255, 37 / 255).convertSRGBToLinear();
+            let object = {t: 0}
+
+            const anim = gsap.to(object, {
+                t: 1,
+                duration: 20,
+                ease: "none",
+                onUpdate: ()=>{
+                    const color = start.clone().lerp(target, object.t);
+                    this.scene.background = color; // opaque only
                 }
-            )
+            });
         })
         this.experience.animations.on('animation-under-water-bliss', ()=>{
             gsap.to(
