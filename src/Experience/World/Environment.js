@@ -24,7 +24,7 @@ export default class Environment
         this.setBackground()
         
         window.setTimeout(()=>{
-            // this.setAnimations()
+            this.setAnimations()
         }, 200)    
 
         // this.setSky()
