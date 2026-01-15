@@ -342,7 +342,6 @@ export default class Box
                     uniformColorChange: 1,    
                     delay: 0,
                     onUpdate : (e)=>{
-                        console.log(this.uniformColorChange)
                         this.material.uniforms.uColorChange.value = this.uniformColorChange
                     }
                 }
@@ -351,7 +350,6 @@ export default class Box
         this.experience.animations.on('animation-outro', ()=>{
             this.uniformCurrentStep = 5
             this.material.uniforms.uCurrentStep.value = this.uniformCurrentStep
-            console.log(this.material.uniforms.uCurrentStep.value)
             this.uniformColorChange = 0
             this.material.uniforms.uColorChange.value = 0
 
@@ -363,7 +361,6 @@ export default class Box
                     uniformColorChange: 1,    
                     delay: 0,
                     onUpdate : (e)=>{
-                        console.log(this.uniformColorChange)
                         this.material.uniforms.uColorChange.value = this.uniformColorChange
                     }
                 }
@@ -481,7 +478,6 @@ export default class Box
     }
     animationRottAndWanderShot()
     {
-        console.log('ROT AND WANDER')
         gsap.to(
             this,
             {
