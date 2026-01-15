@@ -77,8 +77,8 @@ export default class Environment
     setBackground()
     {
 
-        this.scene.background =  new THREE.Color('rgba(0, 0, 0, 1)')
-        // this.scene.background =  new THREE.Color('rgba(32, 33, 37, 1)')
+        // this.scene.background =  new THREE.Color('rgba(0, 0, 0, 1)')
+        this.scene.background =  new THREE.Color('rgba(32, 33, 37, 1)')
 
 
 
