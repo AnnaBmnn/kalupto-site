@@ -124,68 +124,54 @@ export default class Environment
     setAnimations()
     {
         this.experience.animations.on('animation-rott-and-wander', ()=>{
-            const target = new THREE.Color(0, 0, 0).convertSRGBToLinear();
-
-            gsap.to(
-                this.scene.background,
-                {
-                    duration: 15,
-                    ease: "none",
-                    r: target.r,
-                    g: target.g,
-                    b: target.b,
-                    delay: 3,
-                    onUpdate : ()=>{
-                    }
-                }
-            )
-            // const start =  new THREE.Color(32 / 255, 33 / 255, 37 / 255).convertSRGBToLinear();
             // const target = new THREE.Color(0, 0, 0).convertSRGBToLinear();
-            // // const target = new THREE.Color(32 / 255, 33 / 255, 37 / 255).convertSRGBToLinear();
-            // let object = {t: 0}
 
-
-            // const anim = gsap.to(object, {
-            //     t: 1,
-            //     duration: 20,
-            //     duration: 16,
-            //     ease: "none",
-            //     delay: 3,
-            //     onUpdate: ()=>{
-            //         const color = start.clone().lerp(target, object.t);
-            //         this.scene.background = color; // opaque only
+            // gsap.to(
+            //     this.scene.background,
+            //     {
+            //         duration: 20,
+            //         ease: "none",
+            //         r: target.r,
+            //         g: target.g,
+            //         b: target.b,
+            //         delay: 4,
+            //         onUpdate : ()=>{
+            //         }
             //     }
-            // });
+            // )
+            const start =  new THREE.Color(32 / 255, 33 / 255, 37 / 255).convertSRGBToLinear();
+            const target = new THREE.Color(0, 0, 0).convertSRGBToLinear();
+            // const target = new THREE.Color(32 / 255, 33 / 255, 37 / 255).convertSRGBToLinear();
+            let object = {t: 0}
+
+
+            const anim = gsap.to(object, {
+                t: 1,
+                duration: 16,
+                ease: "none",
+                delay: 3,
+                onUpdate: ()=>{
+                    const color = start.clone().lerp(target, object.t);
+                    this.scene.background = color; // opaque only
+                }
+            });
         })
         this.experience.animations.on('animation-outro', ()=>{
             const target =  new THREE.Color(32 / 255, 33 / 255, 37 / 255).convertSRGBToLinear();
-            // const start = new THREE.Color(0, 0, 0).convertSRGBToLinear();
+            const start = new THREE.Color(0, 0, 0).convertSRGBToLinear();
             // const target = new THREE.Color(32 / 255, 33 / 255, 37 / 255).convertSRGBToLinear();
-            // let object = {t: 0}
+            let object = {t: 0}
 
-            // const anim = gsap.to(object, {
-            //     t: 1,
-            //     duration: 20,
-            //     ease: "none",
-            //     delay: 0,
-            //     onUpdate: ()=>{
-            //         const color = start.clone().lerp(target, object.t);
-            //         this.scene.background = color; // opaque only
-            //     }
-            // });
-            gsap.to(
-                this.scene.background,
-                {
-                    duration: 20,
-                    ease: "none",
-                    r: target.r,
-                    g: target.g,
-                    b: target.b,
-                    delay: 0,
-                    onUpdate : ()=>{
-                    }
+            const anim = gsap.to(object, {
+                t: 1,
+                duration: 20,
+                ease: "none",
+                delay: 0,
+                onUpdate: ()=>{
+                    const color = start.clone().lerp(target, object.t);
+                    this.scene.background = color; // opaque only
                 }
-            )
+            });
         })
 
     }
