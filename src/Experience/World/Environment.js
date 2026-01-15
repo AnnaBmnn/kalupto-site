@@ -24,7 +24,7 @@ export default class Environment
         this.setBackground()
         
         window.setTimeout(()=>{
-            this.setAnimations()
+            // this.setAnimations()
         }, 200)    
 
         // this.setSky()
@@ -77,7 +77,8 @@ export default class Environment
     setBackground()
     {
 
-        this.scene.background =  new THREE.Color('rgba(32, 33, 37, 1)')
+        this.scene.background =  new THREE.Color('rgba(0, 0, 0, 1)')
+        // this.scene.background =  new THREE.Color('rgba(32, 33, 37, 1)')
 
 
 
@@ -143,8 +144,10 @@ export default class Environment
             // const target = new THREE.Color(32 / 255, 33 / 255, 37 / 255).convertSRGBToLinear();
             let object = {t: 0}
 
+
             const anim = gsap.to(object, {
                 t: 1,
+                duration: 20,
                 duration: 16,
                 ease: "none",
                 delay: 3,
