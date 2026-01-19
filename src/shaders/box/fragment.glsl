@@ -154,10 +154,9 @@ void main()
         // Explosion
         float mixStrength = mix(100.0, 1.0, uFrequenceAverage * 3.0);
 
-        vec2 vUvIncreasing =  vec2(vUv.x, vUv.y  + sin(uTime * 0.0001));
+        vec2 vUvIncreasing =  vec2(vUv.x, vUv.y);
 
         strength2 =  sin(cnoise( (mod(vUv2 * mixStrength,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceAverage * 2.0 * 0.001 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 100.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
-        // strength2 = sin(cnoise( (mod(vUv2 * mixStrength,  1.0  ) * vUv2.x  ) * 0.5 + uTime * 0.0001 ) * cnoise(uFrequenceAverage * 0.003 * sin(vUv2.y) + (sin(vUv2.x * 0.0001) * vUv2 * 0.01  ) * 6.0 + uTime * 0.0001 ) * 100.0 * (uColorChange + 1.0 )+ uTime * 0.001  ) ;
         float poolNavigate =  (30.0 - uFrequenceAverage) * 0.0005 * (mixStrength * cnoise(  (mod(vUvIncreasing * 10.0 , 10.0 ) * (vUvIncreasing.y + 0.5) + (uTime ) * 0.002  )  * 20.0 )) * (vUv.y + sin(vUv.x + uTime * 0.0001));
         float result = (poolNavigate * 0.001) + strength2;
 
