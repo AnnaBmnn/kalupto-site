@@ -119,6 +119,26 @@ export default class Renderer
             //     }
             // )
         })
+        this.experience.animations.on('animation-rott-and-wander-doing', ()=>{
+            gsap.to(
+                this.unrealBloomPass,
+                {
+                    duration: 0.1,
+                    enabled: false,
+                    delay: 1,
+                }
+            )
+        })
+        this.experience.animations.on('animation-80-band', ()=>{
+            gsap.to(
+                this.unrealBloomPass,
+                {
+                    duration: 0.1,
+                    enabled: true,
+                    delay: 1,
+                }
+            )
+        })
         this.experience.animations.on('animation-outro', ()=>{
             gsap.to(
                 this.unrealBloomPass,
