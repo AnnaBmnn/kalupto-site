@@ -3,33 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Now it's gone - KALUPTO</title>
+    <title>Michicant - Agathe Lavarel x KALUPTO</title>
 
-    <!-- <link rel="apple-touch-icon" sizes="512x512" href="./assets/favicon/web-app-manifest-512x512.png"> -->
-    <!-- <link rel="icon" type="image/png" sizes="96x96" href="./assets/favicon/favicon-96x96.png"> -->
+    <link rel="apple-touch-icon" sizes="512x512" href="./assets/favicon/web-app-manifest-512x512.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="./assets/favicon/favicon-96x96.png">
     <link rel="manifest" href="./assets/favicon/site.webmanifest">
-    <!-- <link rel="mask-icon" href="./assets/favicon/favicon.svg" color="#ffffff"> -->
+    <link rel="mask-icon" href="./assets/favicon/favicon.svg" color="#ffffff">
 
-    <meta property="og:title" content="Now it's gone - KALUPTO">
-    <meta property="description" content="Now it's gone - KALUPTO">
-    <meta property="og:description" content="Now it's gone - KALUPTO">
+    <meta property="og:title" content="Michicant - Agathe Lavarel x KALUPTO">
+    <meta property="description" content="Michicant in a music produced by Agathe Lavarel x KALUPTO, from de Bon Iver.">
+    <meta property="og:description" content="Michicant in a music produced by Agathe Lavarel x KALUPTO, from de Bon Iver.">
     <meta property="og:image" content="./assets/favicon/share-image.jpg">
 
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./style/font.css">
+    <link rel="stylesheet" href="./style/logo.css">
+    <link rel="stylesheet" href="./style/credits.css">
+    <link rel="stylesheet" href="./style/about.css">
+    <link rel="stylesheet" href="./style/lyrics.css">
+    <link rel="stylesheet" href="./style/tooltip.css">
 </head>
 <body>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NRD30L9SJ6"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
+    gtag('config', 'G-NRD30L9SJ6');
+    </script>
+    <button class="js-play-audio splash__play js-remove-splash js-tooltip-button">
+        <span class="letter letter-0">E</span>
+        <span class="letter letter-1">x</span>
+        <span class="letter letter-2">p</span>
+        <span class="letter letter-3">l</span>
+        <span class="letter letter-4">o</span>
+        <span class="letter letter-5">r</span>
+        <span class="letter letter-6">e</span>
+    </button>
+    <button class=" splash__restart js-splash-restart">Restart</button>
+
+    <section class="js-splash splash">
+        <header>
+            <div class="logo">kalupto</div>
+        </header>
+    </section>
+    <div class="subtitles">Story takes place on the couch</div>
+    <div class="js-tooltip tooltip">
+        <img class="tooltip__img" src="/img/drag_2.gif" alt="">
+        <div>swipe, drag, move, zoom <br> to explore</div>
+    </div>
+    <img src="/textures/papier/papier.png" alt="" class="papier">
+    <img src="/textures/papier/kalupto.png" alt="" class="photo-pix">
+
+    <!-- <h1>RESIDENCE THAILAND POC</h1> -->
     <!-- <video autoplay muted loop id="noise" playsinline class="js-video-texture" src="/videos/noise.mp4" ></video>
     <video autoplay muted loop id="snow" playsinline class="js-video-texture"  src="/videos/snow.mp4" ></video>
     <video autoplay muted loop id="water" playsinline class="js-video-texture"  src="/videos/water.mp4" ></video> -->
     <canvas class="webgl"></canvas>
-    <img src="/img/cover.jpg" class="cover" alt="">
     <!-- <button class="js-debug-camera button-camera">debug camera position rotation</button> -->
-    <button class="js-play-audio">play</button>
+    <!-- <button class="js-play-audio">pause</button> -->
 
-    <audio  class="js-audio"  src="/audios/nowitsgone-fake-v2.mp3" ></audio>
-    <audio  class="js-audio-reel"  src="/audios/nowitsgone-fake-v2.mp3" ></audio>
+    <audio  class="js-audio"  src="/audios/Michicant.mp3" ></audio>
+    <audio  class="js-audio-next"  src="/audios/Michicant_SoundDesign_Anna_02.mp3" loop ></audio>
     <script type="module" src="./script.js"></script>
 </body>
 </html>

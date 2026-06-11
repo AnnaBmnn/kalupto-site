@@ -12,7 +12,7 @@ export default class Environment
         this.scene = this.experience.scene
         this.resources = this.experience.resources
         this.debug = this.experience.debug
-        this.debugObject = {color: '#202125'}
+        this.debugObject = {color: '#bcf0ef'}
         
         // Debug
         if(this.debug.active)
@@ -20,9 +20,8 @@ export default class Environment
             this.debugFolder = this.debug.ui.addFolder('environment')
         }
 
-        // this.setSunLight()
-        this.setBackground()
-        
+        this.setSunLight()
+        this.setEnvironmentMap()
         window.setTimeout(()=>{
             this.setAnimations()
         }, 200)    
@@ -32,7 +31,7 @@ export default class Environment
 
     setSunLight()
     {
-        this.sunLight = new THREE.DirectionalLight('#6772AB', 4)
+        this.sunLight = new THREE.DirectionalLight('#ffffffff', 4)
         this.sunLight.castShadow = true
         this.sunLight.shadow.camera.far = 15
         this.sunLight.shadow.mapSize.set(1024, 1024)
@@ -74,28 +73,7 @@ export default class Environment
 
         }
     }
-    setBackground()
-    {
 
-        // this.scene.background =  new THREE.Color('rgba(0, 0, 0, 1)')
-        this.scene.background =  new THREE.Color('rgba(32, 33, 37, 1)')
-
-
-
-        // Debug
-        if(this.debug.active)
-        {
-            this.debugFolder
-                .addColor(this.debugObject , 'color')
-                .name('background color')
-                .onChange((value) =>
-                {
-                    console.log(value)
-                    this.debugObject.color = value
-                    this.scene.background =  new THREE.Color(this.debugObject.color)
-                })
-        }
-    }
     setEnvironmentMap()
     {
         this.environmentMap = {}
@@ -120,59 +98,49 @@ export default class Environment
         // this.scene.backgroundBlurriness = 0.9
         // this.scene.fog = new THREE.Fog( 0xcccccc, 10, 300);
 
+        // this.scene.background =  new THREE.Color('#FFFFFF')
+        this.scene.background =  new THREE.Color(this.debugObject.color)
+
+        this.environmentMap.updateMaterials()
+
+        // Debug
+        if(this.debug.active)
+        {
+            this.debugFolder
+                .add(this.environmentMap, 'intensity')
+                .name('envMapIntensity')
+                .min(0)
+                .max(4)
+                .step(0.001)
+                .onChange(this.environmentMap.updateMaterials)
+
+            this.debugFolder
+                .addColor(this.debugObject , 'color')
+                .name('background color')
+                .onChange((value) =>
+                {
+                    console.log(value)
+                    this.debugObject.color = value
+                    this.scene.background =  new THREE.Color(this.debugObject.color)
+                })
+        }
     }
     setAnimations()
     {
-        this.experience.animations.on('animation-rott-and-wander', ()=>{
-            // const target = new THREE.Color(0, 0, 0).convertSRGBToLinear();
-
-            // gsap.to(
-            //     this.scene.background,
-            //     {
-            //         duration: 20,
-            //         ease: "none",
-            //         r: target.r,
-            //         g: target.g,
-            //         b: target.b,
-            //         delay: 4,
-            //         onUpdate : ()=>{
-            //         }
-            //     }
-            // )
-            const start =  new THREE.Color(32 / 255, 33 / 255, 37 / 255).convertSRGBToLinear();
-            const target = new THREE.Color(0, 0, 0).convertSRGBToLinear();
-            // const target = new THREE.Color(32 / 255, 33 / 255, 37 / 255).convertSRGBToLinear();
-            let object = {t: 0}
-
-
-            const anim = gsap.to(object, {
-                t: 1,
-                duration: 16,
-                ease: "none",
-                delay: 3,
-                onUpdate: ()=>{
-                    const color = start.clone().lerp(target, object.t);
-                    this.scene.background = color; // opaque only
+        this.experience.animations.on('animation-second-step', ()=>{
+            gsap.to(
+                this.scene.background,
+                {
+                    duration: 3,
+                    ease: 'power2.inOut',
+                    r: 0.90,
+                    g: 0.90,
+                    b: 0.92,
+                    delay: 4
                 }
-            });
+            )
         })
-        this.experience.animations.on('animation-outro', ()=>{
-            const target =  new THREE.Color(32 / 255, 33 / 255, 37 / 255).convertSRGBToLinear();
-            const start = new THREE.Color(0, 0, 0).convertSRGBToLinear();
-            // const target = new THREE.Color(32 / 255, 33 / 255, 37 / 255).convertSRGBToLinear();
-            let object = {t: 0}
 
-            const anim = gsap.to(object, {
-                t: 1,
-                duration: 20,
-                ease: "none",
-                delay: 0,
-                onUpdate: ()=>{
-                    const color = start.clone().lerp(target, object.t);
-                    this.scene.background = color; // opaque only
-                }
-            });
-        })
 
     }
     setSky()

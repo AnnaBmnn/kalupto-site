@@ -2,12 +2,13 @@ import Experience from '../Experience.js'
 import Environment from './Environment.js'
 // import Floor from './Floor.js'
 // import Fox from './Fox.js'
-import Mountain from './Mountain.js'
+import Ear from './Ear.js'
 import Rocks from './Rocks.js'
 import Snow from './Snow.js'
 
 import Plans from './Plans.js'
-import Box from './Box.js'
+import Paper from './Paper.js'
+// import Plan from './Plan.js'
 import Videos from './Videos.js'
 import Audio from './Audio.js'
 import Lyrics from './Lyrics.js'
@@ -34,25 +35,27 @@ export default class World
             this.environment = new Environment()
 
 
+            // this.paper = new Paper()
             // this.plans = new Plans()
-            this.box = new Box()
+            // this.plan = new Plan()
             // this.lyrics = new Lyrics()
             // this.videos = new Videos()
 
-            // this.rocks = new Rocks()
+            this.ear = new Ear()
 
-
-            this.audio = new Audio()
+            // this.audio = new Audio()
 
         })
     }
 
     update()
     {
+        if(this.paper)
+            this.paper.update()
         if(this.plans)
             this.plans.update()
-        if(this.box)
-            this.box.update()
+        if(this.plan)
+            this.plan.update()
         if(this.videos)
             this.videos.update()
         if(this.snow)

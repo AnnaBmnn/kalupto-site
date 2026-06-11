@@ -1,0 +1,52 @@
+.logo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    font-family: 'SuisseInt', Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 110px;
+    line-height: 110px;
+    color: black;
+    letter-spacing: -3px;
+    /* mix-blend-mode: difference; */
+}
+
+.subtitles {
+    z-index: 100;
+    position: absolute;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    text-transform: uppercase;
+    font-family: 'SuisseInt', Arial, Helvetica, sans-serif;
+    color: yellow;
+    font-size: 20px;
+}
+
+.papier {
+    z-index: 1000;
+    position: fixed;
+    mix-blend-mode: multiply;
+    opacity: 0.3;
+    height: 100vh;
+    right: 0vw;
+    width: 63vw;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.photo-pix {
+    z-index: 1000;
+    position: fixed;
+    mix-blend-mode: color-dodge;
+    opacity: 0.3;
+    top: 50%;
+    left: 75vw;
+    transform: translate(-50%, -50%);
+    width: 15vw;
+    object-fit: cover;
+    pointer-events: none;
+    filter: grayscale(1);  
+}

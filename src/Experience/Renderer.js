@@ -42,15 +42,13 @@ export default class Renderer
     {
         this.instance = new THREE.WebGLRenderer({
             canvas: this.canvas,
-            antialias: true,
+            antialias: true
         })
-        // this.instance.toneMapping = THREE.CineonToneMapping
-        // this.instance.toneMappingExposure = 1.5
+        this.instance.toneMapping = THREE.CineonToneMapping
+        this.instance.toneMappingExposure = 1.5
         this.instance.shadowMap.enabled = true
         this.instance.shadowMap.type = THREE.PCFSoftShadowMap
-        this.instance.outputColorSpace = THREE.SRGBColorSpace
-        this.instance.toneMapping = THREE.NoToneMapping;
-        this.instance.toneMappingExposure = 1;
+        this.instance.setClearColor('#FFFFFF')
         this.instance.setSize(this.sizes.width, this.sizes.height)
         this.instance.setPixelRatio(this.sizes.pixelRatio)
     }
@@ -75,82 +73,54 @@ export default class Renderer
     setBloomPass()
     {
         this.unrealBloomPass = new UnrealBloomPass()
-        this.unrealBloomPass.strength = 0
-        this.unrealBloomPass.radius = 0
-        this.unrealBloomPass.threshold =  0.943
+        this.unrealBloomPass.strength = 3.0
+        this.unrealBloomPass.radius = 0.4
+        this.unrealBloomPass.threshold = 0.28 
         this.unrealBloomPass.enabled = true
-
         this.effectComposer.addPass(this.unrealBloomPass)
 
         if(this.debug.active)
         {
             this.debugFolder.add(this.unrealBloomPass, 'enabled')
-            this.debugFolder.add(this.unrealBloomPass, 'strength').min(0).max(2).step(0.001)
-            this.debugFolder.add(this.unrealBloomPass, 'radius').min(-2).max(2).step(0.001)
-            this.debugFolder.add(this.unrealBloomPass, 'threshold').min(0).max(2).step(0.001)
+            this.debugFolder.add(this.unrealBloomPass, 'strength').min(0).max(30).step(0.001)
+            this.debugFolder.add(this.unrealBloomPass, 'radius').min(0).max(2).step(0.001)
+            this.debugFolder.add(this.unrealBloomPass, 'threshold').min(0).max(1).step(0.001)
         }
     }
     setAnimations()
     {
-        // this.unrealBloomPass.strength = 0.943
-        // this.unrealBloomPass.radius = -0.213
-        // this.unrealBloomPass.threshold = 0.943
+        
+        this.experience.animations.on('animation-step-one-begin', ()=>{
+            this.unrealBloomPass.enabled = false
+            this.unrealBloomPass.strength = 0.0
+            this.unrealBloomPass.radius = 0.0
 
-        this.experience.animations.on('animation-rott-and-wander', ()=>{
-            gsap.to(
-                this.unrealBloomPass,
-                {
-                    duration: 30,
-                    ease: 'back.out(2)',
-                    strength: 0.9,       
-                    delay: 4,
-                }
-            )
-            // gsap.to(
-            //     this.unrealBloomPass,
-            //     {
-            //         duration: 18.5,
-            //         ease: 'linear',
-            //         strength: 1.017,       
-            //         delay: 4,
-            //         onUpdate : (e)=>{
-            //             this.material.uniforms.uCurrentStep.value = this.uniformCurrentStep
-            //         }
-            //     }
-            // )
         })
-        this.experience.animations.on('animation-rott-and-wander-doing', ()=>{
-            gsap.to(
-                this.unrealBloomPass,
-                {
-                    duration: 0.1,
-                    enabled: false,
-                    delay: 1,
-                }
-            )
-        })
-        this.experience.animations.on('animation-80-band', ()=>{
-            gsap.to(
-                this.unrealBloomPass,
-                {
-                    duration: 0.1,
-                    enabled: true,
-                    delay: 1,
-                }
-            )
-        })
-        this.experience.animations.on('animation-outro', ()=>{
-            gsap.to(
-                this.unrealBloomPass,
-                {
-                    duration: 10.0,
-                    ease: 'linear',
-                    strength: 0,       
-                    delay: 4,
-                }
-            )
-        })
+        
+        this.experience.animations.on('animation-step-one-respi', ()=>{
+            this.unrealBloomPass.enabled = true
+            this.unrealBloomPass.strength = 1
+            this.unrealBloomPass.radius = 1
+            
+            window.setTimeout(() => {
+                // gsap.to(
+                //     this.unrealBloomPass,
+                //     {
+                //         duration: 1,
+                //         ease: 'power4.inOut',
+                //         strength: 1,
+                //         radius: 1.0,
+                //     }
+                // )
+            }, 2000);
 
+        })
+        this.experience.animations.on('animation-second-step', ()=>{
+            window.setTimeout(() => {
+                this.unrealBloomPass.strength = 1
+                this.unrealBloomPass.radius = 1
+            }, 6000);
+        })
     }
     resize()
     {
@@ -162,6 +132,6 @@ export default class Renderer
     {
         this.effectComposer.render(this.scene, this.camera.instance)
 
-        // this.instance.render(this.scene, this.camera.instance)
+        //this.instance.render(this.scene, this.camera.instance)
     }
 }
